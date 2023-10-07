@@ -1,0 +1,16 @@
+{
+  "dateFormat": "yyyy-MM-dd'T'HH:mm",
+  "enableCreateTime": true,
+  "headerUpdated": "updated",
+  "headerCreated": "created",
+  "minMinutesBetweenSaves": 1,
+  "ignoreGlobalFolder": [],
+  "ignoreCreatedFolder": [],
+  "enableExperimentalHash": false,
+  "fileHashMap": {
+    "Платформер.md": "a44980cdb34715556f43ead4d6838b0d03596d1ee3a37b3c08ee79c1bb28b4a4",
+    "Графика.md": "194250fbdaa2958f444c37f5456417b9d026467d60894c5eecab9eb44ba6a375",
+    "Жанр.md": "540c47f4dc82469a7d31af274aed6caabe8f4a66638abcf0e8389a526c02bda0",
+    "Платформер.sync-conflict-20231007-214135-7FTOITF.md": "8b3f13b01ce8bb9d822ab61bc895f645d1ed1d2d97222173f671d9c18fca2cb9"
+  }
+}

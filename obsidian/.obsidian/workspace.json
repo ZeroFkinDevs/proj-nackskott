@@ -1,0 +1,204 @@
+{
+  "main": {
+    "id": "7aaa4066083e1c77",
+    "type": "split",
+    "children": [
+      {
+        "id": "45daedeb8ddbedb7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c8991d740716c660",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Жанр.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e3ff447c956233a4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Платформер.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "14a2231c635c7fa3",
+    "type": "split",
+    "children": [
+      {
+        "id": "c8031edf03dd31fe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6a48dee52f942d4d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "ff76e0f73d78026c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a04c627777342e43",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c3f292fe689bc212",
+    "type": "split",
+    "children": [
+      {
+        "id": "fd3d8a054f861c27",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "16a5442e36f35173",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Жанр.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ecaaeba2692547d2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Жанр.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "63f8496406da6416",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "452bd1f9a8a024b7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Жанр.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "c8991d740716c660",
+  "lastOpenFiles": [
+    "Платформер.md",
+    "Платформер.sync-conflict-20231007-214135-7FTOITF.md",
+    "Графика.md",
+    "Жанр.md",
+    "~syncthing~Жанр.md.tmp",
+    "~syncthing~Платформер.sync-conflict-20231007-214135-7FTOITF.md.tmp",
+    "Платформер.sync-conflict-20231007-200302-7HJYRZP.md",
+    "Платформер.sync-conflict-20231007-200251-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200932-7HJYRZP.md",
+    "~syncthing~Графика.md.tmp",
+    "Графика.sync-conflict-20231007-200921-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200911-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200901-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200855-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200851-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200841-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200831-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200821-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200811-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200802-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200752-7HJYRZP.md",
+    "Графика.sync-conflict-20231007-200631-7HJYRZP.md",
+    "attachs/Pasted image 20231007200618.png",
+    "attachs/~syncthing~Pasted image 20231007200618.png.tmp",
+    "attachs/Pasted image 20231007200528.png",
+    "attachs/~syncthing~Pasted image 20231007200528.png.tmp",
+    "~syncthing~Платформер.md.tmp",
+    "templates/Tool Template.md",
+    "templates/Term Template.md",
+    "templates/Table Template.md",
+    "templates/Structure Template.md",
+    "templates/Bullet Journal - Weekly Log.md",
+    "templates/Bullet Journal - Monthly Log.md",
+    "templates",
+    "Новая папка",
+    "attachs/Pasted image 20231005190348.png",
+    "Pasted image 20231005190300.png",
+    "~syncthing~Pasted image 20231005190300.png.tmp",
+    "Untitled",
+    "attachs/Pasted image 20231005184322.png"
+  ]
+}
