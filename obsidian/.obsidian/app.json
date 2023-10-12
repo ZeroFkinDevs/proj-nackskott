@@ -3,5 +3,6 @@
   "attachmentFolderPath": "attachs",
   "userIgnoreFilters": [
     "templates/"
-  ]
+  ],
+  "alwaysUpdateLinks": true
 }

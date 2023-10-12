@@ -9,17 +9,20 @@
   "enableExperimentalHash": false,
   "fileHashMap": {
     "Платформер.sync-conflict-20231007-214135-7FTOITF.md": "8b3f13b01ce8bb9d822ab61bc895f645d1ed1d2d97222173f671d9c18fca2cb9",
-    "Резкие звуки.md": "6f1ccae172d668d3c0917a137955b7e998588e1325e3e610a1893c6419c3564b",
+    "Резкие звуки.md": "1e4810c0b6ede3b94438b0a28048149c8414d60377db124b8a90df3d702e60a1",
     "Крики.md": "bd682c9d9339b2fa5e30d208f6912eac06e3e5bba340afc647858dd914b2abbd",
     "Музыка.md": "ad631887af6e4ea37f91a0810057098cc121dd5394e11cc41e7951dad502bdda",
     "Звук.md": "e1cac65df7b91cd4ab3a82e52d5254dcc3f537097407c39475217cba93fcc595",
     "Эмбиент Среды.md": "3a8845e8b50d7736772b03e20dfef43f4b3a3b4d644992aa9b5c438ecfa8f004",
-    "Стационар.md": "417d87cc0793a3a36cf922db62e57de3bc89ebf265a0b7d5285da606a8bf026d",
-    "Локации.md": "c8d4dca35b8293192360871771c8e299ed68acf64b694a76d524aed766fbd093",
-    "Улица_1.md": "e505718c912d55419d7b9632619c009a000420ac29846ebc96ce91cf3cc0ee38",
-    "Manjury.md": "e60d0f5e4b2ee1f63d73e2481b0dbd4a2146f7fc5b8ca7130287ea930e19520c",
-    "Улица_2.md": "6aa9eedf78a2105e0a71c76d3e4df873c80429833a0ef9727abf6e698d3ee493",
-    "Детский дом Констанция.md": "3473166473ed7ee6020aa6fac4763ecc1d5c3dc990c04cd6050f6cb81ad90eef",
-    "Нарратив.md": "bb2011603ad1ff9faea8e35e9c39b6b7f287a9e5db506b88be294f44e38fd2d2"
+    "Нарратив.md": "bb2011603ad1ff9faea8e35e9c39b6b7f287a9e5db506b88be294f44e38fd2d2",
+    "templates/Table Template.md": "8efe8b7e93a571a1fafeb4392ab9b5bdf75533c54e714dde616a1043d4b136f9",
+    "Локации/Детский дом Констанция.md": "3473166473ed7ee6020aa6fac4763ecc1d5c3dc990c04cd6050f6cb81ad90eef",
+    "Локации/Стационар.md": "19aeb91ce647709c2d5cac1bd7ef1121b0118dfae2d2ebbdede2399d227ffc58",
+    "Локации/Manjury.md": "e60d0f5e4b2ee1f63d73e2481b0dbd4a2146f7fc5b8ca7130287ea930e19520c",
+    "Локации/Улица_1.md": "e505718c912d55419d7b9632619c009a000420ac29846ebc96ce91cf3cc0ee38",
+    "Локации/Улица_2.md": "6aa9eedf78a2105e0a71c76d3e4df873c80429833a0ef9727abf6e698d3ee493",
+    "Локации/Локации.md": "c8d4dca35b8293192360871771c8e299ed68acf64b694a76d524aed766fbd093",
+    "Противники/Противники.md": "eec30f7058d157a0815c2cf9d3d2e96711cd13866c7f81b6afdf59fcb531412a",
+    "Противники/Противник стационар.md": "fef70a5f33f9f1693dd8011928d09a8398b96387240b9848583ccc217be55a42"
   }
 }
