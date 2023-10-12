@@ -8,9 +8,17 @@
   "ignoreCreatedFolder": [],
   "enableExperimentalHash": false,
   "fileHashMap": {
-    "Платформер.md": "a44980cdb34715556f43ead4d6838b0d03596d1ee3a37b3c08ee79c1bb28b4a4",
-    "Графика.md": "194250fbdaa2958f444c37f5456417b9d026467d60894c5eecab9eb44ba6a375",
-    "Жанр.md": "540c47f4dc82469a7d31af274aed6caabe8f4a66638abcf0e8389a526c02bda0",
-    "Платформер.sync-conflict-20231007-214135-7FTOITF.md": "8b3f13b01ce8bb9d822ab61bc895f645d1ed1d2d97222173f671d9c18fca2cb9"
+    "Платформер.sync-conflict-20231007-214135-7FTOITF.md": "8b3f13b01ce8bb9d822ab61bc895f645d1ed1d2d97222173f671d9c18fca2cb9",
+    "Резкие звуки.md": "8c54f0b157ffd49fafe5e56d2761c7ddb9a250c828ce435e130fa91262eee72c",
+    "Крики.md": "0aa94893a741eb9674fdd3c896a5e628bc9fee5959243727a067dcce041b3c81",
+    "Музыка.md": "6c557814795004dc8dd83687383cbbc74cd0fb614015c711879ef8225a5c7978",
+    "Звук.md": "d78565c18005ebe555ec8ff27fbdf465bdae50987d20c963991649af766fd2a3",
+    "Эмбиент Среды.md": "bb3b63183413a7581ab04ded9057e0c5a0bd7245946d3b91bb9cb6a464a4c564",
+    "Стационар.md": "a13097647d1c59ef5b469662933cb6b02b319b973bdfe18327422ea8b989da8e",
+    "Локации.md": "d9987f51063b3d7c8e5415d96af5416a040d6ac2e05ad1af701d82a537d9a1ea",
+    "Улица_1.md": "21cca44984d8700962db315abdcb1c7ad6924dea208c13364b0041dadf72bf7a",
+    "Manjury.md": "a6afb9d9c62934b8776db87d06d2d37933f1875d5595e43657bc1df2b7c4f0f5",
+    "Улица_2.md": "abb0e3df975a5c34df50c46841a246e055a661f341e6454ccafb3d22a428d82e",
+    "Детский дом Констанция.md": "4c68ae0cb61b946b0884228ff534538b6839b4c894ce7722e2b3ee40c078f32b"
   }
 }

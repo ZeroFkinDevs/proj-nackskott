@@ -4,28 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "45daedeb8ddbedb7",
+        "id": "07e577d596c635bd",
         "type": "tabs",
         "children": [
           {
-            "id": "c8991d740716c660",
+            "id": "4ab438a0440a09d7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Жанр.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e3ff447c956233a4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Платформер.md",
+                "file": "Детский дом Констанция.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Жанр.md",
+                "file": "Детский дом Констанция.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Жанр.md",
+                "file": "Детский дом Констанция.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Жанр.md"
+                "file": "Детский дом Констанция.md"
               }
             }
           }
@@ -145,8 +133,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -158,12 +145,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c8991d740716c660",
+  "active": "6a48dee52f942d4d",
   "lastOpenFiles": [
-    "Платформер.md",
-    "Платформер.sync-conflict-20231007-214135-7FTOITF.md",
+    "Стационар.md",
+    "Локации.md",
+    "Детский дом Констанция.md",
+    "Улица_2.md",
+    "Manjury.md",
+    "Улица_1.md",
+    "Эмбиент Среды.md",
+    "Звук.md",
+    "Крики.md",
+    "Музыка.md",
+    "Резкие звуки.md",
+    "templates/_Note Template.md",
     "Графика.md",
+    "Платформер.md",
     "Жанр.md",
+    "Платформер.sync-conflict-20231007-214135-7FTOITF.md",
     "~syncthing~Жанр.md.tmp",
     "~syncthing~Платформер.sync-conflict-20231007-214135-7FTOITF.md.tmp",
     "Платформер.sync-conflict-20231007-200302-7HJYRZP.md",
@@ -177,22 +176,11 @@
     "Графика.sync-conflict-20231007-200851-7HJYRZP.md",
     "Графика.sync-conflict-20231007-200841-7HJYRZP.md",
     "Графика.sync-conflict-20231007-200831-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200821-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200811-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200802-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200752-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200631-7HJYRZP.md",
     "attachs/Pasted image 20231007200618.png",
     "attachs/~syncthing~Pasted image 20231007200618.png.tmp",
     "attachs/Pasted image 20231007200528.png",
     "attachs/~syncthing~Pasted image 20231007200528.png.tmp",
     "~syncthing~Платформер.md.tmp",
-    "templates/Tool Template.md",
-    "templates/Term Template.md",
-    "templates/Table Template.md",
-    "templates/Structure Template.md",
-    "templates/Bullet Journal - Weekly Log.md",
-    "templates/Bullet Journal - Monthly Log.md",
     "templates",
     "Новая папка",
     "attachs/Pasted image 20231005190348.png",
