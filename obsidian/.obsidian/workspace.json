@@ -20,12 +20,12 @@
             }
           },
           {
-            "id": "3db10989ec2f5b01",
+            "id": "cfb5604e25e347f3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Нарратив.md",
+                "file": "Стационар.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Нарратив.md",
+                "file": "Стационар.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Нарратив.md",
+                "file": "Стационар.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Нарратив.md"
+                "file": "Стационар.md"
               }
             }
           }
@@ -158,20 +158,26 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3db10989ec2f5b01",
+  "active": "cfb5604e25e347f3",
   "lastOpenFiles": [
-    "Стационар.md",
+    "image.png",
+    "Локации.md",
+    "Планировка.md",
     "Нарратив.md",
-    "Улица_1.md",
+    "Музыка.md",
+    "Крики.md",
+    "Звук.md",
+    "Стационар.md",
+    "Pasted image 20231012151258.png",
     "Улица_2.md",
-    "Эмбиент Среды.md",
+    "Улица_1.md",
     "Manjury.md",
     "Детский дом Констанция.md",
-    "Звук.md",
-    "Локации.md",
-    "Крики.md",
-    "Музыка.md",
+    "Хоррор.md",
+    "Untitled",
     "Резкие звуки.md",
+    "templates/Bullet Journal - Daily Log.md",
+    "Эмбиент Среды.md",
     "templates/_Note Template.md",
     "Графика.md",
     "Платформер.md",
@@ -185,10 +191,6 @@
     "~syncthing~Графика.md.tmp",
     "Графика.sync-conflict-20231007-200921-7HJYRZP.md",
     "Графика.sync-conflict-20231007-200911-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200901-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200855-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200851-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200841-7HJYRZP.md",
     "attachs/Pasted image 20231007200618.png",
     "attachs/~syncthing~Pasted image 20231007200618.png.tmp",
     "attachs/Pasted image 20231007200528.png",
@@ -199,7 +201,6 @@
     "attachs/Pasted image 20231005190348.png",
     "Pasted image 20231005190300.png",
     "~syncthing~Pasted image 20231005190300.png.tmp",
-    "Untitled",
     "attachs/Pasted image 20231005184322.png"
   ]
 }
