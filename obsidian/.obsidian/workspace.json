@@ -13,13 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Детский дом Констанция.md",
+                "file": "Стационар.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "3db10989ec2f5b01",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Нарратив.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Детский дом Констанция.md",
+                "file": "Нарратив.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Детский дом Констанция.md",
+                "file": "Нарратив.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Детский дом Констанция.md"
+                "file": "Нарратив.md"
               }
             }
           }
@@ -145,16 +158,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "6a48dee52f942d4d",
+  "active": "3db10989ec2f5b01",
   "lastOpenFiles": [
     "Стационар.md",
-    "Локации.md",
-    "Детский дом Констанция.md",
-    "Улица_2.md",
-    "Manjury.md",
+    "Нарратив.md",
     "Улица_1.md",
+    "Улица_2.md",
     "Эмбиент Среды.md",
+    "Manjury.md",
+    "Детский дом Констанция.md",
     "Звук.md",
+    "Локации.md",
     "Крики.md",
     "Музыка.md",
     "Резкие звуки.md",
@@ -175,7 +189,6 @@
     "Графика.sync-conflict-20231007-200855-7HJYRZP.md",
     "Графика.sync-conflict-20231007-200851-7HJYRZP.md",
     "Графика.sync-conflict-20231007-200841-7HJYRZP.md",
-    "Графика.sync-conflict-20231007-200831-7HJYRZP.md",
     "attachs/Pasted image 20231007200618.png",
     "attachs/~syncthing~Pasted image 20231007200618.png.tmp",
     "attachs/Pasted image 20231007200528.png",
