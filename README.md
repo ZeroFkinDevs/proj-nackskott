@@ -39,9 +39,9 @@ top-down survival хоррор в запущенном болезненном г
 
 Где хранить:
 - Если объект постоянен на протяжении игры (Игрок например) или просто им пользуются на протяжении всей игры или в разных ее частях,  
-то в папке `resources/locations/persistent/<object_name>`
+то в папке `resources/objects/persistent/<object_name>`
 - Если нет, то есть относиться к какой-то локации и используется там,  
-то в папке `resources/locations/<location_name>/<object_name>`
+то в папке `resources/objects/<location_name>/<object_name>`
 
 ## Поверсируем
 По системе semantic versioning: [Semantic Versioning 2.0.0](https://semver.org/) |  [Семантическое Версионирование 2.0.0](https://semver.org/lang/ru/)  
