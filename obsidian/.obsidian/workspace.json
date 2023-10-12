@@ -11,8 +11,12 @@
             "id": "4ab438a0440a09d7",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Крики.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Крики.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Крики.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Крики.md"
+              }
             }
           }
         ]
@@ -139,7 +147,10 @@
   },
   "active": "4ab438a0440a09d7",
   "lastOpenFiles": [
+    "Звук.md",
+    "Нарратив.md",
     "Стационар.md",
+    "Локации.md",
     "Улица_1.md",
     "Улица_2.md",
     "Manjury.md",
@@ -147,8 +158,6 @@
     "Музыка.md",
     "Untitled",
     "Детский дом Констанция.md",
-    "Локации.md",
-    "Звук.md",
     "Крики.md",
     "Резкие звуки.md",
     "templates/_Note Template.md",
