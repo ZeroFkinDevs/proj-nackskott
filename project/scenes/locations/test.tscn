@@ -1,0 +1,166 @@
+[gd_scene load_steps=15 format=3 uid="uid://d05dd8hbrvdkk"]
+
+[ext_resource type="Texture2D" uid="uid://dsv4pw7utcani" path="res://resources/objects/persistent/prototype/location/floor.png" id="1_ne0vq"]
+[ext_resource type="Texture2D" uid="uid://bqac400fm1gsa" path="res://resources/objects/persistent/hand_dude/hand_dude.png" id="2_4ewjn"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandDude.cs" id="2_y22c2"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandCharacter.cs" id="3_7aguc"]
+[ext_resource type="Script" path="res://src/objects/persistent/Pointer.cs" id="3_aj7pk"]
+[ext_resource type="Script" path="res://src/objects/persistent/main_camera/MainCamera.cs" id="3_ea4r5"]
+[ext_resource type="Texture2D" uid="uid://ckpyr35bxtnpl" path="res://resources/objects/persistent/pointer/pointer_default.png" id="4_kadi3"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandRigidBody.cs" id="7_klsew"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fhica"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4ewjn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lqj2p"]
+radius = 0.182
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cl8gk"]
+size = Vector3(0.268, 0.148, 0.494)
+
+[sub_resource type="Environment" id="Environment_8cfgk"]
+ssr_fade_in = 0.0494815
+ssr_fade_out = 0.517632
+ssao_radius = 1.96
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.5838
+adjustment_brightness = 1.12
+adjustment_contrast = 1.48
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_06bls"]
+size = Vector3(3, 0.650335, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wq0i0"]
+
+[node name="test_scene" type="Node3D"]
+
+[node name="HandDudeSystem" type="Node3D" parent="."]
+script = ExtResource("2_y22c2")
+pointerPath = NodePath("Pointer")
+characterPath = NodePath("HandCharacter")
+rigidBodyPath = NodePath("RigidBody3D")
+
+[node name="HandCharacter" type="CharacterBody3D" parent="HandDudeSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.517686, -0.0615318)
+collision_layer = 2
+script = ExtResource("3_7aguc")
+
+[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="HandDudeSystem/HandCharacter"]
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0)
+modulate = Color(0.592157, 0.235294, 0.364706, 1)
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_fhica")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandDudeSystem/HandCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0453218, 0.0731072)
+shape = SubResource("SphereShape3D_lqj2p")
+
+[node name="Pointer" type="Node3D" parent="HandDudeSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19434, 0.0550321, -0.0177753)
+script = ExtResource("3_aj7pk")
+
+[node name="Sprite3D2" type="Sprite3D" parent="HandDudeSystem/Pointer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.11835, 0)
+texture_filter = 0
+texture = ExtResource("4_kadi3")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="HandDudeSystem"]
+transform = Transform3D(1, -2.83736e-07, 4.8188e-07, 2.83736e-07, 1, 5.89305e-07, -4.8188e-07, -5.89305e-07, 1, 0.0359224, 0.135774, -0.0783053)
+collision_layer = 0
+linear_velocity = Vector3(5.9555e-07, 0.163606, 5.9555e-07)
+angular_velocity = Vector3(5.88815e-06, -4.81479e-06, -2.835e-06)
+script = ExtResource("7_klsew")
+characterPath = NodePath("../HandCharacter")
+linearSpringStiffness = 400.0
+linearSpringDamping = 20.0
+angularSpringStiffness = 400.0
+angularSpringDamping = 40.0
+maxAngularForce = 100.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandDudeSystem/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49012e-08, 0.0537081, 0)
+shape = SubResource("BoxShape3D_cl8gk")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="HandDudeSystem/RigidBody3D"]
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, -1.49012e-08, 0.0579418, 0)
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_fhica")
+
+[node name="MainCamera" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.745976, 0.665973, 0, -0.665973, 0.745976, 0, 0.65005, 0)
+script = ExtResource("3_ea4r5")
+CameraPath = NodePath("Camera")
+ViewableTargetPath = NodePath("../HandDudeSystem/RigidBody3D")
+
+[node name="Camera" type="Camera3D" parent="MainCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, -2.98023e-07, 2.1905)
+environment = SubResource("Environment_8cfgk")
+current = true
+size = 4.0
+
+[node name="Location" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Location"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0256784, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Location/StaticBody3D"]
+transform = Transform3D(4.6, 0, 0, 0, -2.01072e-07, 4.6, 0, -4.6, -2.01072e-07, 0, 0, 0)
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("1_ne0vq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00203049, -0.294239, -0.00496292)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Location"]
+transform = Transform3D(1, 0, 0, 0, 0.510378, -0.85995, 0, 0.85995, 0.510378, -1.31285, -0.0256784, -1.03994)
+
+[node name="Sprite3D" type="Sprite3D" parent="Location/StaticBody3D2"]
+transform = Transform3D(4.6, 0, 0, 0, -2.01072e-07, 4.6, 0, -4.6, -2.01072e-07, 0, 0, 0)
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("1_ne0vq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00203049, -0.294239, -0.0049628)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Location"]
+transform = Transform3D(1, 0, 0, 0, 0.89762, -0.44077, 0, 0.44077, 0.89762, 0.622294, -0.0256784, -1.38926)
+
+[node name="Sprite3D" type="Sprite3D" parent="Location/StaticBody3D3"]
+transform = Transform3D(4.6, 0, 0, 0, -2.01072e-07, 4.6, 0, -4.6, -2.01072e-07, 0, 0, 0)
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("1_ne0vq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0.00203049, -0.294239, -0.00496286)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Location"]
+transform = Transform3D(1, 0, 0, 0, 0.745976, 0.665973, 0, -0.665973, 0.745976, 1.77474, 0.197982, -0.506374)
+mesh = SubResource("BoxMesh_wq0i0")
+skeleton = NodePath("../../MainCamera/Camera")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Location"]
+transform = Transform3D(1, 0, 0, 0, 0.745976, 0.665973, 0, -0.665973, 0.745976, 1.77474, 0.337451, -3.34228)
+mesh = SubResource("BoxMesh_wq0i0")
+skeleton = NodePath("../../MainCamera/Camera")
+
+[node name="Decal" type="Decal" parent="Location"]
+transform = Transform3D(0.997862, 0, 0.0653509, 0, 1, 0, -0.0653509, 0, 0.997862, 1.56108, 0.486627, -0.51362)
+size = Vector3(0.980659, 0.947233, 0.929188)
+texture_albedo = ExtResource("2_4ewjn")
+distance_fade_length = 0.0
