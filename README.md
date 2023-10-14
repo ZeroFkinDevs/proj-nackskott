@@ -3,7 +3,13 @@
 
 top-down survival хоррор в запущенном болезненном городе после инцидента с биологическим оружием.
 
----
+# Софт
+- [Godot](https://godotengine.org/) - `v4.1.2.stable.mono.official [399c9dc39]`
+- [Microsoft Visual Studio](https://visualstudio.microsoft.com/) - `Community 2022 - v17.1.1`
+- [Blender](https://www.blender.org/) - `v3.1.2`
+- [Adobe Photoshop](https://www.adobe.com/ru/products/photoshop.html) - `CC 2014`
+- [Obsidian](https://obsidian.md/)
+- [game-resources-exporter](https://github.com/AshenHermit/game-resources-exporter)
 
 # Экосистема
 

@@ -97,7 +97,7 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_fhica")
 
 [node name="MainCamera" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.745976, 0.665973, 0, -0.665973, 0.745976, 0, 0.65005, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.65005, 0)
 script = ExtResource("3_ea4r5")
 CameraPath = NodePath("Camera")
 ViewableTargetPath = NodePath("../HandDudeSystem/RigidBody3D")
