@@ -3,6 +3,13 @@
 
 top-down survival хоррор в запущенном болезненном городе после инцидента с биологическим оружием.
 
+## Как клонировать
+```
+git clone --recurse-submodules https://github.com/ZeroFkinDevs/proj-nackskott.git
+```
+`--recurse-submodules` чтобы отдельный репозиторий с ресурсами `/resources/` клонировался
+
+
 # Софт
 - [Godot](https://godotengine.org/) - `v4.1.2.stable.mono.official [399c9dc39]`
 - [Microsoft Visual Studio](https://visualstudio.microsoft.com/) - `Community 2022 - v17.1.1`
