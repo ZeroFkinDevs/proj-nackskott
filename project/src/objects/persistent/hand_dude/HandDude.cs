@@ -52,6 +52,10 @@ namespace Game
             currentState = state;
             return true;
         }
+        public HandDude()
+        {
+            Global.Instance.Settings.OnSettingsChanged += ApplySettings;
+        }
 
         private void InitializeComponents()
         {
@@ -74,6 +78,11 @@ namespace Game
         public void JumpToPointer()
         {
             character.JumpTo(pointer.Position);
+        }
+
+        private void ApplySettings(GameSettings settings)
+        {
+            character.Visible = settings.IsInDebug;
         }
     }
 }

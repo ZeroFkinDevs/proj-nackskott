@@ -67,6 +67,8 @@ namespace Game
 		{
 			// регистрируем и устанавливаем камеру как текущую в Global
 			Global.Instance.SetCurrentMainCamera(this);
+			// подписываемся на изменение настроек
+			Global.Instance.Settings.OnSettingsChanged += ApplySettings;
 		}
 		public override void _Ready()
 		{
@@ -115,8 +117,16 @@ namespace Game
 			{
 				point = ViewTarget.Position;
             }
-			currentTargetPoint = point;
+			smoothTranslater.TargetPoint = point;
 		}
-        #endregion
+		#endregion
+
+		private void ApplySettings(GameSettings settings)
+        {
+			// меняем что-то зависимо от установленных настроек игры
+			// например если стоит DEBUG режим, включаем перспективное отображение. наоборот - нормальное, ортографическое
+			if (settings.IsInDebug) Camera.SetPerspective(Camera.Fov, Camera.Near, Camera.Far);
+			else Camera.SetOrthogonal(Camera.Size, Camera.Near, Camera.Far);
+		}
     }
 }

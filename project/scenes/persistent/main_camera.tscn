@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsc886tdnlh4s"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/main_camera/MainCamera.cs" id="1_tkei1"]
+
+[sub_resource type="Environment" id="Environment_8cfgk"]
+ssr_fade_in = 0.0494815
+ssr_fade_out = 0.517632
+ssao_radius = 1.96
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.5838
+adjustment_brightness = 1.12
+adjustment_contrast = 1.48
+
+[node name="MainCamera" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.65005, 0)
+script = ExtResource("1_tkei1")
+CameraPath = NodePath("Camera")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, -2.98023e-07, 2.1905)
+environment = SubResource("Environment_8cfgk")
+projection = 1
+current = true
+size = 4.0

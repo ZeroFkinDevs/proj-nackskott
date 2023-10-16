@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="Proj Nackskott"
+run/main_scene="res://scenes/locations/test.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://src/objects/persistent/Global.cs"
+Global="*res://src/objects/persistent/global/Global.cs"
 
 [dotnet]
 
