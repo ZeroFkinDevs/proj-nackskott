@@ -1,13 +1,20 @@
-using Godot;
+﻿using Godot;
 using System;
 
 namespace Game
 {
+    /// <summary>
+    /// Интерфейс для классов состояний руки
+    /// </summary>
     public interface IHandState
     {
         public void Process(HandDude handDude);
     }
-    public class FreeHandState: IHandState, IState
+
+    /// <summary>
+    /// Обычное нормальное состояние
+    /// </summary>
+    public class FreeHandState: IState, IHandState
     {
         public void Process(HandDude handDude)
         {
@@ -18,6 +25,11 @@ namespace Game
         }
     }
 
+    /// <summary>
+    /// Класс Руки <br/>
+    /// этот класс не содержит алгоритмов и сложной логики, он просто совмещает и объединаяет в себе работу с другими состовляющими 
+    /// игрока, такими как StateController, Pointer, HandCharacter, HandRigidBody
+    /// </summary>
     public partial class HandDude : Node3D, IStateControlling<IHandState>
     {
         private IHandState currentState;

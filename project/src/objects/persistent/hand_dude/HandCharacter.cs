@@ -1,8 +1,13 @@
-using Godot;
+﻿using Godot;
 using System;
 
 namespace Game
 {
+    /// <summary>
+    /// Этот CharacterBody3D нужен для управления игроком как обычным персонажем в игре. 
+    /// То есть простое удобное передвижение, без особой физики как у rigidBody.
+    /// По идее этот объект невидимый.
+    /// </summary>
     public partial class HandCharacter : CharacterBody3D
     {
         private float jumpForce = 1.0f;

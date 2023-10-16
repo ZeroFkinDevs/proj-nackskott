@@ -1,7 +1,12 @@
-using Godot;
+﻿using Godot;
 using System;
 
 namespace Game {
+	/// <summary>
+	/// Глобальный класс. Его следует использовать аккуратно.
+	/// Нужен для регистрации только тех объектов и экземпляров классов, которые однозначно не могут создаваться в игре несколько раз.
+	/// И которые логично хранить в глобальном пространстве.
+	/// </summary>
 	public partial class Global : Node
 	{
 		private MainCamera _mainCamera;
