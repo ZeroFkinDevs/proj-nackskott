@@ -1,0 +1,165 @@
+[gd_scene load_steps=19 format=3 uid="uid://dgw8w2rjvc285"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandDude.cs" id="1_pr6ts"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandCharacter.cs" id="2_c7y8b"]
+[ext_resource type="Texture2D" uid="uid://bqac400fm1gsa" path="res://resources/objects/persistent/hand_dude/hand_dude.png" id="3_csfbb"]
+[ext_resource type="Script" path="res://src/objects/persistent/Pointer.cs" id="4_bsri5"]
+[ext_resource type="Texture2D" uid="uid://ckpyr35bxtnpl" path="res://resources/objects/persistent/pointer/pointer_default.png" id="5_vjpiy"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandRigidBody.cs" id="6_1muak"]
+[ext_resource type="PackedScene" uid="uid://lff820h02vdw" path="res://scenes/persistent/hand_dude/hand_dude_normal.tscn" id="7_asbnm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fhica"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_csfbb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lqj2p"]
+radius = 0.288306
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_es8t2"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_toykn"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_srep4"]
+animation = &"hand_free"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_533mp"]
+animation = &"hand_grip"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dmrp"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_r10wl"]
+xfade_time = 0.1
+input_0/name = "free"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "grip"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ngiy8"]
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "jump"
+input_1/auto_advance = true
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cepfg"]
+graph_offset = Vector2(-249.454, -15.5567)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_es8t2")
+nodes/Add2/position = Vector2(600, 180)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3dmrp")
+nodes/Animation/position = Vector2(-20, 280)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_toykn")
+"nodes/Animation 2/position" = Vector2(-20, 400)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_srep4")
+"nodes/Animation 3/position" = Vector2(160, 80)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_533mp")
+"nodes/Animation 4/position" = Vector2(160, 200)
+nodes/Transition/node = SubResource("AnimationNodeTransition_ngiy8")
+nodes/Transition/position = Vector2(180, 340)
+"nodes/Transition 2/node" = SubResource("AnimationNodeTransition_r10wl")
+"nodes/Transition 2/position" = Vector2(380, 80)
+nodes/output/position = Vector2(820, 180)
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"Transition 2", &"Add2", 1, &"Transition", &"Transition", 0, &"Animation", &"Transition", 1, &"Animation 2", &"Transition 2", 0, &"Animation 3", &"Transition 2", 1, &"Animation 4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cl8gk"]
+size = Vector3(0.199326, 0.12393, 0.449907)
+
+[node name="HandDudeSystem" type="Node3D"]
+script = ExtResource("1_pr6ts")
+pointerPath = NodePath("Pointer")
+characterPath = NodePath("HandCharacter")
+rigidBodyPath = NodePath("RigidBody3D")
+
+[node name="HandCharacter" type="CharacterBody3D" parent="."]
+collision_layer = 2
+script = ExtResource("2_c7y8b")
+
+[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="HandCharacter"]
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0)
+modulate = Color(0.592157, 0.235294, 0.364706, 1)
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_fhica")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165005, -0.0132761)
+shape = SubResource("SphereShape3D_lqj2p")
+
+[node name="Pointer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19434, -0.0294624, -0.0177753)
+script = ExtResource("4_bsri5")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Pointer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.11835, 0)
+texture_filter = 0
+texture = ExtResource("5_vjpiy")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, -2.83736e-07, 4.8188e-07, 2.83736e-07, 1, 5.89305e-07, -4.8188e-07, -5.89305e-07, 1, 0, 0, 0)
+collision_layer = 0
+linear_velocity = Vector3(5.9555e-07, 0.163606, 5.9555e-07)
+angular_velocity = Vector3(5.88815e-06, -4.81479e-06, -2.835e-06)
+script = ExtResource("6_1muak")
+characterPath = NodePath("../HandCharacter")
+linearSpringStiffness = 400.0
+linearSpringDamping = 50.0
+angularSpringStiffness = 800.0
+angularSpringDamping = 30.0
+maxAngularForce = 400.0
+
+[node name="hand_dude" parent="RigidBody3D" instance=ExtResource("7_asbnm")]
+transform = Transform3D(1.279, 0, 0, 0, 1.279, 0, 0, 0, 1.279, 0, 0, 0)
+
+[node name="Skeleton3D" parent="RigidBody3D/hand_dude/Armature" index="0"]
+bones/0/rotation = Quaternion(-0.705221, 0.000112662, -0.000112064, 0.708987)
+bones/1/rotation = Quaternion(-0.271697, -0.0583038, -0.418776, 0.864528)
+bones/2/rotation = Quaternion(0.200761, 0.057341, 0.373506, 0.903825)
+bones/3/rotation = Quaternion(-0.0229987, -0.00308363, 0.0161446, 0.9996)
+bones/4/rotation = Quaternion(0.146267, 0.0141167, -0.140385, 0.979132)
+bones/5/rotation = Quaternion(-0.416988, -0.0730121, 0.0807993, 0.902364)
+bones/6/rotation = Quaternion(-0.0672477, -0.000403303, 0.027391, 0.99736)
+bones/7/rotation = Quaternion(0.17885, -0.000318226, 0.00434436, 0.983867)
+bones/8/rotation = Quaternion(-0.456458, 0.0054701, 0.00521406, 0.889713)
+bones/9/rotation = Quaternion(-0.0944858, 0.000565733, -0.00456929, 0.995516)
+bones/10/rotation = Quaternion(0.173192, -0.0105163, 0.133579, 0.975731)
+bones/11/rotation = Quaternion(-0.46325, 0.0994887, -0.011153, 0.880555)
+bones/12/rotation = Quaternion(-0.0717003, 0.00355394, -0.0422735, 0.996524)
+bones/13/rotation = Quaternion(0.149604, -0.0279183, 0.280588, 0.947686)
+bones/14/rotation = Quaternion(-0.471301, 0.187126, -0.0644484, 0.85948)
+bones/15/rotation = Quaternion(-0.0854775, 0.0153233, -0.0605213, 0.994382)
+
+[node name="AnimationTree" type="AnimationTree" parent="RigidBody3D/hand_dude/AnimationPlayer" index="0"]
+tree_root = SubResource("AnimationNodeBlendTree_cepfg")
+anim_player = NodePath("..")
+active = true
+parameters/Add2/add_amount = 1.0
+parameters/Transition/current_state = "idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+"parameters/Transition 2/current_state" = "free"
+"parameters/Transition 2/transition_request" = ""
+"parameters/Transition 2/current_index" = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, -2.42699e-16, 0, -2.42861e-16, 1, 0, 0, 0, 1, -0.00269102, 0.015062, 0.0114954)
+shape = SubResource("BoxShape3D_cl8gk")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RigidBody3D"]
+transform = Transform3D(2, 0, -1.52015e-14, -4.85723e-16, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0)
+visible = false
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_fhica")
+
+[editable path="RigidBody3D/hand_dude"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsc886tdnlh4s"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/main_camera/MainCamera.cs" id="1_tkei1"]
+[ext_resource type="Shader" path="res://shaders/pixelart_outline/pixelart_stylizer.gdshader" id="2_vewmo"]
+[ext_resource type="Shader" path="res://shaders/pixelart_outline/pixelart_shader.gdshader" id="3_0uwqc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_elsw8"]
+render_priority = 0
+shader = ExtResource("2_vewmo")
+shader_parameter/amount = 40
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = false
+shader_parameter/shadow_strength = 0.61
+shader_parameter/highlight_strength = 0.64
+shader_parameter/highlight_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sum2q"]
+size = Vector2(12.635, 9.78)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i8vj3"]
+render_priority = 0
+shader = ExtResource("3_0uwqc")
+shader_parameter/amount = -130
+
+[sub_resource type="BoxMesh" id="BoxMesh_fhvti"]
+
+[node name="MainCamera" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.65005, 0)
+script = ExtResource("1_tkei1")
+CameraPath = NodePath("Camera")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 3)
+projection = 1
+current = true
+size = 4.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, -7.35137e-08, -1, 0, 1, -7.35137e-08, 0, -1.18175e-07, -0.505756)
+material_override = SubResource("ShaderMaterial_elsw8")
+mesh = SubResource("PlaneMesh_sum2q")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, -7.35137e-08, -1, 0, 1, -7.35137e-08, 0, -1.0725e-07, -0.65436)
+visible = false
+material_override = SubResource("ShaderMaterial_i8vj3")
+mesh = SubResource("PlaneMesh_sum2q")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 0.665973, -0.745976, 0, 0.745976, 0.665973, 1.92571, 1.00894, -2.40477)
+visible = false
+mesh = SubResource("BoxMesh_fhvti")
+skeleton = NodePath("../../MainCamera/Camera")

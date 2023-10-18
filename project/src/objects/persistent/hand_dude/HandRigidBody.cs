@@ -1,9 +1,11 @@
-using Godot;
+﻿using Godot;
 using System;
 
 namespace Game
 {
-
+    /// <summary>
+    /// Этот RigidBody3D содержит в себе модель руки и создает эффект ее физичности, то есть он всегда стремиться к HandCharacter.
+    /// </summary>
     public partial class HandRigidBody : RigidBody3D, IViewable
     {
         [Export]
@@ -27,6 +29,11 @@ namespace Game
         {
             character = GetNode<HandCharacter>(characterPath);
         }
+
+        /// <summary>
+        /// Использует формулу HookesLaw чтобы вычислить силу для перемещения в позицию и поворот HandCharacter.
+        /// </summary>
+        /// <param name="delta"></param>
         private void UpdateVelocity(double delta)
         {
             if (character == null) return;
@@ -57,6 +64,14 @@ namespace Game
             UpdateVelocity(delta);
         }
 
+        /// <summary>
+        /// Закон Гука (Hooke's law)
+        /// </summary>
+        /// <param name="displacement"></param>
+        /// <param name="currentVelocity"></param>
+        /// <param name="stiffness"></param>
+        /// <param name="damping"></param>
+        /// <returns></returns>
         private Vector3 HookesLaw(Vector3 displacement, Vector3 currentVelocity, float stiffness, float damping)
         {
             return (stiffness * displacement) - (damping * currentVelocity);
