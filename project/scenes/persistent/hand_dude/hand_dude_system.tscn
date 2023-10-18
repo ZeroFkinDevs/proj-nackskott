@@ -54,22 +54,22 @@ input_1/auto_advance = true
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cepfg"]
-graph_offset = Vector2(-249.454, -15.5567)
+graph_offset = Vector2(-263.993, 105.046)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_es8t2")
-nodes/Add2/position = Vector2(600, 180)
+nodes/Add2/position = Vector2(460, 120)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3dmrp")
-nodes/Animation/position = Vector2(-20, 280)
+nodes/Animation/position = Vector2(180, 260)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_toykn")
-"nodes/Animation 2/position" = Vector2(-20, 400)
+"nodes/Animation 2/position" = Vector2(180, 360)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_srep4")
-"nodes/Animation 3/position" = Vector2(160, 80)
+"nodes/Animation 3/position" = Vector2(-100, 120)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_533mp")
-"nodes/Animation 4/position" = Vector2(160, 200)
+"nodes/Animation 4/position" = Vector2(-100, 240)
 nodes/Transition/node = SubResource("AnimationNodeTransition_ngiy8")
-nodes/Transition/position = Vector2(180, 340)
+nodes/Transition/position = Vector2(320, 260)
 "nodes/Transition 2/node" = SubResource("AnimationNodeTransition_r10wl")
-"nodes/Transition 2/position" = Vector2(380, 80)
-nodes/output/position = Vector2(820, 180)
+"nodes/Transition 2/position" = Vector2(40, 140)
+nodes/output/position = Vector2(620, 120)
 node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"Transition 2", &"Add2", 1, &"Transition", &"Transition", 0, &"Animation", &"Transition", 1, &"Animation 2", &"Transition 2", 0, &"Animation 3", &"Transition 2", 1, &"Animation 4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cl8gk"]

@@ -17,6 +17,7 @@ namespace Game
 		/// <summary>
 		/// Позиция которя сглаживается.
 		/// </summary>
+		/// asd
 		public Vector3 ActualPoint;
 
 		private Node3D node;
