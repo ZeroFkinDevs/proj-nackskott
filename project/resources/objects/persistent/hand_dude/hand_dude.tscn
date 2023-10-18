@@ -21,6 +21,7 @@ material/0 = ExtResource( 3 )
 [node name="AnimationPlayer" parent="."]
 script = ExtResource( 4 )
 AnimationEvents = {
+"ArmatureAction": [  ],
 "hand_free": [  ],
 "hand_grip": [  ],
 "idle": [  ],

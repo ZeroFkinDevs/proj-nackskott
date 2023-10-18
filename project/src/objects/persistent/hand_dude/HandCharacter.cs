@@ -11,20 +11,34 @@ namespace Game
     public partial class HandCharacter : CharacterBody3D
     {
         [Export]
-        private float jumpForce = 20.0f;
+        private float jumpForce = 60.0f;
         private float gravity = 10.0f;
         private float speed = 4.0f;
         private Vector3 _velocity;
 
+        [Export]
+        public NodePath AnimationControllerPath;
+        HandAnimationController _animController;
+        public HandAnimationController AnimController {get{return _animController;}}
+
+        public override void _Ready()
+        {
+            _animController = GetNode<HandAnimationController>(AnimationControllerPath);
+        }
+
         public void JumpTo(Vector3 point)
         {
+            if(AnimController.IsJumping()) return;
+            
             point.Y = Position.Y;
-            _velocity = (point - Position) * jumpForce;
             var direction = ((point - Position) * new Vector3(1, 0, 1)).Normalized();
+            _velocity = direction * jumpForce;
             LookAt(
                 Position + direction,
                 Vector3.Up
             );
+
+            AnimController.Jump();
         }
 
         public void MoveBy(Vector2 motion)

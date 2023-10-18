@@ -18,9 +18,17 @@ namespace Game
     {
         public void Process(HandDude handDude)
         {
-            if (Input.IsActionJustPressed("pointer_press"))
+            if (Input.IsActionPressed("pointer_press"))
             {
                 handDude.JumpToPointer();
+            }
+            if (Input.IsActionJustPressed("pointer_action_press"))
+            {
+                handDude.Character.AnimController.HandGrip();
+            }
+            if (Input.IsActionJustReleased("pointer_action_press"))
+            {
+                handDude.Character.AnimController.HandFree();
             }
         }
     }
@@ -30,7 +38,7 @@ namespace Game
     /// этот класс не содержит алгоритмов и сложной логики, он просто совмещает и объединаяет в себе работу с другими состовляющими 
     /// игрока, такими как StateController, Pointer, HandCharacter, HandRigidBody
     /// </summary>
-    public partial class HandDude : Node3D, IStateControlling<IHandState>
+    public partial class HandDude : Node3D, IStateControlling<IHandState>, IViewable
     {
         private IHandState currentState;
 
@@ -83,6 +91,11 @@ namespace Game
         private void ApplySettings(GameSettings settings)
         {
             character.Visible = settings.IsInDebug;
+        }
+
+        public Vector3 GetViewTargetPoint()
+        {
+            return rigidBody.Position.Lerp(pointer.Position, 0.4f);
         }
     }
 }
