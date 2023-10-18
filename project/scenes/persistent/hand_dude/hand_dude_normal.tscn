@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://lff820h02vdw"]
+
+[ext_resource type="PackedScene" uid="uid://dsrkv0mpehrim" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_pksuu"]
+
+[node name="hand_dude" instance=ExtResource("1_pksuu")]

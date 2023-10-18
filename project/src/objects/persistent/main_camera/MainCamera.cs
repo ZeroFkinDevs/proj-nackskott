@@ -5,22 +5,31 @@ namespace Game
 {
 	/// <summary>
 	/// Класс позволяющий плавно перемещать какой-нибудь Node3D. <br/>
+	/// Также релизует привязку к сетке. <br/>
 	/// Можно переместить в отдельный файл - С камерой он напрямую никак не связан, он о ней не знает.
 	/// </summary>
 	public class SmoothTranslater
     {
 		/// <summary>
-		/// Публичная переменная целевой точки куда надо переместиться. доступна и для чтения и для записи.
+		/// Целевая точка куда надо переместиться. доступна и для чтения и для записи.
 		/// </summary>
 		public Vector3 TargetPoint;
+		/// <summary>
+		/// Позиция которя сглаживается.
+		/// </summary>
+		public Vector3 ActualPoint;
 
 		private Node3D node;
 		public float MotionSmoothness = 2.0f;
+
+		// Зернистость сетки
+		public float Snapping = 40.0f;
 
 		public SmoothTranslater(Node3D _node, float motionSmoothness = 2.0f)
 		{
 			node = _node;
 			TargetPoint = node.Position;
+			ActualPoint = TargetPoint;
 			MotionSmoothness = motionSmoothness;
 		}
 		/// <summary>
@@ -29,7 +38,19 @@ namespace Game
 		/// <param name="delta"></param>
 		public void UpdateMotion(double delta)
 		{
-			node.Position = node.Position.Lerp(TargetPoint, (float)delta * MotionSmoothness);
+			// ActualPoint без привязки к сетке, поэтому 
+			ActualPoint = ActualPoint.Lerp(TargetPoint, (float)delta * MotionSmoothness);
+			var finalPos = ActualPoint;
+			node.Position = ActualPoint;
+			
+			// snapping
+			Vector3 snappedPos = (ActualPoint * Snapping).Round() / Snapping;
+			finalPos = snappedPos;
+			if ((finalPos - TargetPoint).Length() <= (1.0f/Snapping)*100.0f){
+			}
+
+			// Обновляем позицию объекта.
+			node.Position = finalPos;
 		}
 	}
 
