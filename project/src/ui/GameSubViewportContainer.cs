@@ -17,7 +17,6 @@ namespace Game
 			var dist2d = new Vector2(pixDist.X, pixDist.Z) * (pixPerMeter);
 			dist2d *= -1;
 			Position = dist2d;
-			GD.Print(dist2d);
 		}
         public override void _Process(double delta)
         {
