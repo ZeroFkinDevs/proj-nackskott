@@ -99,10 +99,15 @@ namespace Game
 
 			smoothTranslater = new SmoothTranslater(this, MotionSmoothness);
 		}
+		public void UpdateSnapping()
+		{
+			smoothTranslater.Snapping = GetViewport().GetVisibleRect().Size.Y / Camera.Size;
+		}
         public override void _Process(double delta)
         {
 			FollowViewTarget(delta);
 			smoothTranslater.UpdateMotion(delta);
+			UpdateSnapping();
         }
 
 		#region Target and IViewFollower

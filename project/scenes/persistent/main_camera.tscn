@@ -10,8 +10,8 @@ shader = ExtResource("2_vewmo")
 shader_parameter/amount = 40
 shader_parameter/shadows_enabled = true
 shader_parameter/highlights_enabled = false
-shader_parameter/shadow_strength = 0.61
-shader_parameter/highlight_strength = 0.64
+shader_parameter/shadow_strength = 1.0
+shader_parameter/highlight_strength = 1.0
 shader_parameter/highlight_color = Color(0, 0, 0, 1)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 
@@ -31,7 +31,7 @@ script = ExtResource("1_tkei1")
 CameraPath = NodePath("Camera")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, -4.09715e-08, 1.62522)
 projection = 1
 current = true
 size = 4.0
