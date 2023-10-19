@@ -45,7 +45,7 @@ namespace Game
 			node.Position = ActualPoint;
 			
 			// snapping
-			Vector3 snappedPos = (ActualPoint * Snapping).Round() / Snapping;
+			Vector3 snappedPos = (ActualPoint * Snapping).Floor() / Snapping;
 			finalPos = snappedPos;
 			if ((finalPos - TargetPoint).Length() <= (1.0f/Snapping)*100.0f){
 			}
@@ -84,6 +84,7 @@ namespace Game
 		public float MotionSmoothness = 2.0f;
 
 		private SmoothTranslater smoothTranslater;
+		public SmoothTranslater SmoothTrans {get{return smoothTranslater;}}
 
 		public MainCamera()
 		{
