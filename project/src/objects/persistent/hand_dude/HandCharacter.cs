@@ -30,11 +30,11 @@ namespace Game
         {
             if(AnimController.IsJumping()) return;
             
-            point.Y = Position.Y;
-            var direction = ((point - Position) * new Vector3(1, 0, 1)).Normalized();
+            point.Y = GlobalPosition.Y;
+            var direction = ((point - GlobalPosition) * new Vector3(1, 0, 1)).Normalized();
             _velocity = direction * jumpForce;
             LookAt(
-                Position + direction,
+                GlobalPosition + direction,
                 Vector3.Up
             );
 
@@ -47,7 +47,7 @@ namespace Game
 
             _velocity.X += motion.X * speed;
             _velocity.Z += motion.Y * speed;
-            var lookAtVector = Position + new Vector3(motion.X, 0, motion.Y);
+            var lookAtVector = GlobalPosition + new Vector3(motion.X, 0, motion.Y);
             LookAt(
                 lookAtVector,
                 Vector3.Up

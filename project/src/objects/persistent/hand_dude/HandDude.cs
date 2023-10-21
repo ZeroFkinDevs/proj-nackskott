@@ -85,7 +85,7 @@ namespace Game
 
         public void JumpToPointer()
         {
-            character.JumpTo(pointer.Position);
+            character.JumpTo(pointer.GlobalPosition);
         }
 
         private void ApplySettings(GameSettings settings)
@@ -95,7 +95,7 @@ namespace Game
 
         public Vector3 GetViewTargetPoint()
         {
-            return rigidBody.Position.Lerp(pointer.Position, 0.4f);
+            return rigidBody.GlobalPosition.Lerp(pointer.GlobalPosition, 0.4f);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Game
 		public SmoothTranslater(Node3D _node, float motionSmoothness = 2.0f)
 		{
 			node = _node;
-			TargetPoint = node.Position;
+			TargetPoint = node.GlobalPosition;
 			ActualPoint = TargetPoint;
 			MotionSmoothness = motionSmoothness;
 		}
@@ -42,7 +42,7 @@ namespace Game
 			// ActualPoint без привязки к сетке, поэтому 
 			ActualPoint = ActualPoint.Lerp(TargetPoint, (float)delta * MotionSmoothness);
 			var finalPos = ActualPoint;
-			node.Position = ActualPoint;
+			node.GlobalPosition = ActualPoint;
 			
 			// snapping
 			Vector3 snappedPos = (ActualPoint * Snapping).Floor() / Snapping;
@@ -51,7 +51,7 @@ namespace Game
 			}
 
 			// Обновляем позицию объекта.
-			node.Position = finalPos;
+			node.GlobalPosition = finalPos;
 		}
 	}
 
@@ -133,7 +133,7 @@ namespace Game
 		/// <param name="delta"></param>
 		private void FollowViewTarget(double delta)
         {
-			Vector3 point = Position;
+			Vector3 point = GlobalPosition;
 			// Проверяем тип ViewTarget и получаем точки слежения
 			// если ViewTarget это IViewable, то очень удобно преобразовываем Node3D в IViewable сохраняя в переменную viewable
 			if (ViewTarget is IViewable viewable)
@@ -143,7 +143,7 @@ namespace Game
 			// если нет то просто позицию Node3D, вдруг ViewTarget не реализует IViewable, это можно допустить.
 			else
 			{
-				point = ViewTarget.Position;
+				point = ViewTarget.GlobalPosition;
             }
 			smoothTranslater.TargetPoint = point;
 		}

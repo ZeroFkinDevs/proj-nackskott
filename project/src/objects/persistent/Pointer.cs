@@ -48,7 +48,7 @@ namespace Game
 				// P.S. Value это относиться к Nullable<T>, а не к вектору
 				Vector3 pos = worldPos.Value;
 				// перемещаем Pointer
-				Position = new Vector3(pos.X, Position.Y, pos.Z);
+				GlobalPosition = new Vector3(pos.X, GlobalPosition.Y, pos.Z);
 			}
 		}
 
