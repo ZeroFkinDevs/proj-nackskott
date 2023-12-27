@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 35800,
+	"savedWithRelease": 36802,
 	"name": "proj-nackskott prototype",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -28,6 +28,13 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "TiledBg",
+			"name": "Tiled Background",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "EightDir",
 			"name": "8 Direction",
@@ -40,6 +47,13 @@
 			"name": "Scroll To",
 			"author": "Scirra",
 			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "solid",
+			"name": "Solid",
+			"author": "Scirra",
+			"bundled": false
 		}
 	],
 	"uniqueId": "rihhmqugg62",
@@ -47,7 +61,8 @@
 		"items": [
 			"Sprite",
 			"Mouse",
-			"Keyboard"
+			"Keyboard",
+			"wall"
 		],
 		"subfolders": []
 	},
