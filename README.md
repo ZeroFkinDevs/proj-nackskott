@@ -11,7 +11,7 @@ git clone --recurse-submodules https://github.com/ZeroFkinDevs/proj-nackskott.gi
 
 
 # Софт
-- [Godot](https://godotengine.org/) - `v4.1.2.stable.mono.official [399c9dc39]`
+- [Godot](https://godotengine.org/) - `v4.2.1.stable.mono.official [b09f793f5]`
 - [Visual Studio Code](https://code.visualstudio.com/) - with `ms-dotnettools.csharp`, `ms-dotnettools.csdevkit`
 - [Blender](https://www.blender.org/) - `v3.1.2`
 - [Adobe Photoshop](https://www.adobe.com/ru/products/photoshop.html) - `CC 2014`
