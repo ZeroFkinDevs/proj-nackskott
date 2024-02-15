@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdqyosstv3r01"]
+
+[ext_resource type="Texture2D" uid="uid://c0w3adjwipyo8" path="res://resources/objects/persistent/decorations/blood_stains/blood_stain_3.png" id="1_0yl5r"]
+[ext_resource type="Texture2D" uid="uid://dbsvlbaapcq7i" path="res://resources/objects/persistent/decorations/blood_stains/blood_stain_3_orm.png" id="2_0wfeq"]
+
+[node name="blood_stain_3" type="Decal"]
+size = Vector3(0.980659, 0.947233, 0.929188)
+texture_albedo = ExtResource("1_0yl5r")
+texture_orm = ExtResource("2_0wfeq")
+distance_fade_length = 0.0
+cull_mask = 2

@@ -17,6 +17,7 @@ namespace Game
 		/// <summary>
 		/// Позиция которя сглаживается.
 		/// </summary>
+		/// asd
 		public Vector3 ActualPoint;
 
 		private Node3D node;
@@ -28,7 +29,7 @@ namespace Game
 		public SmoothTranslater(Node3D _node, float motionSmoothness = 2.0f)
 		{
 			node = _node;
-			TargetPoint = node.Position;
+			TargetPoint = node.GlobalPosition;
 			ActualPoint = TargetPoint;
 			MotionSmoothness = motionSmoothness;
 		}
@@ -41,16 +42,16 @@ namespace Game
 			// ActualPoint без привязки к сетке, поэтому 
 			ActualPoint = ActualPoint.Lerp(TargetPoint, (float)delta * MotionSmoothness);
 			var finalPos = ActualPoint;
-			node.Position = ActualPoint;
+			node.GlobalPosition = ActualPoint;
 			
 			// snapping
-			Vector3 snappedPos = (ActualPoint * Snapping).Round() / Snapping;
+			Vector3 snappedPos = (ActualPoint * Snapping).Floor() / Snapping;
 			finalPos = snappedPos;
 			if ((finalPos - TargetPoint).Length() <= (1.0f/Snapping)*100.0f){
 			}
 
 			// Обновляем позицию объекта.
-			node.Position = finalPos;
+			node.GlobalPosition = finalPos;
 		}
 	}
 
@@ -83,6 +84,7 @@ namespace Game
 		public float MotionSmoothness = 2.0f;
 
 		private SmoothTranslater smoothTranslater;
+		public SmoothTranslater SmoothTrans {get{return smoothTranslater;}}
 
 		public MainCamera()
 		{
@@ -98,10 +100,15 @@ namespace Game
 
 			smoothTranslater = new SmoothTranslater(this, MotionSmoothness);
 		}
+		public void UpdateSnapping()
+		{
+			smoothTranslater.Snapping = GetViewport().GetVisibleRect().Size.Y / Camera.Size;
+		}
         public override void _Process(double delta)
         {
 			FollowViewTarget(delta);
 			smoothTranslater.UpdateMotion(delta);
+			UpdateSnapping();
         }
 
 		#region Target and IViewFollower
@@ -126,7 +133,7 @@ namespace Game
 		/// <param name="delta"></param>
 		private void FollowViewTarget(double delta)
         {
-			Vector3 point = Position;
+			Vector3 point = GlobalPosition;
 			// Проверяем тип ViewTarget и получаем точки слежения
 			// если ViewTarget это IViewable, то очень удобно преобразовываем Node3D в IViewable сохраняя в переменную viewable
 			if (ViewTarget is IViewable viewable)
@@ -136,7 +143,7 @@ namespace Game
 			// если нет то просто позицию Node3D, вдруг ViewTarget не реализует IViewable, это можно допустить.
 			else
 			{
-				point = ViewTarget.Position;
+				point = ViewTarget.GlobalPosition;
             }
 			smoothTranslater.TargetPoint = point;
 		}

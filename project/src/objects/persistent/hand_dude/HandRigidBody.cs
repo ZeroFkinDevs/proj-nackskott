@@ -79,7 +79,7 @@ namespace Game
 
         public Vector3 GetViewTargetPoint()
         {
-            return Position;
+            return GlobalPosition;
         }
     }
 }

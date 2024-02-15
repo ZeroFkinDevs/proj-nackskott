@@ -1,5 +1,87 @@
-[gd_scene load_steps=2 format=3 uid="uid://lff820h02vdw"]
+[gd_scene load_steps=11 format=3 uid="uid://lff820h02vdw"]
 
-[ext_resource type="PackedScene" uid="uid://dsrkv0mpehrim" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_pksuu"]
+[ext_resource type="PackedScene" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_pksuu"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandAnimationController.cs" id="2_kc0f8"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_svi5d"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xhmma"]
+animation = &"hand_grip"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ihnio"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jvnum"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_btufk"]
+animation = &"hand_free"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_4c6hj"]
+xfade_time = 0.05
+input_0/name = "hand_free"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "hand_grip"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_d5634"]
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "jump"
+input_1/auto_advance = true
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1rcie"]
+graph_offset = Vector2(-585.861, 136.119)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_svi5d")
+nodes/Add2/position = Vector2(140, 220)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_btufk")
+nodes/Animation/position = Vector2(-260, 100)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_xhmma")
+"nodes/Animation 2/position" = Vector2(-260, 200)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_ihnio")
+"nodes/Animation 3/position" = Vector2(-260, 340)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_jvnum")
+"nodes/Animation 4/position" = Vector2(-260, 440)
+nodes/HandState/node = SubResource("AnimationNodeTransition_4c6hj")
+nodes/HandState/position = Vector2(-80, 120)
+nodes/MovementState/node = SubResource("AnimationNodeTransition_d5634")
+nodes/MovementState/position = Vector2(-80, 340)
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"MovementState", &"Add2", 1, &"HandState", &"HandState", 0, &"Animation", &"HandState", 1, &"Animation 2", &"MovementState", 0, &"Animation 3", &"MovementState", 1, &"Animation 4"]
 
 [node name="hand_dude" instance=ExtResource("1_pksuu")]
+script = ExtResource("2_kc0f8")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(-0.705221, 0.000112662, -0.000112064, 0.708987)
+bones/1/rotation = Quaternion(-0.271697, -0.0583038, -0.418776, 0.864528)
+bones/2/rotation = Quaternion(0.200761, 0.057341, 0.373507, 0.903825)
+bones/4/rotation = Quaternion(0.146267, 0.0141167, -0.140385, 0.979132)
+bones/5/rotation = Quaternion(-0.416988, -0.0730121, 0.0807993, 0.902364)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.0672477, -0.000403301, 0.027391, 0.99736)
+bones/7/rotation = Quaternion(0.17885, -0.000318226, 0.00434436, 0.983867)
+bones/8/rotation = Quaternion(-0.456458, 0.0054701, 0.00521406, 0.889713)
+bones/9/rotation = Quaternion(-0.0944858, 0.000565732, -0.00456928, 0.995516)
+bones/10/rotation = Quaternion(0.173192, -0.0105163, 0.133579, 0.975731)
+bones/11/rotation = Quaternion(-0.46325, 0.0994887, -0.011153, 0.880555)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/rotation = Quaternion(-0.0717003, 0.00355395, -0.0422736, 0.996524)
+bones/13/rotation = Quaternion(0.149604, -0.0279183, 0.280588, 0.947686)
+bones/14/rotation = Quaternion(-0.471301, 0.187126, -0.0644485, 0.85948)
+bones/15/rotation = Quaternion(-0.0854775, 0.0153233, -0.0605213, 0.994382)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_1rcie")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Add2/add_amount = 1.0
+parameters/HandState/current_state = "hand_free"
+parameters/HandState/transition_request = ""
+parameters/HandState/current_index = 0
+parameters/MovementState/current_state = "idle"
+parameters/MovementState/transition_request = ""
+parameters/MovementState/current_index = 0
