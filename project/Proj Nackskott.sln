@@ -3,7 +3,7 @@
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proj Nackskott", "Proj Nackskott.csproj", "{89615C32-62EA-442E-9E49-51DFCB18574C}"
 EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	GlobalSection(SolutitonConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
 	ExportDebug|Any CPU = ExportDebug|Any CPU
 	ExportRelease|Any CPU = ExportRelease|Any CPU

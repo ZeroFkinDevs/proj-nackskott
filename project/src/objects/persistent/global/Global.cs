@@ -1,5 +1,7 @@
 ﻿using Godot;
 using System;
+using System.Linq;
+using UI;
 
 namespace Game {
 	/// <summary>
@@ -9,6 +11,9 @@ namespace Game {
 	/// </summary>
 	public partial class Global : Node
 	{
+		[Export]
+		PackedScene UIScene;
+
 		private MainCamera _mainCamera;
 		public MainCamera CurrentMainCamera { get { return _mainCamera; } }
 
@@ -35,8 +40,21 @@ namespace Game {
 			// после _Ready, когда все что на сцене уже точно на 100% прогружено.
 			CallDeferred("DeferredReady");
 		}
+		
+		/// <summary>
+		/// берем сцену игры и отдаем UI чтобы он поместил ее в нужный viewport
+		/// </summary>
+		void SetupUI(){
+			var ui = UIScene.Instantiate<UIDad>();
+			AddChild(ui);
+			var neighbours = GetParent().GetChildren();
+			// типо берем то что кроме Global, т.к. в /root/ спавнятся только Global и запускаемая сцена
+			var scene = neighbours.Last();
+			ui.PlaceGameScene(scene);
+		}
 		public void DeferredReady()
         {
+			SetupUI();
 			Settings.InvokeChange();
 		}
 
