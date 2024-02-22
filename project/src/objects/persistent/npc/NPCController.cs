@@ -47,7 +47,6 @@ namespace Game
 
         public void OnVelocityComputed(Vector3 _safeVelocity){
             safeVelocity = _safeVelocity;
-            GD.Print(safeVelocity);
         }
 
 

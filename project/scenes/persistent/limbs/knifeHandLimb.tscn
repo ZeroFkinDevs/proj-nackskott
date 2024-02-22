@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwlbhjych1751"]
+
+[ext_resource type="PackedScene" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_p02gb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_725gu"]
+size = Vector3(0.08, 0.595, 0.08)
+
+[node name="model" type="Node3D"]
+
+[node name="hand_dude" parent="." instance=ExtResource("1_p02gb")]
+transform = Transform3D(1.12135, 0, 0, 0, 1.16905, 0, 0, 0, 1.95268, 0, 0.0441037, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0725217, 0.61884, 0.782162, -0.993203, 0.116393, 0, -0.0910385, -0.776846, 0.623074, 0.0685754, 0.00908524, -0.414538)
+mesh = SubResource("BoxMesh_725gu")
+skeleton = NodePath("../..")
