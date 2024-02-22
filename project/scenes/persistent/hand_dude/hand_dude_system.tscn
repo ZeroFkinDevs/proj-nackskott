@@ -32,7 +32,7 @@ characterPath = NodePath("HandCharacter")
 rigidBodyPath = NodePath("RigidBody3D")
 
 [node name="HandCharacter" type="CharacterBody3D" parent="."]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("2_c7y8b")
 AnimationControllerPath = NodePath("../RigidBody3D/hand_dude")
 

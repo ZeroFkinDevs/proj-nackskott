@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Proj Nackskott"
-run/main_scene="res://scenes/locations/test.tscn"
+run/main_scene="res://scenes/persistent/ui.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://src/objects/persistent/global/Global.cs"
+Global="*res://scenes/persistent/Global.tscn"
 
 [dotnet]
 
@@ -82,6 +82,9 @@ movement_right={
 
 3d_render/layer_1="all"
 3d_render/layer_2="map"
+3d_physics/layer_1="all"
+3d_physics/layer_2="obstacle"
+3d_physics/layer_3="characters"
 
 [rendering]
 

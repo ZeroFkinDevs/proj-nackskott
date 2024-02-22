@@ -1,0 +1,232 @@
+[gd_scene load_steps=20 format=3 uid="uid://byb727ejkr0ba"]
+
+[ext_resource type="PackedScene" uid="uid://dgw8w2rjvc285" path="res://scenes/persistent/hand_dude/hand_dude_system.tscn" id="1_uyhq4"]
+[ext_resource type="PackedScene" uid="uid://bsc886tdnlh4s" path="res://scenes/persistent/main_camera.tscn" id="2_hwiua"]
+[ext_resource type="Texture2D" uid="uid://dsv4pw7utcani" path="res://resources/objects/persistent/prototype/location/floor.png" id="3_oxu1x"]
+[ext_resource type="PackedScene" uid="uid://b2eiyg0m8nulq" path="res://scenes/persistent/decorations/blood_stains/blood_stain_1.tscn" id="4_6px8k"]
+[ext_resource type="PackedScene" uid="uid://bt75f6pnb042g" path="res://scenes/persistent/decorations/blood_stains/blood_stain_2.tscn" id="5_mauv5"]
+[ext_resource type="PackedScene" uid="uid://bdqyosstv3r01" path="res://scenes/persistent/decorations/blood_stains/blood_stain_3.tscn" id="6_jvyyj"]
+[ext_resource type="PackedScene" path="res://resources/objects/locations/hospital/person/person.tscn" id="7_hllsy"]
+[ext_resource type="Script" path="res://src/objects/persistent/npc/NPCController.cs" id="8_uc2yp"]
+[ext_resource type="Script" path="res://src/objects/persistent/npc/NPCViewComponent.cs" id="9_32n3o"]
+[ext_resource type="Script" path="res://src/objects/persistent/npc/NPCBrain.cs" id="10_ekhf4"]
+
+[sub_resource type="Environment" id="Environment_p2mu3"]
+background_mode = 1
+ambient_light_energy = 0.0
+tonemap_mode = 2
+ssao_radius = 3.04
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_mci23"]
+vertices = PackedVector3Array(1.74657, 0.380593, 0.995037, 1.99657, 0.380593, 2.74504, 3.24657, 0.380593, 2.99504, 3.49657, 0.380593, 2.99504, 3.99657, 0.380593, 2.74504, 3.99657, 0.380593, 0.495037, 1.49657, 0.380593, 0.495037, -1.00343, 0.380593, 0.995037, 1.74657, 0.380593, 0.995037, 3.99657, 0.380593, 0.495037, 3.24657, 0.380593, 7.74504, 3.24657, 0.380593, 5.74504, 1.24657, 0.380593, 5.74504, 0.996565, 0.380593, 7.74504, -1.00343, 0.380593, -1.00496, -1.00343, 0.380593, 0.995037, 1.49657, 0.380593, 0.495037, 1.24657, 0.380593, -1.00496, 0.746565, 0.380593, 5.74504, 0.996565, 0.380593, 7.74504, 1.24657, 0.380593, 5.74504, 0.996565, 0.380593, 4.49504, 2.99657, 0.380593, 3.99504, -1.00343, 0.380593, 3.49504, 0.996565, 0.380593, 4.49504, 3.49657, 0.380593, 4.24504, -1.00343, 0.380593, 5.74504, 0.746565, 0.380593, 5.74504, 0.996565, 0.380593, 4.49504, -1.00343, 0.380593, 3.49504, 3.49657, 0.380593, 2.99504, 3.24657, 0.380593, 2.99504, 2.99657, 0.380593, 3.99504, 3.49657, 0.380593, 4.24504)
+polygons = [PackedInt32Array(3, 2, 4), PackedInt32Array(4, 2, 1), PackedInt32Array(4, 1, 0), PackedInt32Array(4, 0, 5), PackedInt32Array(9, 8, 6), PackedInt32Array(6, 8, 7), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(17, 16, 14), PackedInt32Array(14, 16, 15), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33)]
+geometry_parsed_geometry_type = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svxw5"]
+albedo_texture = ExtResource("3_oxu1x")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4c2mb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_06bls"]
+size = Vector3(3, 0.650335, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wq0i0"]
+lightmap_size_hint = Vector2i(22, 29)
+material = SubResource("StandardMaterial3D_svxw5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_h76o3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jgnwv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wdy8h"]
+height = 1.31
+radius = 2.483
+
+[node name="test_level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p2mu3")
+
+[node name="HandDudeSystem" parent="." instance=ExtResource("1_uyhq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.269207, 0)
+
+[node name="Location" type="Node3D" parent="."]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Location"]
+navigation_mesh = SubResource("NavigationMesh_mci23")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Location/NavigationRegion3D"]
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Location/NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1.5, 0, 0, 0, 2.001, 0, 0, 0, 1.5, 0, 0, 0)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("PlaneMesh_4c2mb")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Location/NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.667, 0, 0, 0, 0.5, 0.5, 0, 2.5)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("PlaneMesh_4c2mb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00203049, -0.294239, -0.00496292)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Location/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.02054, 0, 1.64879)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Location/NavigationRegion3D/StaticBody3D4"]
+transform = Transform3D(1.5, 0, 0, 0, 2.001, 0, 0, 0, 1.5, 0, 0, 0)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("PlaneMesh_4c2mb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/NavigationRegion3D/StaticBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00203049, -0.294239, -0.00496292)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="Location/NavigationRegion3D"]
+transform = Transform3D(0.396, 0, 0, 0, 1, 0, 0, 0, 0.524, 3.3582, 0, 3.87673)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Location/NavigationRegion3D/StaticBody3D5"]
+transform = Transform3D(1.5, 0, 0, 0, 2.001, 0, 0, 0, 1.5, 0, 0, 0)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("PlaneMesh_4c2mb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/NavigationRegion3D/StaticBody3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00203049, -0.294239, -0.00496292)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="Location/NavigationRegion3D"]
+transform = Transform3D(-1.33851e-08, 0, 0.524303, 0, 0.999997, 0, -0.306215, 0, -2.2918e-08, 1.97609, 0, 4.1815)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Location/NavigationRegion3D/StaticBody3D7"]
+transform = Transform3D(1.5, 0, 0, 0, 2.001, 0, 0, 0, 1.5, 0, -0.0110072, 0)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("PlaneMesh_4c2mb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/NavigationRegion3D/StaticBody3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00203049, -0.294239, -0.00496292)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="Location/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00546527, 0, 4.63382)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Location/NavigationRegion3D/StaticBody3D6"]
+transform = Transform3D(1.5, 0, 0, 0, 2.001, 0, 0, 0, 1.5, 0, 0, 0)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("PlaneMesh_4c2mb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/NavigationRegion3D/StaticBody3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00203049, -0.294239, -0.00496292)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="StaticBody3D8" type="StaticBody3D" parent="Location/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04317, 0, 6.81236)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Location/NavigationRegion3D/StaticBody3D8"]
+transform = Transform3D(1.5, 0, 0, 0, 2.001, 0, 0, 0, 1.5, 0, 0, 0)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("PlaneMesh_4c2mb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Location/NavigationRegion3D/StaticBody3D8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00203049, -0.294239, -0.00496292)
+shape = SubResource("BoxShape3D_06bls")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Location"]
+transform = Transform3D(0.707107, -0.707107, 2.98023e-08, 0.527485, 0.527485, 0.665973, -0.470914, -0.470914, 0.745976, 1.77474, 0.197982, -0.506374)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("BoxMesh_wq0i0")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Location"]
+transform = Transform3D(-0.694452, 0.719271, -0.0196576, 0.527485, 0.527485, 0.665973, 0.489384, 0.452117, -0.745717, -0.627926, 0.399676, 4.59266)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("BoxMesh_wq0i0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Location"]
+transform = Transform3D(1, 0, 0, 0, 0.745976, 0.665973, 0, -0.665973, 0.745976, 1.77474, 0.337451, -3.34228)
+layers = 3
+material_override = SubResource("StandardMaterial3D_svxw5")
+mesh = SubResource("BoxMesh_wq0i0")
+
+[node name="blood_stain_1" parent="Location" instance=ExtResource("4_6px8k")]
+transform = Transform3D(3.20896, 0, 0, 0, 3.20896, 0, 0, 0, 3.20896, 2.31721, 0.0309282, 2.88486)
+
+[node name="blood_stain_2" parent="Location" instance=ExtResource("4_6px8k")]
+transform = Transform3D(-1.32508, 0, 2.92261, 0, 3.20896, 0, -2.92261, 0, -1.32508, 0.930142, 0.0309277, 1.54291)
+
+[node name="blood_stain_3" parent="Location" instance=ExtResource("5_mauv5")]
+transform = Transform3D(1.62914, 0, 1.48391, 0, 2.20365, 0, -1.48391, 0, 1.62914, 3.78653, 0.0309284, 1.96078)
+
+[node name="blood_stain_7" parent="Location" instance=ExtResource("4_6px8k")]
+transform = Transform3D(-1.48635, 0, 2.84398, 0, 3.20896, 0, -2.84398, 0, -1.48635, 2.66106, 0.0309286, 6.44465)
+
+[node name="blood_stain_8" parent="Location" instance=ExtResource("4_6px8k")]
+transform = Transform3D(-1.97643, 0, -2.52808, 0, 3.20896, 0, 2.52808, 0, -1.97643, 2.11421, 0.0309282, 8.29553)
+
+[node name="blood_stain_9" parent="Location" instance=ExtResource("5_mauv5")]
+transform = Transform3D(-2.06973, 0, 0.756512, 0, 2.20365, 0, -0.756512, 0, -2.06973, 1.16151, 0.0309289, 5.57048)
+
+[node name="blood_stain_4" parent="Location" instance=ExtResource("5_mauv5")]
+transform = Transform3D(2.20365, 0, 0, 0, 2.20365, 0, 0, 0, 2.20365, 1.41327, 0.921162, -0.794279)
+
+[node name="blood_stain_5" parent="Location" instance=ExtResource("6_jvyyj")]
+transform = Transform3D(3.40328, 0, 0, 0, 3.40328, 0, 0, 0, 3.40328, -0.555929, 0.0309286, 0.120743)
+
+[node name="blood_stain_6" parent="Location" instance=ExtResource("6_jvyyj")]
+transform = Transform3D(0.75793, 0, 3.31781, 0, 3.40328, 0, -3.31781, 0, 0.75793, 3.64977, 0.0309286, 0.286073)
+
+[node name="MainCamera" parent="." instance=ExtResource("2_hwiua")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.73735, -3.57628e-07)
+ViewableTargetPath = NodePath("../HandDudeSystem")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MainCamera"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.202671, -0.190207, 2.05818)
+shadow_enabled = true
+omni_range = 7.42971
+
+[node name="creatures" type="Node3D" parent="."]
+
+[node name="person" parent="creatures" instance=ExtResource("7_hllsy")]
+transform = Transform3D(0.26316, 0, 3.92139e-09, 0, 0.26316, 0, -3.92139e-09, 0, 0.26316, 1.78569, -0.0407555, 7.79075)
+
+[node name="NPC" type="CharacterBody3D" parent="creatures"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93041, 0.748283, 1.71415)
+script = ExtResource("8_uc2yp")
+Speed = 0.3
+NavAgentPath = NodePath("NavigationAgent3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="creatures/NPC"]
+mesh = SubResource("BoxMesh_h76o3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creatures/NPC"]
+shape = SubResource("BoxShape3D_jgnwv")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="creatures/NPC"]
+path_desired_distance = 0.3
+avoidance_enabled = true
+radius = 1.0
+
+[node name="NPCView" type="Node3D" parent="creatures/NPC"]
+script = ExtResource("9_32n3o")
+AreaPath = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="creatures/NPC/NPCView"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creatures/NPC/NPCView/Area3D"]
+shape = SubResource("CylinderShape3D_wdy8h")
+
+[node name="NPCBrain" type="Node3D" parent="creatures/NPC" node_paths=PackedStringArray("ViewComponent")]
+script = ExtResource("10_ekhf4")
+ViewComponent = NodePath("../NPCView")

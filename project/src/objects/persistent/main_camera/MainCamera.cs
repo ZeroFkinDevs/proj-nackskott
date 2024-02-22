@@ -62,15 +62,7 @@ namespace Game
 	public partial class MainCamera : Node3D, IViewFollower<Node3D>
 	{
 		[Export]
-		public NodePath CameraPath;
-		/// <summary>
-		/// Камера которая привязывается из CameraPath
-		/// </summary>
-		private Camera3D _camera = null;
-		/// <summary>
-		/// Публичный доступ к камере
-		/// </summary>
-		public Camera3D Camera { get { return _camera; } }
+		public Camera3D Camera;
 
 		/// <summary>
 		/// Путь к объекту слежения
@@ -95,7 +87,6 @@ namespace Game
 		}
 		public override void _Ready()
 		{
-			_camera = GetNode<Camera3D>(CameraPath);
 			SetViewTarget(GetNode<Node3D>(ViewableTargetPath));
 
 			smoothTranslater = new SmoothTranslater(this, MotionSmoothness);
