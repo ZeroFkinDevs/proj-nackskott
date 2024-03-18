@@ -42,7 +42,7 @@ script = ExtResource("2_csxb7")
 [node name="SubViewport" type="SubViewport" parent="Control/Control/SubViewportContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(288, 89)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="StatusPanel" parent="Control" instance=ExtResource("3_7l5p8")]

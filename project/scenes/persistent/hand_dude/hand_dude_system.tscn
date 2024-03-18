@@ -1,29 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgw8w2rjvc285"]
+[gd_scene load_steps=12 format=3 uid="uid://dgw8w2rjvc285"]
 
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandDude.cs" id="1_pr6ts"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandCharacter.cs" id="2_c7y8b"]
-[ext_resource type="Texture2D" uid="uid://bqac400fm1gsa" path="res://resources/objects/persistent/hand_dude/hand_dude.png" id="3_csfbb"]
 [ext_resource type="Script" path="res://src/objects/persistent/Pointer.cs" id="4_bsri5"]
 [ext_resource type="Texture2D" uid="uid://ckpyr35bxtnpl" path="res://resources/objects/persistent/pointer/pointer_default.png" id="5_vjpiy"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandRigidBody.cs" id="6_1muak"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/LimbController.cs" id="7_8jv4c"]
 [ext_resource type="PackedScene" uid="uid://lff820h02vdw" path="res://scenes/persistent/hand_dude/hand_dude_normal.tscn" id="7_asbnm"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fhica"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_csfbb")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/UseRegion.cs" id="8_n2vwf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lqj2p"]
 radius = 0.288306
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cl8gk"]
 size = Vector3(0.199326, 0.12393, 0.449907)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a2heo"]
+radius = 0.549085
 
 [node name="HandDudeSystem" type="Node3D"]
 script = ExtResource("1_pr6ts")
@@ -35,14 +28,6 @@ rigidBodyPath = NodePath("RigidBody3D")
 collision_layer = 4
 script = ExtResource("2_c7y8b")
 AnimationControllerPath = NodePath("../RigidBody3D/hand_dude")
-
-[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="HandCharacter"]
-transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0)
-visible = false
-modulate = Color(0.592157, 0.235294, 0.364706, 1)
-alpha_cut = 1
-texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_fhica")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165005, -0.0132761)
@@ -77,9 +62,16 @@ transform = Transform3D(1.3671, -6.65266e-14, 0, -3.81051e-14, 1.3671, -9.66338e
 transform = Transform3D(1, -2.42699e-16, 0, -2.42861e-16, 1, 0, 0, 0, 1, -0.00269102, 0.015062, 0.0114954)
 shape = SubResource("BoxShape3D_cl8gk")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RigidBody3D"]
-transform = Transform3D(2, 0, -1.52015e-14, -4.85723e-16, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0)
-visible = false
-alpha_cut = 1
-texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_fhica")
+[node name="LimbController" type="Node3D" parent="RigidBody3D" node_paths=PackedStringArray("handAnimationController", "limbContainer")]
+script = ExtResource("7_8jv4c")
+handAnimationController = NodePath("../hand_dude")
+limbContainer = NodePath("LimbContainer")
+
+[node name="LimbContainer" type="Node3D" parent="RigidBody3D/LimbController"]
+
+[node name="UseRegion" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("Player")]
+script = ExtResource("8_n2vwf")
+Player = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/UseRegion"]
+shape = SubResource("SphereShape3D_a2heo")

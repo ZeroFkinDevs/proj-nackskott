@@ -5,8 +5,24 @@ namespace Game
 {
 	public partial class HandAnimationController : AnimationController
 	{
+		[Export]
+		public Skeleton3D skeleton3D;
+		[Export]
+		public string baseBoneName = "base_bone";
+		int baseBoneID = -1;
+
 		private string handStateName = "HandState";
 		private string movementStateName = "MovementState";
+
+        public override void _Process(double delta)
+        {
+			baseBoneID = skeleton3D.FindBone(baseBoneName);
+        }
+
+        public Transform3D GetBaseBoneGlobalPose(){
+			var pose = skeleton3D.GetBoneGlobalPose(baseBoneID);
+			return pose;
+		}
 
 		#region hand state
 		public void HandGrip()

@@ -55,6 +55,8 @@ namespace Game
         public NodePath rigidBodyPath;
         private HandRigidBody rigidBody;
 
+        public Inventory inventory;
+
         public bool SetState(IHandState state)
         {
             currentState = state;

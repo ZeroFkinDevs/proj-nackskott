@@ -851,8 +851,9 @@ nodes/MovementState/node = SubResource("AnimationNodeTransition_d5634")
 nodes/MovementState/position = Vector2(-80, 340)
 node_connections = [&"Add2", 0, &"MovementState", &"Add2", 1, &"HandState", &"HandState", 0, &"Animation", &"HandState", 1, &"Animation 2", &"MovementState", 0, &"Animation 3", &"MovementState", 1, &"Animation 4", &"output", 0, &"Add2"]
 
-[node name="hand_dude" instance=ExtResource("1_pksuu")]
+[node name="hand_dude" node_paths=PackedStringArray("skeleton3D") instance=ExtResource("1_pksuu")]
 script = ExtResource("2_kc0f8")
+skeleton3D = NodePath("Armature/Skeleton3D")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/0/rotation = Quaternion(-0.705221, 0.000112662, -0.000112064, 0.708987)
