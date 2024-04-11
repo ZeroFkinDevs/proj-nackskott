@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://dch37pm6mqlbb"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/npc/NPCController.cs" id="1_f76p0"]
+[ext_resource type="PackedScene" uid="uid://f7mh0xut1glr" path="res://scenes/persistent/npc/test_npc_view.tscn" id="2_q7yw0"]
+[ext_resource type="Script" path="res://src/objects/persistent/npc/NPCViewComponent.cs" id="3_cn36q"]
+[ext_resource type="Script" path="res://src/objects/persistent/npc/NPCBrain.cs" id="4_ducka"]
+[ext_resource type="Script" path="res://src/utils/DebugVisibility.cs" id="5_ko64o"]
+[ext_resource type="Script" path="res://src/objects/persistent/DamageArea.cs" id="6_efm10"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_elthj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wdy8h"]
+height = 1.31
+radius = 2.483
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ncqfy"]
+radius = 0.773835
+
+[node name="NPC" type="CharacterBody3D" node_paths=PackedStringArray("AnimController", "damageArea", "HpLabel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25905, 0.748283, 2.28026)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_f76p0")
+Speed = 0.3
+RotationSpeed = 2.0
+AnimController = NodePath("character")
+damageArea = NodePath("DamageArea")
+NavAgentPath = NodePath("NavigationAgent3D")
+HpLabel = NodePath("Label3D")
+
+[node name="character" parent="." instance=ExtResource("2_q7yw0")]
+transform = Transform3D(-1.32133, 0, -0.35405, 0, 1.36794, 0, 0.35405, 0, -1.32133, 0, -0.64686, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.119919, 0, -0.0823059)
+shape = SubResource("CapsuleShape3D_elthj")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.3
+avoidance_enabled = true
+radius = 1.0
+avoidance_layers = 2
+avoidance_mask = 2
+
+[node name="NPCView" type="Node3D" parent="."]
+script = ExtResource("3_cn36q")
+AreaPath = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="NPCView"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPCView/Area3D"]
+shape = SubResource("CylinderShape3D_wdy8h")
+
+[node name="NPCBrain" type="Node3D" parent="." node_paths=PackedStringArray("ViewComponent")]
+script = ExtResource("4_ducka")
+ViewComponent = NodePath("../NPCView")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.999904, 0, 0.0138399, 0, 1, 0, -0.0138399, 0, -0.999904, 0, 1.71804, 0.394419)
+billboard = 1
+no_depth_test = true
+modulate = Color(0.937255, 0.478431, 0.576471, 1)
+text = "text"
+script = ExtResource("5_ko64o")
+
+[node name="DamageArea" type="Area3D" parent="." node_paths=PackedStringArray("FromPosition", "FromEntity")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.04026, 0)
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("6_efm10")
+FromPosition = NodePath("..")
+FromEntity = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageArea"]
+shape = SubResource("CylinderShape3D_ncqfy")

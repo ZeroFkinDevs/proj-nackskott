@@ -11,9 +11,10 @@ namespace Game
 		}
         public Godot.Collections.Array<Cell> cells = new Godot.Collections.Array<Cell>();
 
-		public event Action<InventoryItem> ActiveLimbChanged;
-		private InventoryItem _activeLimb = null;
-		public InventoryItem ActiveLimb {
+		public delegate void ActiveLimbChangedDelegate(LimbInventoryItem limbItem);
+		public event ActiveLimbChangedDelegate ActiveLimbChanged;
+		private LimbInventoryItem _activeLimb = null;
+		public LimbInventoryItem ActiveLimb {
 			get{return _activeLimb;}
 			set{
 				_activeLimb = value;

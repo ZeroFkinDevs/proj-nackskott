@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_pksuu"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandAnimationController.cs" id="2_kc0f8"]
 
-[sub_resource type="Animation" id="Animation_7jdys"]
+[sub_resource type="Animation" id="Animation_2gfa8"]
 resource_name = "ArmatureAction"
 length = 0.001
 tracks/0/type = "position_3d"
@@ -161,7 +161,7 @@ tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = PackedFloat32Array(0, 1, 0.017982, 0.0108897, 0.281722, 0.959266)
 
-[sub_resource type="Animation" id="Animation_hyeo2"]
+[sub_resource type="Animation" id="Animation_8w76y"]
 resource_name = "hand_free"
 length = 0.001
 tracks/0/type = "rotation_3d"
@@ -319,7 +319,7 @@ tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = PackedFloat32Array(0, 1, 0.017982, 0.0108897, 0.281722, 0.959266)
 
-[sub_resource type="Animation" id="Animation_dfg1k"]
+[sub_resource type="Animation" id="Animation_sk4gx"]
 resource_name = "hand_grip"
 length = 0.166667
 tracks/0/type = "rotation_3d"
@@ -477,7 +477,7 @@ tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = PackedFloat32Array(0, 1, 0.017982, 0.0108897, 0.281722, 0.959266)
 
-[sub_resource type="Animation" id="Animation_5ms6d"]
+[sub_resource type="Animation" id="Animation_ihfrf"]
 resource_name = "idle"
 length = 0.001
 tracks/0/type = "position_3d"
@@ -635,7 +635,7 @@ tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = PackedFloat32Array(0, 1, -0.0854775, 0.0153233, -0.0605213, 0.994382)
 
-[sub_resource type="Animation" id="Animation_vuvu4"]
+[sub_resource type="Animation" id="Animation_84f3d"]
 resource_name = "jump"
 length = 0.583333
 tracks/0/type = "position_3d"
@@ -793,13 +793,13 @@ tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = PackedFloat32Array(0, 1, -0.0854775, 0.0153233, -0.0605213, 0.994382)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbvig"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sc12w"]
 _data = {
-"ArmatureAction": SubResource("Animation_7jdys"),
-"hand_free": SubResource("Animation_hyeo2"),
-"hand_grip": SubResource("Animation_dfg1k"),
-"idle": SubResource("Animation_5ms6d"),
-"jump": SubResource("Animation_vuvu4")
+"ArmatureAction": SubResource("Animation_2gfa8"),
+"hand_free": SubResource("Animation_8w76y"),
+"hand_grip": SubResource("Animation_sk4gx"),
+"idle": SubResource("Animation_ihfrf"),
+"jump": SubResource("Animation_84f3d")
 }
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_svi5d"]
@@ -834,7 +834,7 @@ input_1/auto_advance = true
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1rcie"]
-graph_offset = Vector2(-585.861, 136.119)
+graph_offset = Vector2(-477.695, 69.9819)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_svi5d")
 nodes/Add2/position = Vector2(140, 220)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_btufk")
@@ -849,6 +849,7 @@ nodes/HandState/node = SubResource("AnimationNodeTransition_4c6hj")
 nodes/HandState/position = Vector2(-80, 120)
 nodes/MovementState/node = SubResource("AnimationNodeTransition_d5634")
 nodes/MovementState/position = Vector2(-80, 340)
+nodes/output/position = Vector2(380, 140)
 node_connections = [&"Add2", 0, &"MovementState", &"Add2", 1, &"HandState", &"HandState", 0, &"Animation", &"HandState", 1, &"Animation 2", &"MovementState", 0, &"Animation 3", &"MovementState", 1, &"Animation 4", &"output", 0, &"Add2"]
 
 [node name="hand_dude" node_paths=PackedStringArray("skeleton3D") instance=ExtResource("1_pksuu")]
@@ -876,7 +877,7 @@ bones/15/rotation = Quaternion(-0.0854775, 0.0153233, -0.0605213, 0.994382)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 libraries = {
-"": SubResource("AnimationLibrary_cbvig")
+"": SubResource("AnimationLibrary_sc12w")
 }
 tree_root = SubResource("AnimationNodeBlendTree_1rcie")
 anim_player = NodePath("../AnimationPlayer")

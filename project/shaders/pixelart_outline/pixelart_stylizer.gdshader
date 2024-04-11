@@ -101,6 +101,7 @@ void fragment() {
 	if (shadows_enabled) {
 		final = mix(final, final_shadow_color, depth_diff);
 	}
+	
 	ALBEDO = final;
 
 	float alpha_mask = depth_diff * float(shadows_enabled) + normal_diff * float(highlights_enabled);

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://ctd47ohuxn8aw"]
+
+[ext_resource type="PackedScene" uid="uid://dwlbhjych1751" path="res://scenes/persistent/limbs/knifeHandLimb.tscn" id="1_edtat"]
+[ext_resource type="Script" path="res://src/objects/persistent/inventory/itemConfigs/LimbInventoryItem.cs" id="2_j4ego"]
+
+[resource]
+script = ExtResource("2_j4ego")
+Scene = ExtResource("1_edtat")
+Name = "Knife Hand"
+Type = ""
+Data = null

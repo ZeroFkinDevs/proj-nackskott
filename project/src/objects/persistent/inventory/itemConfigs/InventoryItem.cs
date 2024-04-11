@@ -11,6 +11,6 @@ namespace Game
         public string Type;
 
         [Export]
-        public Godot.Collections.Dictionary<string, Godot.GodotObject> Data;
+        public Godot.Collections.Dictionary<string, Variant> Data;
     }
 }

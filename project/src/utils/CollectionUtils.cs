@@ -3,7 +3,7 @@ using System;
 
 namespace Game.Utils
 {
-    static class CollectionUtils
+    public static class CollectionUtils
     {
         public static T Get<T>(this Godot.Collections.Dictionary dict, Variant key)
         {

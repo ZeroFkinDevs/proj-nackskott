@@ -9,7 +9,7 @@ namespace Game {
 	/// Нужен для регистрации только тех объектов и экземпляров классов, которые однозначно не могут создаваться в игре несколько раз.
 	/// И которые логично хранить в глобальном пространстве.
 	/// </summary>
-	public partial class Global : Node
+	public partial class Global : Node3D
 	{
 		[Export]
 		PackedScene UIScene;
@@ -23,6 +23,10 @@ namespace Game {
         #region singleton
         private static Global _instance = null;
 		public static Global Instance {	get { return _instance; } }
+
+		public bool DebugVisibility = false;
+		public event Action<bool> OnDebugVisibilityChange;
+
 		public Global()
 		{
 			_instance = this;
@@ -45,6 +49,7 @@ namespace Game {
 		/// берем сцену игры и отдаем UI чтобы он поместил ее в нужный viewport
 		/// </summary>
 		void SetupUI(){
+			if(UIScene==null) return;
 			var ui = UIScene.Instantiate<UIDad>();
 			AddChild(ui);
 			var neighbours = GetParent().GetChildren();
@@ -60,7 +65,10 @@ namespace Game {
 
 		public override void _Process(double delta)
 		{
-
+			if(Input.IsActionJustPressed("debug_visibility")){
+				DebugVisibility = !DebugVisibility;
+				OnDebugVisibilityChange?.Invoke(DebugVisibility);
+			}
 		}
 	}
 }

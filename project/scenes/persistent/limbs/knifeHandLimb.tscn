@@ -1,16 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwlbhjych1751"]
+[gd_scene load_steps=9 format=3 uid="uid://dwlbhjych1751"]
 
 [ext_resource type="PackedScene" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_p02gb"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/limbs/LimbEntity.cs" id="1_t4v8l"]
+[ext_resource type="PackedScene" uid="uid://bsrine03cou6i" path="res://scenes/persistent/limbs/knife_attack_action.tscn" id="2_wa5f4"]
+[ext_resource type="Script" path="res://src/utils/HookesConnector.cs" id="3_g2a1e"]
+[ext_resource type="PackedScene" uid="uid://bbo77pcf33wjq" path="res://scenes/persistent/limbs/knife_attack_action2.tscn" id="3_ths84"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_725gu"]
 size = Vector3(0.08, 0.595, 0.08)
 
-[node name="model" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5iyuf"]
+size = Vector3(0.198242, 0.132751, 0.506653)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5gkw7"]
+size = Vector3(0.249634, 0.132751, 1.0242)
+
+[node name="model" type="RigidBody3D" node_paths=PackedStringArray("Connector", "Area")]
+collision_layer = 0
+script = ExtResource("1_t4v8l")
+Actions = Array[PackedScene]([ExtResource("2_wa5f4"), ExtResource("3_ths84")])
+Connector = NodePath("connector")
+Area = NodePath("Area3D")
 
 [node name="hand_dude" parent="." instance=ExtResource("1_p02gb")]
-transform = Transform3D(1.12135, 0, 0, 0, 1.16905, 0, 0, 0, 1.95268, 0, 0.0441037, 0)
+transform = Transform3D(1.11966, -4.82278e-09, -0.107062, -0.0242518, 1.07426, -0.769086, 0.0564964, 0.461137, 1.79165, 0.0108066, 0.131368, -0.353427)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0725217, 0.61884, 0.782162, -0.993203, 0.116393, 0, -0.0910385, -0.776846, 0.623074, 0.0685754, 0.00908524, -0.414538)
+transform = Transform3D(0.0774041, 0.660502, 0.746823, -0.878382, 0.399541, -0.262322, -0.471651, -0.635691, 0.611099, 0.102007, 0.260978, -0.744138)
 mesh = SubResource("BoxMesh_725gu")
 skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.928492, -0.371352, 0, 0.371352, 0.928492, 0.0180664, 0.136014, -0.290911)
+shape = SubResource("BoxShape3D_5iyuf")
+
+[node name="connector" type="Node3D" parent="." node_paths=PackedStringArray("Body")]
+script = ExtResource("3_g2a1e")
+Body = NodePath("..")
+linearSpringStiffness = 600.0
+maxLinearForce = 400.0
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.928492, -0.371352, 0, 0.371352, 0.928492, 0.0147095, 0.23211, -0.531181)
+shape = SubResource("BoxShape3D_5gkw7")

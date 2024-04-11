@@ -3,6 +3,6 @@
 [ext_resource type="Script" path="res://src/objects/persistent/global/Global.cs" id="1_7eyvp"]
 [ext_resource type="PackedScene" uid="uid://d05dd8hbrvdkk" path="res://scenes/persistent/ui/ui.tscn" id="2_mf6vp"]
 
-[node name="Global" type="Node"]
+[node name="Global" type="Node3D"]
 script = ExtResource("1_7eyvp")
 UIScene = ExtResource("2_mf6vp")

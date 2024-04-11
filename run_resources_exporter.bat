@@ -1,1 +1,1 @@
-python "D:\Users\user\Python\game-resources-exporter\exporter.py"
+python "C:\Users\hermit\gamedev\game-resources-exporter\exporter.py"

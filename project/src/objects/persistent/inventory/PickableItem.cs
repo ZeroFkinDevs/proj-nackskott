@@ -25,7 +25,9 @@ namespace Game
 		public void Use(Node3D user){
 			if(user is HandDude player){
 				player.inventory.AddItem(Item, Amount);
-				player.inventory.ActiveLimb = Item;
+				if(Item is LimbInventoryItem limbItem){
+					player.inventory.ActiveLimb = limbItem;
+				}
 				QueueFree();
 			}
 		}

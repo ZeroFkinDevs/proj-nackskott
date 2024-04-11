@@ -8,7 +8,7 @@ namespace Game
     /// То есть простое удобное передвижение, без особой физики как у rigidBody.
     /// По идее этот объект невидимый.
     /// </summary>
-    public partial class HandCharacter : CharacterBody3D
+    public partial class HandCharacter : CharacterBody3D, IDamagable
     {
         [Export]
         private float jumpForce = 60.0f;
@@ -16,14 +16,20 @@ namespace Game
         private float speed = 4.0f;
         private Vector3 _velocity;
 
+        float _initialRadius = 0.0f;
+
         [Export]
-        public NodePath AnimationControllerPath;
-        HandAnimationController _animController;
-        public HandAnimationController AnimController {get{return _animController;}}
+        public HandAnimationController AnimController;
+        [Export]
+        public HandDude Player;
+        [Export]
+        public CollisionShape3D collisionShape;
+        SphereShape3D sphereShape;
 
         public override void _Ready()
         {
-            _animController = GetNode<HandAnimationController>(AnimationControllerPath);
+            sphereShape = ((SphereShape3D)collisionShape.Shape);
+            _initialRadius = sphereShape.Radius;
         }
 
         public void JumpTo(Vector3 point)
@@ -56,6 +62,12 @@ namespace Game
 
         public override void _PhysicsProcess(double delta)
         {
+            if(Player.bodyState == HandDude.BodyState.Controlled) UpdateMovement(delta);
+            else AlignWithRigidBody();
+        }
+
+        public void UpdateMovement(double delta){
+            sphereShape.Radius += (_initialRadius - sphereShape.Radius) / 4f;
             var input = Input.GetVector("movement_left", "movement_right", "movement_up", "movement_down");
             MoveBy(input);
 
@@ -65,6 +77,15 @@ namespace Game
             _velocity = Velocity;
             _velocity.X /= 10.0f;
             _velocity.Z /= 10.0f;
+        }
+        public void AlignWithRigidBody()
+        {
+            GlobalTransform = Player.rigidBody.GlobalTransform;
+            sphereShape.Radius += (0.05f - sphereShape.Radius) / 4.0f;
+        }
+
+        public void TakeDamage(float damage, Vector3 position, Node from=null){
+            Player.TakeDamage(damage, position, from);
         }
     }
 }

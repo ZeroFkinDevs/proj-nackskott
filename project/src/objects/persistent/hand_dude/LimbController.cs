@@ -1,6 +1,7 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
+using Game.Utils;
 namespace Game
 {
 	public partial class LimbController : Node
@@ -27,12 +28,27 @@ namespace Game
 		public void UpdateLimbContainer(double delta)
 		{
 			var pose = handAnimationController.GetBaseBoneGlobalPose();
-			limbContainer.GlobalPosition = pose.Origin;
+			limbContainer.GlobalTransform = pose;
 		}
 
-		public void OnActiveLimbChanged(InventoryItem limb){
-			PackedScene scene = null;
-			limb.Data.Get("limb_scene", out scene);
+		public void OnActiveLimbChanged(LimbInventoryItem limbItem){
+			GD.Print(limbItem.Scene);
+			PackedScene scene = limbItem.Scene;
+			var limbInstance = scene.Instantiate<LimbEntity>();
+			Player.CurrentLimbEntity = limbInstance;
+			limbInstance.limbController = this;
+
+			Player.GetParent().AddChild(limbInstance);
+			var trans = limbInstance.Transform;
+			trans.Origin = limbContainer.GlobalPosition;
+			// trans.Basis = Basis.FromEuler(new Vector3(
+			// 	Mathf.DegToRad(90.0f), Mathf.DegToRad(180.0f), 0.0f), EulerOrder.Xyz);
+			limbInstance.Transform = trans;
+
+			var joint = new PinJoint3D();
+			limbContainer.AddChild(joint);
+			joint.NodeA = Player.rigidBody.GetPath();
+			joint.NodeB = limbInstance.GetPath();
 		}
 	}
 }

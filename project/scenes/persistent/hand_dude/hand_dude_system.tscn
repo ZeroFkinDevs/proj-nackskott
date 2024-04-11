@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgw8w2rjvc285"]
+[gd_scene load_steps=13 format=3 uid="uid://dgw8w2rjvc285"]
 
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandDude.cs" id="1_pr6ts"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandCharacter.cs" id="2_c7y8b"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/LimbController.cs" id="7_8jv4c"]
 [ext_resource type="PackedScene" uid="uid://lff820h02vdw" path="res://scenes/persistent/hand_dude/hand_dude_normal.tscn" id="7_asbnm"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/UseRegion.cs" id="8_n2vwf"]
+[ext_resource type="Script" path="res://src/utils/HookesConnector.cs" id="9_gx6km"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lqj2p"]
 radius = 0.288306
@@ -18,16 +19,18 @@ size = Vector3(0.199326, 0.12393, 0.449907)
 [sub_resource type="SphereShape3D" id="SphereShape3D_a2heo"]
 radius = 0.549085
 
-[node name="HandDudeSystem" type="Node3D"]
+[node name="HandDudeSystem" type="Node3D" node_paths=PackedStringArray("rigidBody")]
 script = ExtResource("1_pr6ts")
 pointerPath = NodePath("Pointer")
 characterPath = NodePath("HandCharacter")
-rigidBodyPath = NodePath("RigidBody3D")
+rigidBody = NodePath("RigidBody3D")
 
-[node name="HandCharacter" type="CharacterBody3D" parent="."]
+[node name="HandCharacter" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimController", "Player", "collisionShape")]
 collision_layer = 4
 script = ExtResource("2_c7y8b")
-AnimationControllerPath = NodePath("../RigidBody3D/hand_dude")
+AnimController = NodePath("../RigidBody3D/HandAnimationController")
+Player = NodePath("..")
+collisionShape = NodePath("CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165005, -0.0132761)
@@ -42,29 +45,28 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.1
 texture_filter = 0
 texture = ExtResource("5_vjpiy")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("character", "Player", "Connector")]
 transform = Transform3D(1, -2.83736e-07, 4.8188e-07, 2.83736e-07, 1, 5.89305e-07, -4.8188e-07, -5.89305e-07, 1, 0, 0, 0)
 collision_layer = 0
+mass = 11.52
 linear_velocity = Vector3(5.9555e-07, 0.163606, 5.9555e-07)
 angular_velocity = Vector3(5.88815e-06, -4.81479e-06, -2.835e-06)
 script = ExtResource("6_1muak")
-characterPath = NodePath("../HandCharacter")
-linearSpringStiffness = 400.0
-linearSpringDamping = 50.0
-angularSpringStiffness = 800.0
-angularSpringDamping = 30.0
-maxAngularForce = 400.0
+character = NodePath("../HandCharacter")
+Player = NodePath("..")
+Connector = NodePath("HookesConnector")
 
-[node name="hand_dude" parent="RigidBody3D" instance=ExtResource("7_asbnm")]
+[node name="HandAnimationController" parent="RigidBody3D" instance=ExtResource("7_asbnm")]
 transform = Transform3D(1.3671, -6.65266e-14, 0, -3.81051e-14, 1.3671, -9.66338e-13, -1.13687e-13, -2.84217e-13, 1.3671, 3.08185e-15, -0.00791342, 1.77636e-14)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(1, -2.42699e-16, 0, -2.42861e-16, 1, 0, 0, 0, 1, -0.00269102, 0.015062, 0.0114954)
 shape = SubResource("BoxShape3D_cl8gk")
 
-[node name="LimbController" type="Node3D" parent="RigidBody3D" node_paths=PackedStringArray("handAnimationController", "limbContainer")]
+[node name="LimbController" type="Node3D" parent="RigidBody3D" node_paths=PackedStringArray("Player", "handAnimationController", "limbContainer")]
 script = ExtResource("7_8jv4c")
-handAnimationController = NodePath("../hand_dude")
+Player = NodePath("../..")
+handAnimationController = NodePath("../HandAnimationController")
 limbContainer = NodePath("LimbContainer")
 
 [node name="LimbContainer" type="Node3D" parent="RigidBody3D/LimbController"]
@@ -75,3 +77,8 @@ Player = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/UseRegion"]
 shape = SubResource("SphereShape3D_a2heo")
+
+[node name="HookesConnector" type="Node3D" parent="RigidBody3D" node_paths=PackedStringArray("Target", "Body")]
+script = ExtResource("9_gx6km")
+Target = NodePath("../../HandCharacter")
+Body = NodePath("..")

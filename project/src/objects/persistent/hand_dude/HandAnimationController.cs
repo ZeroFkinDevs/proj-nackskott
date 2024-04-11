@@ -16,11 +16,12 @@ namespace Game
 
         public override void _Process(double delta)
         {
-			baseBoneID = skeleton3D.FindBone(baseBoneName);
+			
         }
 
         public Transform3D GetBaseBoneGlobalPose(){
-			var pose = skeleton3D.GetBoneGlobalPose(baseBoneID);
+			baseBoneID = skeleton3D.FindBone(baseBoneName);
+			var pose = skeleton3D.GlobalTransform * skeleton3D.GetBoneGlobalPose(baseBoneID);
 			return pose;
 		}
 

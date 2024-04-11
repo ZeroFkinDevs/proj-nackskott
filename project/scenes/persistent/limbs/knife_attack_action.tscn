@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsrine03cou6i"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/limbs/LimbAction.cs" id="1_cxq73"]
+[ext_resource type="Script" path="res://src/utils/DebugVisibility.cs" id="2_7vtrf"]
+
+[sub_resource type="Curve" id="Curve_5d8c4"]
+_data = [Vector2(0, 0.274725), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x3xvh"]
+curve = SubResource("Curve_5d8c4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hg7oc"]
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+color = Color(1, 1, 1, 0.156863)
+alpha_curve = SubResource("CurveTexture_x3xvh")
+hue_variation_min = -1.0
+hue_variation_max = -1.0
+anim_speed_max = 5.33
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgoxu"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_xfoy0"]
+material = SubResource("StandardMaterial3D_rgoxu")
+size = Vector2(0.225, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6rpeq"]
+
+[sub_resource type="Animation" id="Animation_cpsmt"]
+resource_name = "attack"
+length = 0.6
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/target")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.720795, 0.325018, -5.96046e-08, 0.2, 1, 0.1011, 0.300824, 1.03773, 0.4, 1, 0.472048, 0.166767, 0.586322, 0.6, 1, 0.270489, 0.166767, 0.466794)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D/target")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0302209, -0.548295, -0.152209, 0.821761, 0.2, 1, -0.111244, 0.061114, 0.0865131, 0.988132, 0.4, 1, -0.0330977, 0.507547, 0.0047813, 0.860975, 0.6, 1, -0.0317221, 0.652407, 0.0105843, 0.757131)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3iphg"]
+_data = {
+"attack": SubResource("Animation_cpsmt")
+}
+
+[node name="knife_attack_action" type="Node3D" node_paths=PackedStringArray("Target", "AnimController")]
+script = ExtResource("1_cxq73")
+Target = NodePath("Node3D/target")
+AnimController = NodePath("AnimationPlayer")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(-0.990524, -2.28885e-09, 0.137341, -5.17002e-09, 1, -2.06216e-08, -0.137341, -2.11362e-08, -0.990524, 0, 0.0126324, -0.409735)
+
+[node name="target" type="Node3D" parent="Node3D"]
+transform = Transform3D(0.148507, -0.0574188, 0.987243, -0.025364, 0.997763, 0.0618461, -0.988586, -0.034225, 0.146718, 0.270489, 0.166767, 0.466794)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D/target"]
+transform = Transform3D(0.0714655, -0.17288, -0.0513103, 0.0148412, 0.0923533, 0.273333, -0.0112016, -0.980604, 0.0347885, 1.19209e-07, 0, 0.218687)
+visible = false
+amount = 16
+lifetime = 0.2
+visibility_aabb = AABB(-4, -0.399275, -4, 8, 0.798551, 8)
+process_material = SubResource("ParticleProcessMaterial_hg7oc")
+draw_pass_1 = SubResource("QuadMesh_xfoy0")
+script = ExtResource("2_7vtrf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/target"]
+transform = Transform3D(0.0738448, 0, 0, 0, 1, 0, 0, 0, 0.280275, 0, 0, 0.218687)
+visible = false
+mesh = SubResource("PlaneMesh_6rpeq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3iphg")
+}
+autoplay = "attack"
+speed_scale = 1.3
