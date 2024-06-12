@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://q3qm5lpifqhl"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/global/audio/SoundBank.cs" id="1_h11ii"]
+[ext_resource type="AudioStream" uid="uid://cd3o8x1bm2vkl" path="res://resources/objects/persistent/hand_dude/audio/jump1.ogg" id="2_587fd"]
+[ext_resource type="AudioStream" uid="uid://lhyen8ahvw26" path="res://resources/objects/persistent/hand_dude/audio/jump2.ogg" id="3_wydal"]
+[ext_resource type="AudioStream" uid="uid://c5ecjoc6yamtn" path="res://resources/objects/persistent/hand_dude/audio/jump3.ogg" id="4_y7byw"]
+
+[resource]
+script = ExtResource("1_h11ii")
+streams = Array[AudioStream]([ExtResource("2_587fd"), ExtResource("3_wydal"), ExtResource("4_y7byw")])

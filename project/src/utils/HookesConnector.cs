@@ -37,15 +37,16 @@ namespace Game
         private void UpdateVelocity(double delta)
         {
             if (Target == null) return;
+            if (!IsInstanceValid(Target)) return;
             Transform3D targetTransform = Target.GlobalTransform;
             Transform3D currentTransform = GlobalTransform;
             Basis rotationDifference = targetTransform.Basis * currentTransform.Basis.Inverse();
 
             Vector3 positionDifference = targetTransform.Origin - currentTransform.Origin;
 
-            if (positionDifference.LengthSquared() > 5.0f)
+            if (positionDifference.LengthSquared() > 5.0f && false)
             {
-                GlobalTransform = targetTransform;
+                // Body.GlobalTransform = targetTransform;
             }
             else
             {

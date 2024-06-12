@@ -1,0 +1,384 @@
+[gd_scene load_steps=75 format=2]
+
+[ext_resource path="res://resources/objects/leash/leash_loc.glb" type="PackedScene" id=1]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=2]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=3]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=4]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=5]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=6]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=7]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=8]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=9]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=10]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=11]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=12]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=13]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=14]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=15]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=16]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=17]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=18]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=19]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=20]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=21]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=22]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=23]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=24]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=25]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=26]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=27]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=28]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=29]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=30]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=31]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=32]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=33]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=34]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=35]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=36]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=37]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=38]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=39]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=40]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=41]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=42]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=43]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=44]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=45]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=46]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=47]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=48]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=49]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=50]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=51]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=52]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=53]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=54]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=55]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=56]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=57]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=58]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=59]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=60]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=61]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=62]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=63]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=64]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=65]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=66]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=67]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=68]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=69]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=70]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=71]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=72]
+
+[ext_resource path="res://resources/objects/leash/mat_leash_loc.tres" type="Material" id=73]
+
+[ext_resource path="res://src/utils/AnimWithEvents.cs" type="Script" id=74]
+
+[node name="leash_loc" instance=ExtResource( 1 )]
+
+[node name="Cube" parent="." index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="Plane" parent="." index="1"]
+material/0 = ExtResource( 3 )
+
+[node name="Plane001" parent="." index="2"]
+material/0 = ExtResource( 4 )
+
+[node name="Plane002" parent="." index="3"]
+material/0 = ExtResource( 5 )
+
+[node name="Plane003" parent="." index="4"]
+material/0 = ExtResource( 6 )
+
+[node name="Plane004" parent="." index="5"]
+material/0 = ExtResource( 7 )
+
+[node name="Plane005" parent="." index="6"]
+material/0 = ExtResource( 8 )
+
+[node name="Plane006" parent="." index="7"]
+material/0 = ExtResource( 9 )
+
+[node name="Plane007" parent="." index="8"]
+material/0 = ExtResource( 10 )
+
+[node name="Plane008" parent="." index="9"]
+material/0 = ExtResource( 11 )
+
+[node name="Plane009" parent="." index="10"]
+material/0 = ExtResource( 12 )
+
+[node name="Plane010" parent="." index="11"]
+material/0 = ExtResource( 13 )
+
+[node name="Plane011" parent="." index="12"]
+material/0 = ExtResource( 14 )
+
+[node name="Plane012" parent="." index="13"]
+material/0 = ExtResource( 15 )
+
+[node name="Plane013" parent="." index="14"]
+material/0 = ExtResource( 16 )
+
+[node name="camera" parent="." index="15"]
+
+[node name="Circle001" parent="." index="16"]
+material/0 = ExtResource( 17 )
+
+[node name="Circle002" parent="." index="17"]
+material/0 = ExtResource( 18 )
+
+[node name="Circle003" parent="." index="18"]
+material/0 = ExtResource( 19 )
+
+[node name="Circle004" parent="." index="19"]
+material/0 = ExtResource( 20 )
+
+[node name="Circle006" parent="." index="20"]
+material/0 = ExtResource( 21 )
+
+[node name="Circle007" parent="." index="21"]
+material/0 = ExtResource( 22 )
+
+[node name="Circle008" parent="." index="22"]
+material/0 = ExtResource( 23 )
+
+[node name="Circle009" parent="." index="23"]
+material/0 = ExtResource( 24 )
+
+[node name="Circle010" parent="." index="24"]
+material/0 = ExtResource( 25 )
+
+[node name="Circle011" parent="." index="25"]
+material/0 = ExtResource( 26 )
+
+[node name="Circle012" parent="." index="26"]
+material/0 = ExtResource( 27 )
+
+[node name="Circle013" parent="." index="27"]
+material/0 = ExtResource( 28 )
+
+[node name="Circle015" parent="." index="28"]
+material/0 = ExtResource( 29 )
+
+[node name="Circle016" parent="." index="29"]
+material/0 = ExtResource( 30 )
+
+[node name="Circle017" parent="." index="30"]
+material/0 = ExtResource( 31 )
+
+[node name="Circle018" parent="." index="31"]
+material/0 = ExtResource( 32 )
+
+[node name="Circle019" parent="." index="32"]
+material/0 = ExtResource( 33 )
+
+[node name="Circle020" parent="." index="33"]
+material/0 = ExtResource( 34 )
+
+[node name="Circle021" parent="." index="34"]
+material/0 = ExtResource( 35 )
+
+[node name="Circle005" parent="." index="35"]
+material/0 = ExtResource( 36 )
+
+[node name="Plane014" parent="." index="36"]
+material/0 = ExtResource( 37 )
+
+[node name="Plane015" parent="." index="37"]
+material/0 = ExtResource( 38 )
+
+[node name="Plane016" parent="." index="38"]
+material/0 = ExtResource( 39 )
+
+[node name="Plane017" parent="." index="39"]
+material/0 = ExtResource( 40 )
+
+[node name="Plane018" parent="." index="40"]
+material/0 = ExtResource( 41 )
+
+[node name="Plane019" parent="." index="41"]
+material/0 = ExtResource( 42 )
+
+[node name="Plane020" parent="." index="42"]
+material/0 = ExtResource( 43 )
+
+[node name="Plane021" parent="." index="43"]
+material/0 = ExtResource( 44 )
+
+[node name="Plane022" parent="." index="44"]
+material/0 = ExtResource( 45 )
+
+[node name="Plane023" parent="." index="45"]
+material/0 = ExtResource( 46 )
+
+[node name="Plane024" parent="." index="46"]
+material/0 = ExtResource( 47 )
+
+[node name="Plane025" parent="." index="47"]
+material/0 = ExtResource( 48 )
+
+[node name="Plane026" parent="." index="48"]
+material/0 = ExtResource( 49 )
+
+[node name="Plane027" parent="." index="49"]
+material/0 = ExtResource( 50 )
+
+[node name="Plane028" parent="." index="50"]
+material/0 = ExtResource( 51 )
+
+[node name="Plane029" parent="." index="51"]
+material/0 = ExtResource( 52 )
+
+[node name="Plane030" parent="." index="52"]
+material/0 = ExtResource( 53 )
+
+[node name="Plane031" parent="." index="53"]
+material/0 = ExtResource( 54 )
+
+[node name="Plane032" parent="." index="54"]
+material/0 = ExtResource( 55 )
+
+[node name="Plane033" parent="." index="55"]
+material/0 = ExtResource( 56 )
+
+[node name="Plane034" parent="." index="56"]
+material/0 = ExtResource( 57 )
+
+[node name="Plane035" parent="." index="57"]
+material/0 = ExtResource( 58 )
+
+[node name="Plane036" parent="." index="58"]
+material/0 = ExtResource( 59 )
+
+[node name="Plane037" parent="." index="59"]
+material/0 = ExtResource( 60 )
+
+[node name="Plane038" parent="." index="60"]
+material/0 = ExtResource( 61 )
+
+[node name="Plane039" parent="." index="61"]
+material/0 = ExtResource( 62 )
+
+[node name="Plane040" parent="." index="62"]
+material/0 = ExtResource( 63 )
+
+[node name="Plane041" parent="." index="63"]
+material/0 = ExtResource( 64 )
+
+[node name="Plane042" parent="." index="64"]
+material/0 = ExtResource( 65 )
+
+[node name="Plane043" parent="." index="65"]
+material/0 = ExtResource( 66 )
+
+[node name="Plane044" parent="." index="66"]
+material/0 = ExtResource( 67 )
+
+[node name="Plane045" parent="." index="67"]
+material/0 = ExtResource( 68 )
+
+[node name="Plane046" parent="." index="68"]
+material/0 = ExtResource( 69 )
+
+[node name="Plane047" parent="." index="69"]
+material/0 = ExtResource( 70 )
+
+[node name="Plane048" parent="." index="70"]
+material/0 = ExtResource( 71 )
+
+[node name="Plane049" parent="." index="71"]
+material/0 = ExtResource( 72 )
+
+[node name="Plane050" parent="." index="72"]
+material/0 = ExtResource( 73 )
+
+[node name="AnimationPlayer" parent="."]
+script = ExtResource( 74 )
+AnimationEvents = {
+"Plane.050Action": [  ],
+"shot_1": [ {
+"event": "deattach_camera",
+"args": [  ],
+"time": 4.583333333333333
+}, {
+"event": "attach_camera",
+"args": [  ],
+"time": 0.0
+} ]
+}

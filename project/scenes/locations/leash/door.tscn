@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://skcmbe0qynvf"]
+
+[ext_resource type="PackedScene" path="res://resources/objects/leash/door/door_rigid_body.tscn" id="1_ahu2v"]
+
+[node name="door" instance=ExtResource("1_ahu2v")]
+
+[node name="door" parent="." index="0"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="door_phy_collision_shape" parent="." index="1"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)

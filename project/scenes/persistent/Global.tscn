@@ -1,8 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://dny2dbrgu4thj"]
+[gd_scene load_steps=7 format=3 uid="uid://dny2dbrgu4thj"]
 
 [ext_resource type="Script" path="res://src/objects/persistent/global/Global.cs" id="1_7eyvp"]
 [ext_resource type="PackedScene" uid="uid://d05dd8hbrvdkk" path="res://scenes/persistent/ui/ui.tscn" id="2_mf6vp"]
+[ext_resource type="Resource" uid="uid://d4idxueigg3cg" path="res://scenes/persistent/LocationsLoader.tres" id="3_1dd2v"]
+[ext_resource type="Script" path="res://src/objects/persistent/global/audio/AudioPlayer.cs" id="3_br2pl"]
+[ext_resource type="PackedScene" uid="uid://bsc886tdnlh4s" path="res://scenes/persistent/main_camera.tscn" id="4_8iff1"]
+[ext_resource type="PackedScene" uid="uid://dgw8w2rjvc285" path="res://scenes/persistent/hand_dude/hand_dude_system.tscn" id="5_b7dlw"]
 
-[node name="Global" type="Node3D"]
+[node name="Global" type="Node3D" node_paths=PackedStringArray("audioPlayer", "PlayerSystem")]
 script = ExtResource("1_7eyvp")
 UIScene = ExtResource("2_mf6vp")
+audioPlayer = NodePath("AudioPlayer")
+PlayerSystem = NodePath("PlayerSystem")
+LocationLoader = ExtResource("3_1dd2v")
+
+[node name="AudioPlayer" type="Node3D" parent="."]
+script = ExtResource("3_br2pl")
+
+[node name="PlayerSystem" type="Node3D" parent="."]
+
+[node name="MainCamera" parent="PlayerSystem" node_paths=PackedStringArray("AudioListener") instance=ExtResource("4_8iff1")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0197637, 0.0902967, -0.204529)
+AudioListener = NodePath("AudioListener3D")
+ViewableTargetPath = NodePath("../HandDudeSystem")
+MotionSmoothness = 10.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="PlayerSystem/MainCamera"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.90735e-05, 4.51202)
+shadow_enabled = true
+omni_range = 6.25339
+
+[node name="AudioListener3D" type="AudioListener3D" parent="PlayerSystem/MainCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.90735e-06, 2.04584)
+
+[node name="HandDudeSystem" parent="PlayerSystem" instance=ExtResource("5_b7dlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0566927, 0.836378, -0.267758)

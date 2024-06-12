@@ -1,29 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://br7g8oj031trm"]
 
-[ext_resource path="res://resources/objects/persistent/hand_dude/hand_dude.glb" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://d0epiard0c3id" path="res://resources/objects/persistent/hand_dude/hand_dude.glb" id="1"]
+[ext_resource type="Script" path="res://src/utils/AnimWithEvents.cs" id="4"]
 
-[ext_resource path="res://resources/objects/persistent/hand_dude/mat_hand_dude_normal.tres" type="Material" id=2]
+[node name="hand_dude" instance=ExtResource("1")]
 
-[ext_resource path="res://resources/objects/persistent/hand_dude/mat_hand_dude_normal.tres" type="Material" id=3]
-
-[ext_resource path="res://src/utils/AnimWithEvents.cs" type="Script" id=4]
-
-[node name="hand_dude" instance=ExtResource( 1 )]
-
-[node name="hand_dude" parent="." index="0"]
-material/0 = ExtResource( 2 )
-
-[node name="hand_dude001" parent="." index="1"]
-material/0 = ExtResource( 3 )
-
-[node name="Armature" parent="." index="2"]
-
-[node name="AnimationPlayer" parent="."]
-script = ExtResource( 4 )
+[node name="AnimationPlayer" parent="." index="1"]
+script = ExtResource("4")
 AnimationEvents = {
-"ArmatureAction": [  ],
-"hand_free": [  ],
-"hand_grip": [  ],
-"idle": [  ],
-"jump": [  ]
+"ArmatureAction": [],
+"hand_free": [],
+"hand_grip": [],
+"idle": [],
+"jump": []
 }

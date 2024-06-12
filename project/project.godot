@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Proj Nackskott"
-run/main_scene="res://scenes/persistent/ui/ui.tscn"
+run/main_scene="res://scenes/locations/leash.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -90,6 +90,10 @@ debug_visibility={
 3d_physics/layer_1="all"
 3d_physics/layer_2="obstacle"
 3d_physics/layer_3="characters"
+
+[navigation]
+
+3d/default_cell_height=0.05
 
 [rendering]
 

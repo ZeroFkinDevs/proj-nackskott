@@ -19,8 +19,8 @@ namespace UI {
 
 		}
 
-		public void PlaceGameScene(Node gameScene){
-			gameScene.Reparent(SceneContainer);
+		public void PlaceNode(Node node){
+			node.Reparent(SceneContainer);
 		}
 	}
 }

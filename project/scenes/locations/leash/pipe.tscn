@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvmsv3jgnypj0"]
+
+[ext_resource type="PackedScene" uid="uid://djrfuj7qbjq0b" path="res://scenes/locations/leash/pipe_view_model.tscn" id="1_5bsbp"]
+[ext_resource type="Script" path="res://src/objects/persistent/entities/Pipe.cs" id="1_tryac"]
+[ext_resource type="Resource" uid="uid://c05vr65vlsqhs" path="res://resources/objects/leash/pipe/pipe_load_sounds.tres" id="2_3fwsp"]
+[ext_resource type="PackedScene" path="res://resources/objects/leash/pipe/pipe_phy_collision_shape.tscn" id="2_u1ppy"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/Gripable.cs" id="3_ttkn7"]
+[ext_resource type="Script" path="res://src/utils/DebugVisibility.cs" id="6_inmjy"]
+[ext_resource type="Script" path="res://src/objects/persistent/entities/Teleporter.cs" id="7_ojk50"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lchhb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o40dm"]
+no_depth_test = true
+albedo_color = Color(0.384314, 0.443137, 1, 1)
+emission_enabled = true
+emission = Color(0.384314, 0.443137, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_frywx"]
+material = SubResource("StandardMaterial3D_o40dm")
+radius = 0.2
+height = 0.4
+radial_segments = 8
+rings = 4
+
+[node name="Pipe" type="StaticBody3D" node_paths=PackedStringArray("Teleport", "GripArea", "AnimController")]
+script = ExtResource("1_tryac")
+Teleport = NodePath("Teleporter")
+GripArea = NodePath("Area3D")
+AnimController = NodePath("pipe")
+LoadSounds = ExtResource("2_3fwsp")
+
+[node name="pipe" parent="." instance=ExtResource("1_5bsbp")]
+
+[node name="pipe_phy_collision_shape" parent="." instance=ExtResource("2_u1ppy")]
+
+[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("GripPoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06824, 0.467744, 0)
+script = ExtResource("3_ttkn7")
+GripPoint = NodePath("GripPoint")
+IsUnGripable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_lchhb")
+
+[node name="GripPoint" type="Node3D" parent="Area3D"]
+transform = Transform3D(0.052538, -0.449615, 0.891676, 0.0264457, 0.893222, 0.448837, -0.998269, 0, 0.0588185, -0.874138, 2.25902, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/GripPoint"]
+mesh = SubResource("SphereMesh_frywx")
+script = ExtResource("6_inmjy")
+
+[node name="Teleporter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37782, 3.0152, -0.000470847)
+script = ExtResource("7_ojk50")
+
+[connection signal="animation_finished" from="pipe/AnimationTree" to="." method="OnAnimationFinished"]
+[connection signal="OnGrip" from="Area3D" to="." method="OnHandleGrip"]
+[connection signal="OnTeleportEnd" from="Teleporter" to="." method="OnTeleportEnd"]
+
+[editable path="pipe"]

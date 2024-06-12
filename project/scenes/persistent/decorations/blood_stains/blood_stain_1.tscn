@@ -7,5 +7,6 @@
 size = Vector3(0.980659, 0.947233, 0.929188)
 texture_albedo = ExtResource("1_7i6fr")
 texture_orm = ExtResource("2_52ecc")
+emission_energy = 0.0
 distance_fade_length = 0.0
 cull_mask = 2

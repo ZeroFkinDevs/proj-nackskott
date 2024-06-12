@@ -1,0 +1,113 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=15 format=3 uid="uid://clblqobhn1sfx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a0kgu"]
+animation = &"walk_inconfidence_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oy85r"]
+animation = &"walk_inconfidence_3"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5x7jd"]
+animation = &"walk_inconfidence_1"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_qtcki"]
+sync = true
+xfade_time = 0.5
+allow_transition_to_self = true
+input_0/name = "default"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "attack"
+input_1/auto_advance = false
+input_1/reset = true
+input_2/name = "attack_back"
+input_2/auto_advance = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_yv6ix"]
+xfade_time = 0.3
+input_0/name = "default"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "fall"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_571kq"]
+xfade_time = 1.0
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "walk"
+input_1/auto_advance = false
+input_1/reset = true
+input_2/name = "walk_inconfidence_1"
+input_2/auto_advance = false
+input_2/reset = true
+input_3/name = "walk_inconfidence_2"
+input_3/auto_advance = false
+input_3/reset = true
+input_4/name = "walk_inconfidence_3"
+input_4/auto_advance = false
+input_4/reset = true
+
+[sub_resource type="Curve" id="Curve_acftx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_dsp23"]
+xfade_time = 0.15
+xfade_curve = SubResource("Curve_acftx")
+input_0/name = "default"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "stun"
+input_1/auto_advance = true
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_khnbp"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y4x4y"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1xexv"]
+animation = &"attack_back"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iqscx"]
+animation = &"get_hit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ull0g"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ofsfe"]
+animation = &"walk"
+
+[resource]
+graph_offset = Vector2(-21.5387, 73.3591)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_5x7jd")
+nodes/Animation/position = Vector2(-320, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_a0kgu")
+"nodes/Animation 2/position" = Vector2(-320, 240)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_oy85r")
+"nodes/Animation 3/position" = Vector2(-320, 360)
+nodes/Attack/node = SubResource("AnimationNodeTransition_qtcki")
+nodes/Attack/position = Vector2(240, 140)
+nodes/FallState/node = SubResource("AnimationNodeTransition_yv6ix")
+nodes/FallState/position = Vector2(740, 240)
+nodes/MovementState/node = SubResource("AnimationNodeTransition_571kq")
+nodes/MovementState/position = Vector2(-20, 20)
+nodes/Stun/node = SubResource("AnimationNodeTransition_dsp23")
+nodes/Stun/position = Vector2(540, 200)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_khnbp")
+nodes/TimeScale/position = Vector2(-220, 0)
+nodes/attack/node = SubResource("AnimationNodeAnimation_y4x4y")
+nodes/attack/position = Vector2(-20, 300)
+nodes/attack_back/node = SubResource("AnimationNodeAnimation_1xexv")
+nodes/attack_back/position = Vector2(-20, 420)
+nodes/get_hit/node = SubResource("AnimationNodeAnimation_iqscx")
+nodes/get_hit/position = Vector2(340, 360)
+nodes/idle/node = SubResource("AnimationNodeAnimation_ull0g")
+nodes/idle/position = Vector2(-240, -140)
+nodes/output/position = Vector2(900, 180)
+nodes/walk/node = SubResource("AnimationNodeAnimation_ofsfe")
+nodes/walk/position = Vector2(-360, -20)
+node_connections = [&"Attack", 0, &"MovementState", &"Attack", 1, &"attack", &"Attack", 2, &"attack_back", &"FallState", 0, &"Stun", &"MovementState", 0, &"idle", &"MovementState", 1, &"TimeScale", &"MovementState", 2, &"Animation", &"MovementState", 3, &"Animation 2", &"MovementState", 4, &"Animation 3", &"Stun", 0, &"Attack", &"Stun", 1, &"get_hit", &"TimeScale", 0, &"walk", &"output", 0, &"FallState"]

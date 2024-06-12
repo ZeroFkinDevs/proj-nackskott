@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/objects/leash/slicer/slicer.tscn" type="PackedScene" id=1]
+
+[ext_resource path="res://resources/objects/leash/slicer/slicer_phy_collision_shape.tscn" type="PackedScene" id=2]
+
+[node name="slicer_kinematic_body" type="KinematicBody"]
+
+[node name="slicer" parent="." instance=ExtResource( 1 )]
+
+[node name="slicer_phy_collision_shape" parent="." instance=ExtResource( 2 )]

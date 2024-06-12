@@ -21,8 +21,18 @@ namespace Game
         {
             _registeredEvents = new System.Collections.Generic.HashSet<string>();
             EventsHandlersMap = new System.Collections.Generic.Dictionary<string, AnimEventHandler> {
-                // { "give_item",  GiveItem}
+                { "attach_camera",  AttachCamera},
+                { "deattach_camera",  DeAttachCamera}
             };
+        }
+
+        public void AttachCamera(ArrayOfStrings args){
+            var cameraAnimNode = GetParent().GetNode<Node3D>("camera");
+            if(cameraAnimNode==null) return;
+            Global.Instance.CurrentMainCamera.StartAttachedPerspectiveSession(cameraAnimNode);
+        }
+        public void DeAttachCamera(ArrayOfStrings args){
+            Global.Instance.CurrentMainCamera.DeAttach();
         }
 
 
@@ -32,12 +42,14 @@ namespace Game
             SetupEvents();
         }
 
-        private void SetupEvents()
+        public void SetupEvents()
         {
             foreach (string animKey in AnimationEvents.Keys)
             {
-
                 Animation anim = GetAnimation(animKey);
+                if (anim == null){
+                    GD.Print(animKey, " not found");
+                }
                 if (anim != null)
                 {
                     string regKey = anim.ResourcePath;
@@ -48,14 +60,14 @@ namespace Game
 
                     foreach (Godot.Collections.Dictionary eventData in AnimationEvents.Get<Godot.Collections.Array>(animKey))
                     {
-                        float time = eventData.Get<float>("time");
+                        float time = (float)eventData.Get<double>("time");
                         string event_key = eventData.Get<string>("event");
                         ArrayOfStrings args = new ArrayOfStrings(eventData.Get<Godot.Collections.Array>("args"));
                         Dictionary newKey = new Dictionary{
                             {"args", new Array<Variant>(new Variant[]{ 
                                 event_key, 
-                                args })},
-                            { "method", "HandleEvent"}
+                                args })}, 
+                            {"method", "HandleEvent"}
                         };
                         anim.TrackInsertKey(trackIdx, time, newKey);
                         int keyIdx = anim.TrackFindKey(trackIdx, time, Animation.FindMode.Approx);
@@ -68,7 +80,6 @@ namespace Game
 
         public void HandleEvent(string event_key, ArrayOfStrings args)
         {
-            GD.Print(event_key, args);
             if (EventsHandlersMap.ContainsKey(event_key))
             {
                 try

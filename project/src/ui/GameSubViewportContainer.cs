@@ -12,6 +12,7 @@ namespace Game
 		public void UpdateOffset()
 		{
 			var mainCamera = Global.Instance.CurrentMainCamera;
+			if(mainCamera.Camera.Projection != Camera3D.ProjectionType.Orthogonal) return;
 			var pixDist = mainCamera.SmoothTrans.ActualPoint - mainCamera.Position;
 			float pixPerMeter = Size.Y / mainCamera.Camera.Size;
 			var dist2d = new Vector2(pixDist.X, pixDist.Z) * (pixPerMeter);

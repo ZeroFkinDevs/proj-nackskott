@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7u4ydah2qhu6"]
+
+[ext_resource type="PackedScene" uid="uid://fr52ypx6de4f" path="res://resources/objects/leash/leash_loc_static_body_ext.tscn" id="1_5lu83"]
+[ext_resource type="Script" path="res://src/objects/persistent/location/LocationBaseController.cs" id="2_4q72t"]
+
+[node name="leash_loc_base" node_paths=PackedStringArray("AnimPlayer") instance=ExtResource("1_5lu83")]
+script = ExtResource("2_4q72t")
+AnimPlayer = NodePath("leash_loc/AnimationPlayer")
+AnimationToPlayOnStart = "shot_1"
+
+[node name="Cube" parent="leash_loc" index="0"]
+layers = 3
+
+[editable path="leash_loc"]

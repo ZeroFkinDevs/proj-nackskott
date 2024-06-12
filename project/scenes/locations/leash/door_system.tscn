@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://ch3ouitvylllw"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/entities/DoorSystem.cs" id="1_b4pem"]
+[ext_resource type="PackedScene" uid="uid://skcmbe0qynvf" path="res://scenes/locations/leash/door.tscn" id="2_nxdph"]
+[ext_resource type="Script" path="res://src/utils/HookesConnector.cs" id="3_p8mt8"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/Gripable.cs" id="4_k3qib"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7xexn"]
+albedo_color = Color(1, 1, 0.447059, 1)
+emission_enabled = true
+emission = Color(1, 1, 0.447059, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bqffi"]
+size = Vector3(0.215, 0.215, 0.215)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ns8q"]
+size = Vector3(0.565083, 1.29158, 0.215)
+
+[node name="door_system" type="Node3D" node_paths=PackedStringArray("HConnector", "Body", "Joint", "InitialTarget")]
+script = ExtResource("1_b4pem")
+HConnector = NodePath("door/connector")
+Body = NodePath("door")
+Joint = NodePath("HingeJoint3D")
+InitialTarget = NodePath("initialTarget")
+CloseTime = 2.0
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 0, -3.82137e-15, 4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, -0.00968784, 1.38686, 0.0239191)
+node_a = NodePath("../door")
+node_b = NodePath("../StaticBody3D")
+angular_limit/enable = true
+angular_limit/upper = 1.49924
+angular_limit/lower = -1.39277
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.174407, 1.20248, 0.0239191)
+
+[node name="initialTarget" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.56627, 1.23072, 0.0241189)
+
+[node name="door" parent="." instance=ExtResource("2_nxdph")]
+transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.56627, 1.23072, 0.0241189)
+collision_layer = 3
+mass = 4.0
+can_sleep = false
+
+[node name="connector" type="Node3D" parent="door" node_paths=PackedStringArray("Target", "Body")]
+script = ExtResource("3_p8mt8")
+Target = NodePath("../../initialTarget")
+Body = NodePath("..")
+Active = false
+
+[node name="GrabArea" type="Area3D" parent="door" node_paths=PackedStringArray("GripPoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.349001, 0, 0.160335)
+script = ExtResource("4_k3qib")
+GripPoint = NodePath("GrabPoint")
+
+[node name="GrabPoint" type="Node3D" parent="door/GrabArea"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="door/GrabArea/GrabPoint"]
+transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7xexn")
+mesh = SubResource("BoxMesh_bqffi")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door/GrabArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.088064, -0.538291, -5.96046e-08)
+shape = SubResource("BoxShape3D_2ns8q")
+
+[node name="GrabArea2" type="Area3D" parent="door" node_paths=PackedStringArray("GripPoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.349001, 0, -0.161129)
+script = ExtResource("4_k3qib")
+GripPoint = NodePath("GrabPoint2")
+
+[node name="GrabPoint2" type="Node3D" parent="door/GrabArea2"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="door/GrabArea2/GrabPoint2"]
+transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7xexn")
+mesh = SubResource("BoxMesh_bqffi")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door/GrabArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.088064, -0.538291, -5.96046e-08)
+shape = SubResource("BoxShape3D_2ns8q")
+
+[connection signal="OnGrip" from="door/GrabArea" to="." method="OnHandleGrip"]
+[connection signal="OnGrip" from="door/GrabArea2" to="." method="OnHandleGrip"]

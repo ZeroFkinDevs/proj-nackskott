@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://fr52ypx6de4f"]
+
+[ext_resource type="PackedScene" uid="uid://c1luny26sgjt2" path="res://resources/objects/leash/leash_loc.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://resources/objects/leash/leash_loc_phy_collision_shape.tscn" id="2"]
+
+[node name="leash_loc_static_body" type="StaticBody3D"]
+
+[node name="leash_loc" parent="." instance=ExtResource("1")]
+
+[node name="camera" parent="leash_loc" index="15"]
+transform = Transform3D(-0.999811, 0, -0.0194191, 0, 1, 0, 0.0194191, 0, -0.999811, 0.0197882, 0.311788, -0.760009)
+
+[node name="leash_loc_phy_collision_shape" parent="." instance=ExtResource("2")]
+
+[editable path="leash_loc"]

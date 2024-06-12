@@ -13,6 +13,20 @@ namespace Game {
 	{
 		[Export]
 		PackedScene UIScene;
+		UIDad UIInstance;
+		[Export]
+		public AudioPlayer audioPlayer;
+		[Export]
+		public Node3D PlayerSystem;
+		
+		/// <summary>
+		/// использовать осторожно.
+		/// желательно только в UI
+		/// </summary>
+		public HandDude CurrentPlayer;
+
+		[Export]
+		public LocationLoader LocationLoader;
 
 		private MainCamera _mainCamera;
 		public MainCamera CurrentMainCamera { get { return _mainCamera; } }
@@ -26,6 +40,10 @@ namespace Game {
 
 		public bool DebugVisibility = false;
 		public event Action<bool> OnDebugVisibilityChange;
+
+		public Resources resources = new Resources();
+
+		public Node3D GameScene;
 
 		public Global()
 		{
@@ -44,6 +62,11 @@ namespace Game {
 			// после _Ready, когда все что на сцене уже точно на 100% прогружено.
 			CallDeferred("DeferredReady");
 		}
+		public void LoadGameScene(PackedScene gameScene){
+			GameScene.QueueFree();
+			GameScene = gameScene.Instantiate<Node3D>();
+			UIInstance.SceneContainer.AddChild(GameScene);
+		}
 		
 		/// <summary>
 		/// берем сцену игры и отдаем UI чтобы он поместил ее в нужный viewport
@@ -51,15 +74,31 @@ namespace Game {
 		void SetupUI(){
 			if(UIScene==null) return;
 			var ui = UIScene.Instantiate<UIDad>();
+			UIInstance = ui;
 			AddChild(ui);
 			var neighbours = GetParent().GetChildren();
 			// типо берем то что кроме Global, т.к. в /root/ спавнятся только Global и запускаемая сцена
 			var scene = neighbours.Last();
-			ui.PlaceGameScene(scene);
+			GameScene = (Node3D)scene;
+			
+			ui.PlaceNode(scene);
+			ui.PlaceNode(PlayerSystem);
+		}
+		void SetupAudioPlayer(){
+			audioPlayer.Reparent(GameScene);
 		}
 		public void DeferredReady()
         {
 			SetupUI();
+			SetupAudioPlayer();
+
+			foreach(var node in PlayerSystem.GetChildren()){
+                if(node is HandDude player){
+                    CurrentPlayer = player;
+					break;
+                }
+            }
+
 			Settings.InvokeChange();
 		}
 

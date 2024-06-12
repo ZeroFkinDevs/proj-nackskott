@@ -21,7 +21,7 @@ namespace Game
 		/// и переместить Pointer в точку пересечения. <br/>
 		/// Инициализирован вертикальной плоскостью Up и позицией в нулевом векторе (Zero) в мире.
 		/// </summary>
-		private Plane workingPlane = new Plane(Vector3.Up, Vector3.Zero);
+		public Plane workingPlane = new Plane(Vector3.Up, Vector3.Zero);
 
 		/// <summary>
 		/// Проецирует точку на экране под курсором на workingPlane в мировом пространстве игры <br/>
@@ -32,6 +32,7 @@ namespace Game
         {
 			// подготавливаем переменные
 			Camera3D camera = Global.Instance.CurrentMainCamera.Camera;
+			if(!camera.Current) return;
 			float rayCastDistance = camera.Far;
 
 			// получаем начальную и конечную точки луча отбрасываемого из камеры в направлении курсора мыши в пространстве экрана
@@ -48,7 +49,7 @@ namespace Game
 				// P.S. Value это относиться к Nullable<T>, а не к вектору
 				Vector3 pos = worldPos.Value;
 				// перемещаем Pointer
-				GlobalPosition = new Vector3(pos.X, GlobalPosition.Y, pos.Z);
+				GlobalPosition = new Vector3(pos.X, workingPlane.Y, pos.Z);
 			}
 		}
 

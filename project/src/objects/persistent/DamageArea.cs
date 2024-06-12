@@ -24,6 +24,8 @@ namespace Game
                 var fromPos = GlobalPosition;
                 if(FromPosition!=null) fromPos = FromPosition.GlobalPosition;
                 if(FromEntity!=null) fromEnt = FromEntity;
+                
+                if(body.GetInstanceId() == fromEnt.GetInstanceId()) return;
                 damagable.TakeDamage(Damage, fromPos, fromEnt);
             }
         }

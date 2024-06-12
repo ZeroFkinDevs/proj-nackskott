@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://cdyl7c2stcsw6"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/graphics/ParticlesSystem.cs" id="1_iq1ll"]
+[ext_resource type="Material" uid="uid://bj0cw8afxt216" path="res://resources/objects/persistent/decorations/blood_particles/blood_particle_1_mat.tres" id="2_k73w5"]
+[ext_resource type="Material" uid="uid://cyuebb02in40g" path="res://resources/objects/persistent/decorations/blood_particles/blood_particle_2_mat.tres" id="3_61stc"]
+[ext_resource type="PackedScene" uid="uid://b2eiyg0m8nulq" path="res://scenes/persistent/decorations/blood_stains/blood_stain_1.tscn" id="4_cami8"]
+
+[sub_resource type="Curve" id="Curve_0ygsj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.23897, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r06iq"]
+curve = SubResource("Curve_0ygsj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q5kp4"]
+lifetime_randomness = 0.64
+particle_flag_align_y = true
+emission_shape = 2
+emission_sphere_radius = 0.3
+angle_max = 152.1
+direction = Vector3(0, 0, 1)
+spread = 69.527
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.0
+linear_accel_max = -1.24
+scale_max = 1.5
+alpha_curve = SubResource("CurveTexture_r06iq")
+
+[sub_resource type="QuadMesh" id="QuadMesh_elrpq"]
+material = ExtResource("2_k73w5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vxdck"]
+lifetime_randomness = 0.64
+particle_flag_align_y = true
+emission_shape = 2
+emission_sphere_radius = 0.5
+angle_max = 152.1
+direction = Vector3(0, 0, 1)
+spread = 112.011
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -4.49
+linear_accel_max = -1.24
+scale_max = 1.5
+alpha_curve = SubResource("CurveTexture_r06iq")
+
+[sub_resource type="QuadMesh" id="QuadMesh_1v53h"]
+material = ExtResource("3_61stc")
+
+[node name="BloodParticle_1_system" type="Node3D"]
+script = ExtResource("1_iq1ll")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 1.74845e-07, 0, 1, 0, -1.74845e-07, 0, 1, 0, 0, 0)
+emitting = false
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+randomness = 0.56
+visibility_aabb = AABB(-1.6118, -2.37436, -1.63972, 3.22361, 4.74871, 3.27945)
+process_material = SubResource("ParticleProcessMaterial_q5kp4")
+draw_pass_1 = SubResource("QuadMesh_elrpq")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 1.74845e-07, 0, 1, 0, -1.74845e-07, 0, 1, 0, 0, 0)
+emitting = false
+amount = 12
+lifetime = 1.5
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+randomness = 0.56
+visibility_aabb = AABB(-1.6118, -2.37436, -1.63972, 3.22361, 4.74871, 3.27945)
+process_material = SubResource("ParticleProcessMaterial_vxdck")
+draw_pass_1 = SubResource("QuadMesh_1v53h")
+
+[node name="blood_stain_1" parent="." instance=ExtResource("4_cami8")]
+transform = Transform3D(2.52, 0, 0, 0, 2.52, 0, 0, 0, 2.52, 0, 0, 0)
+layers = 3

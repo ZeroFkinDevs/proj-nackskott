@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4xidjgwsxpym"]
+
+[ext_resource type="PackedScene" path="res://resources/objects/leash/slicer/slicer_kinematic_body.tscn" id="1_o4jka"]
+[ext_resource type="Script" path="res://src/objects/leash/Slicer.cs" id="2_w8yc2"]
+[ext_resource type="AudioStream" uid="uid://bguhyuxr14agf" path="res://resources/objects/leash/slicer/slicer_attack.ogg" id="3_gaqdk"]
+[ext_resource type="AudioStream" uid="uid://x6cvje5sbjwt" path="res://resources/objects/leash/slicer/slicer_working.ogg" id="4_u6n68"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b6kbh"]
+size = Vector3(0.68705, 1, 5.11406)
+
+[node name="slicer" node_paths=PackedStringArray("area", "AnimPlayer", "AudPlayer") instance=ExtResource("1_o4jka")]
+script = ExtResource("2_w8yc2")
+area = NodePath("Area3D")
+AnimPlayer = NodePath("slicer/AnimationPlayer")
+AudPlayer = NodePath("AudioStreamPlayer3D")
+AttackSound = ExtResource("3_gaqdk")
+
+[node name="slicer" parent="." index="0"]
+transform = Transform3D(-2.27299e-08, 0, -0.52, 0, 0.52, 0, 0.52, 0, -2.27299e-08, 0.00128508, 0, -1.47836)
+
+[node name="Skeleton3D" parent="slicer/Armature" index="0"]
+bones/0/position = Vector3(-0.0897524, -0.00926238, -0.0635639)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/3/rotation = Quaternion(0, 0, 0, 1)
+
+[node name="Cube_001" parent="slicer/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31185, -0.00926238, -1.78447)
+
+[node name="Cube_002" parent="slicer/Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26083, -0.00926238, 1.61619)
+
+[node name="Cube" parent="slicer/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0897524, -0.00926238, -0.0635639)
+
+[node name="slicer_phy_collision_shape" parent="." index="1"]
+transform = Transform3D(-2.27299e-08, 0, -0.52, 0, 0.52, 0, 0.52, 0, -2.27299e-08, 0.00128508, 0, -1.47836)
+
+[node name="Area3D" type="Area3D" parent="." index="2"]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0255852, 0, 2.05703)
+shape = SubResource("BoxShape3D_b6kbh")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.291457, -0.599173)
+stream = ExtResource("4_u6n68")
+unit_size = 3.45
+autoplay = true
+
+[editable path="slicer"]
+[editable path="slicer_phy_collision_shape"]

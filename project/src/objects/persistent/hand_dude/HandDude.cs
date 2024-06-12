@@ -20,18 +20,24 @@ namespace Game
         {
             if (Input.IsActionPressed("pointer_press"))
             {
-                handDude.JumpToPointer();
+                if(handDude.bodyState == HandDude.BodyState.Controlled){
+                    handDude.JumpToPointer();
+                }
             }
             if (Input.IsActionJustPressed("pointer_action_press"))
             {
                 handDude.CurrentLimbEntity?.Act();
                 handDude.bodyState = HandDude.BodyState.Free;
                 handDude.Character.AnimController.HandGrip();
+                handDude.TryGripSmth();
             }
             if (Input.IsActionJustReleased("pointer_action_press"))
             {
-                handDude.bodyState = HandDude.BodyState.Controlled;
-                handDude.Character.AnimController.HandFree();
+                if(handDude.rigidBody.CanUnGrip){
+                    handDude.bodyState = HandDude.BodyState.Controlled;
+                    handDude.Character.AnimController.HandFree();
+                    handDude.EndGrip();
+                }
             }
         }
     }
@@ -49,7 +55,7 @@ namespace Game
     /// этот класс не содержит алгоритмов и сложной логики, он просто совмещает и объединаяет в себе работу с другими состовляющими 
     /// игрока, такими как StateController, Pointer, HandCharacter, HandRigidBody
     /// </summary>
-    public partial class HandDude : Node3D, IStateControlling<IHandState>, IViewable
+    public partial class HandDude : Node3D, IStateControlling<IHandState>, IViewable, IKillable
     {
         private IHandState currentState;
         
@@ -70,6 +76,11 @@ namespace Game
 
         [Export]
         public HandRigidBody rigidBody;
+        [Export]
+        public UseRegion useRegion;
+        
+        [Export]
+        public string TeleportToID = "default";
 
         public Inventory inventory = new Inventory();
         public LimbEntity CurrentLimbEntity = null;
@@ -103,6 +114,8 @@ namespace Game
         public override void _Process(double delta)
         {
             currentState?.Process(this);
+
+            pointer.workingPlane.Y = Character.GlobalPosition.Y;
         }
 
         public void JumpToPointer()
@@ -131,16 +144,54 @@ namespace Game
                 rigidBody.AngularVelocity += vec;
             }
 
-            await ToSignal(GetTree().CreateTimer(seconds), "timeout");
-            SetState(initialState);
+            if(seconds!=0.0f){
+                await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+                SetState(initialState);
+                bodyState = BodyState.Controlled;
+            }
+        }
+
+        #region Grip
+        public void TryGripSmth(){
+            useRegion.TryGrip();
+        }
+        public void Grip(IGripable gripable){
+            rigidBody.Grip(gripable);
+        }
+        public void EndGrip(){
+            rigidBody.EndGrip();
+        }
+        public void UnGripObject(){
+            rigidBody.EndGrip();
+            Character.AnimController.HandFree();
             bodyState = BodyState.Controlled;
         }
+        #endregion
 
         public void TakeDamage(float damage, Vector3 position, Node from=null){
             if(currentState is StunnedHandState) return;
-            if(from == CurrentLimbEntity) return;
+            if(from == CurrentLimbEntity) return; //TODO: carefull with multiple limbs
             GD.Print("player damaged");
-            Stun(0.5f, position.DirectionTo(rigidBody.GlobalPosition) * new Vector3(1,0,1) * 10.0f);
+            Stun(0.5f, position.DirectionTo(rigidBody.GlobalPosition) * new Vector3(1,0,1) * 6.0f);
+            if(from is Node3D n3d){
+                rigidBody.EmitBlood(n3d.GlobalPosition);
+            }else{
+                rigidBody.EmitBlood();
+            }
+        }
+
+        public void Kill(Node from=null){
+            Stun(0.0f, new Vector3(0, 0, 0));
+            if(from is Node3D n3d){
+                rigidBody.EmitBlood(n3d.GlobalPosition);
+            }else{
+                rigidBody.EmitBlood();
+            }
+        }
+
+        public void PlaceAt(Vector3 position){
+            rigidBody.GlobalPosition = position;
+            Character.GlobalPosition = position;
         }
     }
 }

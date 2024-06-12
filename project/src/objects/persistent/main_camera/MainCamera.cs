@@ -22,6 +22,7 @@ namespace Game
 
 		private Node3D node;
 		public float MotionSmoothness = 2.0f;
+		public float TargetSmoothness = 2.0f;
 
 		// Зернистость сетки
 		public float Snapping = 40.0f;
@@ -32,6 +33,7 @@ namespace Game
 			TargetPoint = node.GlobalPosition;
 			ActualPoint = TargetPoint;
 			MotionSmoothness = motionSmoothness;
+			TargetSmoothness = motionSmoothness;
 		}
 		/// <summary>
 		/// Плавного перемещает в точку TargetPoint
@@ -40,6 +42,7 @@ namespace Game
 		public void UpdateMotion(double delta)
 		{
 			// ActualPoint без привязки к сетке, поэтому 
+			MotionSmoothness += (TargetSmoothness - MotionSmoothness) * ((float)delta * 1.5f);
 			ActualPoint = ActualPoint.Lerp(TargetPoint, (float)delta * MotionSmoothness);
 			var finalPos = ActualPoint;
 			node.GlobalPosition = ActualPoint;
@@ -63,6 +66,11 @@ namespace Game
 	{
 		[Export]
 		public Camera3D Camera;
+		[Export]
+		public Camera3D FilmCamera;
+
+		[Export]
+		public AudioListener3D AudioListener;
 
 		/// <summary>
 		/// Путь к объекту слежения
@@ -78,6 +86,9 @@ namespace Game
 		private SmoothTranslater smoothTranslater;
 		public SmoothTranslater SmoothTrans {get{return smoothTranslater;}}
 
+		public Node3D AttachNode = null;
+		public Transform3D NormalTransform;
+
 		public MainCamera()
 		{
 			// регистрируем и устанавливаем камеру как текущую в Global
@@ -90,6 +101,8 @@ namespace Game
 			SetViewTarget(GetNode<Node3D>(ViewableTargetPath));
 
 			smoothTranslater = new SmoothTranslater(this, MotionSmoothness);
+
+			NormalTransform = Camera.Transform;
 		}
 		public void UpdateSnapping()
 		{
@@ -97,9 +110,14 @@ namespace Game
 		}
         public override void _Process(double delta)
         {
-			FollowViewTarget(delta);
-			smoothTranslater.UpdateMotion(delta);
-			UpdateSnapping();
+			if(AttachNode!=null){
+				FilmCamera.GlobalTransform = AttachNode.GlobalTransform;
+			}
+			else{
+				FollowViewTarget(delta);
+				smoothTranslater.UpdateMotion(delta);
+				UpdateSnapping();
+			}
         }
 
 		#region Target and IViewFollower
@@ -146,6 +164,21 @@ namespace Game
 			// например если стоит DEBUG режим, включаем перспективное отображение. наоборот - нормальное, ортографическое
 			if (settings.IsInDebug) Camera.SetPerspective(Camera.Fov, Camera.Near, Camera.Far);
 			else Camera.SetOrthogonal(Camera.Size, Camera.Near, Camera.Far);
+		}
+
+		public void StartAttachedPerspectiveSession(Node3D attachTo){
+			AttachNode = attachTo;
+			FilmCamera.Current = true;
+			Camera.Current = false;
+			AudioListener?.ClearCurrent();
+		}
+		public void DeAttach(){
+			AttachNode = null;
+			FilmCamera.Current = false;
+			Camera.Current = true;
+			smoothTranslater.ActualPoint = new Vector3(FilmCamera.GlobalPosition.X, Camera.GlobalPosition.Y, FilmCamera.GlobalPosition.Z);
+			smoothTranslater.MotionSmoothness = 0.0f;
+			AudioListener?.MakeCurrent();
 		}
     }
 }

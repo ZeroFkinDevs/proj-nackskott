@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://tj8u4nn4r4va"]
+
+[ext_resource type="PackedScene" path="res://resources/objects/hub/hub_loc_static_body.tscn" id="3_yvuxd"]
+[ext_resource type="AudioStream" uid="uid://dlnsggmymobee" path="res://resources/objects/leash/audio/ambience/ambience.mp3" id="6_g2dro"]
+[ext_resource type="Script" path="res://src/objects/persistent/entities/Teleporter.cs" id="6_gb54a"]
+[ext_resource type="PackedScene" uid="uid://cvmsv3jgnypj0" path="res://scenes/locations/leash/pipe.tscn" id="16_70tfa"]
+
+[sub_resource type="Environment" id="Environment_p2mu3"]
+background_mode = 1
+ambient_light_energy = 0.0
+tonemap_mode = 2
+ssao_radius = 3.04
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_mci23"]
+vertices = PackedVector3Array(-4.0463, 0.100628, -3.82682, -4.0463, 0.100628, 3.87318, 3.7537, 0.100628, 3.87318, 3.7537, 0.100628, -3.82682)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 1
+cell_size = 0.1
+cell_height = 0.1
+agent_radius = 0.25
+agent_max_climb = 0.1
+vertices_per_polygon = 10.0
+
+[node name="test_level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p2mu3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.272716, 1.58417, -0.306537)
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="Location" type="Node3D" parent="."]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Location"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.006405, 0)
+navigation_mesh = SubResource("NavigationMesh_mci23")
+
+[node name="hub_loc_static_body" parent="Location/NavigationRegion3D" instance=ExtResource("3_yvuxd")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_g2dro")
+autoplay = true
+
+[node name="Pipe" parent="." instance=ExtResource("16_70tfa")]
+transform = Transform3D(-0.606474, 0, 0.795103, 0, 1, 0, -0.795103, 0, -0.606474, 2.43672, 0.00504649, 3.00955)
+TeleportID = "leash_hub"
+ToLocation = "leash"
+
+[node name="PlayerSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71806, 0.859647, -1.5528)
+script = ExtResource("6_gb54a")
+ID = "default"

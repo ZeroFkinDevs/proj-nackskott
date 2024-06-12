@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://byb727ejkr0ba"]
+[gd_scene load_steps=27 format=3 uid="uid://byb727ejkr0ba"]
 
 [ext_resource type="PackedScene" uid="uid://dgw8w2rjvc285" path="res://scenes/persistent/hand_dude/hand_dude_system.tscn" id="1_uyhq4"]
 [ext_resource type="Script" path="res://src/objects/persistent/inventory/PickableItem.cs" id="2_cx6hi"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bdqyosstv3r01" path="res://scenes/persistent/decorations/blood_stains/blood_stain_3.tscn" id="6_jvyyj"]
 [ext_resource type="PackedScene" path="res://resources/objects/locations/hospital/person/person.tscn" id="7_hllsy"]
 [ext_resource type="PackedScene" uid="uid://dch37pm6mqlbb" path="res://scenes/persistent/npc/npc.tscn" id="11_nsw2y"]
-[ext_resource type="Script" path="res://src/objects/persistent/entities/Breakable.cs" id="12_7qmxt"]
 
 [sub_resource type="Environment" id="Environment_p2mu3"]
 background_mode = 1
@@ -66,10 +65,6 @@ size = Vector3(1.30907, 0.650335, 0.617676)
 lightmap_size_hint = Vector2i(22, 29)
 material = SubResource("StandardMaterial3D_svxw5")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wfxtg"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_8ih5h"]
-
 [node name="test_level" type="Node3D"]
 
 [node name="MainCamera" parent="." instance=ExtResource("2_hwiua")]
@@ -89,7 +84,7 @@ environment = SubResource("Environment_p2mu3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.269207, 0)
 
 [node name="handLimbItem" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.738257, 0.0991547, -0.422499)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.738257, 0.0991547, -0.714465)
 script = ExtResource("2_cx6hi")
 Item = ExtResource("3_b8nlv")
 Amount = 1
@@ -330,15 +325,5 @@ transform = Transform3D(0.26316, 0, 3.92139e-09, 0, 0.26316, 0, -3.92139e-09, 0,
 
 [node name="NPC" parent="creatures" instance=ExtResource("11_nsw2y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.06895, 0.748283, 2.10571)
+collision_mask = 1
 Speed = 0.7
-
-[node name="Node3D" type="StaticBody3D" parent="creatures"]
-transform = Transform3D(0.403365, 0, 0, 0, 2.53294, 0, 0, 0, 1.83418, 1.69179, 0.996872, 0.827581)
-script = ExtResource("12_7qmxt")
-MaxHealth = 2.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creatures/Node3D"]
-shape = SubResource("BoxShape3D_wfxtg")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="creatures/Node3D"]
-mesh = SubResource("BoxMesh_8ih5h")

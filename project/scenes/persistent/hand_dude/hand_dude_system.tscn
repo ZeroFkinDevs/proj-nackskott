@@ -1,12 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgw8w2rjvc285"]
+[gd_scene load_steps=20 format=3 uid="uid://dgw8w2rjvc285"]
 
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandDude.cs" id="1_pr6ts"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandCharacter.cs" id="2_c7y8b"]
+[ext_resource type="Resource" uid="uid://q3qm5lpifqhl" path="res://scenes/persistent/hand_dude/jump_sounds.tres" id="3_0yyat"]
+[ext_resource type="Resource" uid="uid://c5n7rysbeuli7" path="res://scenes/persistent/hand_dude/death_sounds.tres" id="4_4h642"]
 [ext_resource type="Script" path="res://src/objects/persistent/Pointer.cs" id="4_bsri5"]
 [ext_resource type="Texture2D" uid="uid://ckpyr35bxtnpl" path="res://resources/objects/persistent/pointer/pointer_default.png" id="5_vjpiy"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandRigidBody.cs" id="6_1muak"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/LimbController.cs" id="7_8jv4c"]
 [ext_resource type="PackedScene" uid="uid://lff820h02vdw" path="res://scenes/persistent/hand_dude/hand_dude_normal.tscn" id="7_asbnm"]
+[ext_resource type="AudioStream" uid="uid://bosgidvywdl7r" path="res://resources/objects/persistent/hand_dude/audio/rustling.ogg" id="7_tlv77"]
+[ext_resource type="Script" path="res://src/utils/DebugVisibility.cs" id="8_2yn0h"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/UseRegion.cs" id="8_n2vwf"]
 [ext_resource type="Script" path="res://src/utils/HookesConnector.cs" id="9_gx6km"]
 
@@ -19,18 +23,41 @@ size = Vector3(0.199326, 0.12393, 0.449907)
 [sub_resource type="SphereShape3D" id="SphereShape3D_a2heo"]
 radius = 0.549085
 
-[node name="HandDudeSystem" type="Node3D" node_paths=PackedStringArray("rigidBody")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lkwer"]
+no_depth_test = true
+albedo_color = Color(0.435294, 0.584314, 1, 1)
+emission_enabled = true
+emission = Color(0.435294, 0.584314, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_eh673"]
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ei8s4"]
+no_depth_test = true
+albedo_color = Color(0.552941, 0.917647, 0, 1)
+emission_enabled = true
+emission = Color(0.552941, 0.917647, 0, 1)
+
+[node name="HandDudeSystem" type="Node3D" node_paths=PackedStringArray("rigidBody", "useRegion")]
 script = ExtResource("1_pr6ts")
 pointerPath = NodePath("Pointer")
 characterPath = NodePath("HandCharacter")
 rigidBody = NodePath("RigidBody3D")
+useRegion = NodePath("RigidBody3D/UseRegion")
 
 [node name="HandCharacter" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimController", "Player", "collisionShape")]
 collision_layer = 4
+collision_mask = 5
+floor_block_on_wall = false
 script = ExtResource("2_c7y8b")
 AnimController = NodePath("../RigidBody3D/HandAnimationController")
 Player = NodePath("..")
 collisionShape = NodePath("CollisionShape3D")
+JumpSounds = ExtResource("3_0yyat")
+DeathSounds = ExtResource("4_4h642")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165005, -0.0132761)
@@ -42,10 +69,11 @@ script = ExtResource("4_bsri5")
 
 [node name="Sprite3D2" type="Sprite3D" parent="Pointer"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.11835, 0)
+no_depth_test = true
 texture_filter = 0
 texture = ExtResource("5_vjpiy")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("character", "Player", "Connector")]
+[node name="RigidBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("character", "Player", "Connector", "GripConnector", "Rustling")]
 transform = Transform3D(1, -2.83736e-07, 4.8188e-07, 2.83736e-07, 1, 5.89305e-07, -4.8188e-07, -5.89305e-07, 1, 0, 0, 0)
 collision_layer = 0
 mass = 11.52
@@ -55,6 +83,13 @@ script = ExtResource("6_1muak")
 character = NodePath("../HandCharacter")
 Player = NodePath("..")
 Connector = NodePath("HookesConnector")
+GripConnector = NodePath("GripConnector")
+Rustling = NodePath("rustling")
+
+[node name="rustling" type="AudioStreamPlayer3D" parent="RigidBody3D"]
+transform = Transform3D(1, -2.8446e-13, -1.7053e-13, -2.42861e-16, 1, 1.13687e-13, 0, 0, 1, 0, 0, 0)
+stream = ExtResource("7_tlv77")
+autoplay = true
 
 [node name="HandAnimationController" parent="RigidBody3D" instance=ExtResource("7_asbnm")]
 transform = Transform3D(1.3671, -6.65266e-14, 0, -3.81051e-14, 1.3671, -9.66338e-13, -1.13687e-13, -2.84217e-13, 1.3671, 3.08185e-15, -0.00791342, 1.77636e-14)
@@ -71,14 +106,36 @@ limbContainer = NodePath("LimbContainer")
 
 [node name="LimbContainer" type="Node3D" parent="RigidBody3D/LimbController"]
 
-[node name="UseRegion" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("Player")]
+[node name="UseRegion" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("Player", "Indicator")]
 script = ExtResource("8_n2vwf")
 Player = NodePath("../..")
+Indicator = NodePath("MeshInstance3D2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/UseRegion"]
 shape = SubResource("SphereShape3D_a2heo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/UseRegion"]
+transform = Transform3D(1.121, -3.61209e-13, 8.57478e-14, 3.61209e-13, 1.121, 7.7173e-13, -8.57478e-14, -7.7173e-13, 1.121, 3.38502e-08, -0.0499957, -0.0996837)
+material_override = SubResource("StandardMaterial3D_lkwer")
+mesh = SubResource("SphereMesh_eh673")
+skeleton = NodePath("../../LimbController/LimbContainer")
 
 [node name="HookesConnector" type="Node3D" parent="RigidBody3D" node_paths=PackedStringArray("Target", "Body")]
 script = ExtResource("9_gx6km")
 Target = NodePath("../../HandCharacter")
 Body = NodePath("..")
+
+[node name="GripConnector" type="Node3D" parent="RigidBody3D" node_paths=PackedStringArray("Body")]
+transform = Transform3D(1, -2.42699e-16, 0, -2.42861e-16, 1, 0, 0, 0, 1, 8.44429e-08, -0.0499956, -0.204674)
+script = ExtResource("9_gx6km")
+Body = NodePath("..")
+linearSpringStiffness = 500.0
+angularSpringDamping = 2.0
+maxAngularForce = 100.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/GripConnector"]
+transform = Transform3D(0.431024, -5.49785e-15, 1.42109e-14, 6.55563e-14, 0.431024, -8.52651e-14, -1.42109e-14, -1.13687e-13, 0.431024, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ei8s4")
+mesh = SubResource("SphereMesh_eh673")
+skeleton = NodePath("../../LimbController/LimbContainer")
+script = ExtResource("8_2yn0h")

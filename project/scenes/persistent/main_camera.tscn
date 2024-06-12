@@ -28,16 +28,17 @@ shader = ExtResource("3_0uwqc")
 
 [sub_resource type="BoxMesh" id="BoxMesh_fhvti"]
 
-[node name="MainCamera" type="Node3D" node_paths=PackedStringArray("Camera")]
+[node name="MainCamera" type="Node3D" node_paths=PackedStringArray("Camera", "FilmCamera")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.65005, 0)
 script = ExtResource("1_tkei1")
 Camera = NodePath("Camera")
+FilmCamera = NodePath("Camera2")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, -1.85195e-07, 4.92467)
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, -6.84794e-07, 16.3542)
 projection = 1
 current = true
-size = 4.0
+size = 6.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, -7.35137e-08, -1, 0, 1, -7.35137e-08, 0, -1.18175e-07, -0.505756)
@@ -57,6 +58,33 @@ material_override = SubResource("ShaderMaterial_i8vj3")
 mesh = SubResource("PlaneMesh_sum2q")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 0.665973, -0.745976, 0, 0.745976, 0.665973, 1.92571, 1.00894, -2.40477)
+visible = false
+mesh = SubResource("BoxMesh_fhvti")
+
+[node name="Camera2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, -6.84794e-07, 16.3542)
+fov = 45.0
+size = 4.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera2"]
+transform = Transform3D(1, 0, 0, 0, -7.35137e-08, -1, 0, 1, -7.35137e-08, 0, -1.18175e-07, -0.505756)
+material_override = SubResource("ShaderMaterial_elsw8")
+mesh = SubResource("PlaneMesh_sum2q")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Camera2"]
+transform = Transform3D(1, 0, 0, 0, -7.35137e-08, -1, 0, 1, -7.35137e-08, 0, -1.35894e-07, -0.264721)
+visible = false
+material_override = SubResource("ShaderMaterial_cyow8")
+mesh = SubResource("PlaneMesh_sum2q")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Camera2"]
+transform = Transform3D(1, 0, 0, 0, -7.35137e-08, -1, 0, 1, -7.35137e-08, 0, -1.0725e-07, -0.65436)
+visible = false
+material_override = SubResource("ShaderMaterial_i8vj3")
+mesh = SubResource("PlaneMesh_sum2q")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera2"]
 transform = Transform3D(1, 0, 0, 0, 0.665973, -0.745976, 0, 0.745976, 0.665973, 1.92571, 1.00894, -2.40477)
 visible = false
 mesh = SubResource("BoxMesh_fhvti")
