@@ -11,4 +11,7 @@ AnimationToPlayOnStart = "shot_1"
 [node name="Cube" parent="leash_loc" index="0"]
 layers = 3
 
+[node name="camera" parent="leash_loc" index="15"]
+transform = Transform3D(-0.999811, 0, -0.0194191, 0, 1, 0, 0.0194191, 0, -0.999811, 0.0197882, 0.311788, -0.760009)
+
 [editable path="leash_loc"]

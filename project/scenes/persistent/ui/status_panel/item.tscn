@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx1700oc77gqr"]
+
+[ext_resource type="Script" path="res://src/ui/status_panel/StatusPanelItem.cs" id="1_m3s3n"]
+
+[node name="Item" type="Control" node_paths=PackedStringArray("NameLabel")]
+custom_minimum_size = Vector2(44.52, 42)
+layout_mode = 3
+anchor_right = 0.039
+anchor_bottom = 0.065
+offset_right = -44.928
+offset_bottom = -42.12
+script = ExtResource("1_m3s3n")
+NameLabel = NodePath("Control/Label")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 4.8)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(1, 1, 1, 0.231373)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = 9.475
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -14.5
+offset_right = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
+vertical_alignment = 2

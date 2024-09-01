@@ -96,7 +96,7 @@ shadow_enabled = true
 omni_range = 8.971
 
 [node name="handLimbItem" parent="." instance=ExtResource("3_di1oq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2708, 0.565846, -6.62647)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.19459, -3.56365, -26.7692)
 
 [node name="Location" type="Node3D" parent="."]
 
@@ -231,7 +231,7 @@ ToLocation = "hub"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3378, -4.5413, -28.0692)
 
 [node name="PlayerSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4856, -3.66477, -26.9102)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4612, -3.66477, -26.9174)
 script = ExtResource("15_sgfer")
 ID = "default"
 

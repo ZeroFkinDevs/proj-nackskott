@@ -18,6 +18,10 @@ namespace Game
     {
         public void Process(HandDude handDude)
         {
+            if (handDude.useRegion.CurrentUsable != null){
+                handDude.useRegion.CurrentUsable.Use(handDude);
+            }
+
             if (Input.IsActionPressed("pointer_press"))
             {
                 if(handDude.bodyState == HandDude.BodyState.Controlled){
@@ -39,6 +43,14 @@ namespace Game
                     handDude.EndGrip();
                 }
             }
+            if (Input.IsActionJustPressed("scroll_up"))
+            {
+                handDude.inventory.SwitchCurrentCell(-1);
+            }
+            if (Input.IsActionJustPressed("scroll_down"))
+            {
+                handDude.inventory.SwitchCurrentCell(1);
+            }
         }
     }
     
@@ -55,7 +67,7 @@ namespace Game
     /// этот класс не содержит алгоритмов и сложной логики, он просто совмещает и объединаяет в себе работу с другими состовляющими 
     /// игрока, такими как StateController, Pointer, HandCharacter, HandRigidBody
     /// </summary>
-    public partial class HandDude : Node3D, IStateControlling<IHandState>, IViewable, IKillable
+    public partial class HandDude : Node3D, IStateControlling<IHandState>, IViewable, IKillable, ITeleportable, IEntityWithInventory
     {
         private IHandState currentState;
         
@@ -80,9 +92,15 @@ namespace Game
         public UseRegion useRegion;
         
         [Export]
-        public string TeleportToID = "default";
+        public TeleportableObjectType _teleportObjectType = TeleportableObjectType.HAND_DUDE;
+        [Export]
+        public string _teleportToID = "default";
 
-        public Inventory inventory = new Inventory();
+        public string TeleportToID{get{return _teleportToID;} set{_teleportToID = value;}}
+
+        [Export]
+        public Inventory _inventory = new Inventory();
+        public Inventory inventory{get{return _inventory;}}
         public LimbEntity CurrentLimbEntity = null;
 
         public bool SetState(IHandState state)
@@ -189,9 +207,38 @@ namespace Game
             }
         }
 
+        #region ITeleportable
         public void PlaceAt(Vector3 position){
-            rigidBody.GlobalPosition = position;
-            Character.GlobalPosition = position;
+            // rigidBody.GlobalPosition = position;
+            // Character.GlobalPosition = position;
+            var dist = Character.GlobalPosition - GlobalPosition;
+            GlobalPosition = position - dist;
+        }
+
+        public TeleportableObjectType GetObjectType()
+        {
+            return _teleportObjectType;
+        }
+
+        public void Deactivate()
+        {
+            Visible = false;
+            ProcessMode = ProcessModeEnum.Disabled;
+        }
+
+        public void Activate()
+        {
+            Visible = true;
+            ProcessMode = ProcessModeEnum.Inherit;
+        }
+        #endregion
+
+        public void AddItem(InventoryItem item, int amount)
+        {
+            inventory.AddItem(item, amount);
+            if(item is LimbInventoryItem limbItem){
+                inventory.ActiveLimb = limbItem;
+            }
         }
     }
 }

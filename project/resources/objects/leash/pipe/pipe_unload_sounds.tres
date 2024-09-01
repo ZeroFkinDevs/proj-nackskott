@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cbrenpujbmd8f"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/global/audio/SoundBank.cs" id="1_1xqnq"]
+[ext_resource type="AudioStream" uid="uid://bc8fk2j8wkyau" path="res://resources/objects/leash/pipe/pipe_unload.ogg" id="2_f0y2r"]
+
+[resource]
+script = ExtResource("1_1xqnq")
+streams = Array[AudioStream]([ExtResource("2_f0y2r")])

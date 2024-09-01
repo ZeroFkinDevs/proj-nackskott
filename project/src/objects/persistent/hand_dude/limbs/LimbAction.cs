@@ -17,6 +17,7 @@ namespace Game
             AnimController.AnimationFinished += (name) => {
                 OnFinished?.Invoke();
                 Target.QueueFree();
+                QueueFree();
             };
             return Target;
         }

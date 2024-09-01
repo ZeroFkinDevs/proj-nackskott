@@ -32,14 +32,14 @@ namespace Game
         }
 
         public void ClosingProcess(double delta){
-            var distToInit = HConnector.GlobalPosition.DistanceTo(InitialTarget.GlobalPosition);
-            if(distToInit > 0.1f){
-                if(closeTimer>0.0f){
-                    closeTimer -= (float) delta;
-                }else{
-                    Close();
-                }
-            }
+            // var distToInit = HConnector.GlobalPosition.DistanceTo(InitialTarget.GlobalPosition);
+            // if(distToInit > 0.1f){
+            //     if(closeTimer>0.0f){
+            //         closeTimer -= (float) delta;
+            //     }else{
+            //         Close();
+            //     }
+            // }
         }
         public void Open(){
             HConnector.Active = false;

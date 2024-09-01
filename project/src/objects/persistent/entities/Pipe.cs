@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics.Tracing;
 
 namespace Game
 {
@@ -18,6 +19,8 @@ namespace Game
 
         [Export]
         public SoundBank LoadSounds;
+        [Export]
+        public SoundBank UnloadSounds;
 
         protected int doorBoneId;
         protected HandDude player;
@@ -34,15 +37,18 @@ namespace Game
             GripArea.GripPoint.GlobalTransform = AnimController.GetBoneGlobalPose(doorBoneId);
         }
         
-        public void OnTeleportEnd(HandDude _player){
-            player = _player;
-            AnimController.SetState("state", "unload");
-            player.Grip(GripArea);
-            LoadSounds.PlayAtNode(GripArea.GripPoint);
+        public void OnTeleportEnd(Node node){
+            if(node is HandDude _player){
+                player = _player;
+                AnimController.SetState("state", "unload");
+                player.Grip(GripArea);
+                UnloadSounds.PlayAtNode(GripArea.GripPoint);
+            }
         }
 
         public void OnHandleGrip(Node3D handle){
             AnimController.SetState("state", "load");
+            Teleport.PrepareTeleportation(ToLocation);
             LoadSounds.PlayAtNode(GripArea.GripPoint);
         }
 

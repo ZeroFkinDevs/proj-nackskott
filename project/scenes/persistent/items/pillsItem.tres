@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://pfqyif8s2rlr"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/inventory/itemConfigs/InventoryItem.cs" id="1_jtjpg"]
+
+[resource]
+script = ExtResource("1_jtjpg")
+Name = "Pills"
+Type = "food"
+Data = {}

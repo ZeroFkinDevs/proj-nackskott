@@ -1,17 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dryjwoi0ve18y"]
+[gd_scene load_steps=7 format=3 uid="uid://dryjwoi0ve18y"]
 
 [ext_resource type="Script" path="res://src/objects/persistent/inventory/PickableItem.cs" id="1_qfhef"]
 [ext_resource type="Resource" uid="uid://ctd47ohuxn8aw" path="res://scenes/persistent/limbs/knifeHandItem.tres" id="2_nulko"]
-[ext_resource type="PackedScene" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="3_7kfbi"]
+[ext_resource type="PackedScene" uid="uid://br7g8oj031trm" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="3_7kfbi"]
 [ext_resource type="PackedScene" path="res://resources/objects/persistent/weapons/knife.tscn" id="4_iy6jc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ro67"]
 size = Vector3(0.348206, 0.153839, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj8ww"]
+size = Vector3(0.255508, 0.17041, 0.937439)
+
 [node name="handLimbItem" type="RigidBody3D"]
-script = ExtResource("1_qfhef")
-Item = ExtResource("2_nulko")
-Amount = 1
 
 [node name="model2" type="Node3D" parent="."]
 
@@ -30,3 +30,13 @@ transform = Transform3D(-1.09662e-08, 0.189918, 0.163922, -0.250877, -1.54668e-0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.171392, 0)
 light_energy = 0.277
 omni_range = 1.279
+
+[node name="PickableItem" type="Area3D" parent="." node_paths=PackedStringArray("Container")]
+script = ExtResource("1_qfhef")
+Item = ExtResource("2_nulko")
+Amount = 1
+Container = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickableItem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00978851, 0.0646973, -0.0196228)
+shape = SubResource("BoxShape3D_uj8ww")

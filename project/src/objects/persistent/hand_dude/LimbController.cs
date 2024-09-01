@@ -38,12 +38,12 @@ namespace Game
 			Player.CurrentLimbEntity = limbInstance;
 			limbInstance.limbController = this;
 
-			Player.GetParent().AddChild(limbInstance);
+			Player.AddChild(limbInstance);
 			var trans = limbInstance.Transform;
 			trans.Origin = limbContainer.GlobalPosition;
 			// trans.Basis = Basis.FromEuler(new Vector3(
 			// 	Mathf.DegToRad(90.0f), Mathf.DegToRad(180.0f), 0.0f), EulerOrder.Xyz);
-			limbInstance.Transform = trans;
+			limbInstance.GlobalTransform = trans;
 
 			var joint = new PinJoint3D();
 			limbContainer.AddChild(joint);

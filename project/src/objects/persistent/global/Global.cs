@@ -11,6 +11,8 @@ namespace Game {
 	/// </summary>
 	public partial class Global : Node3D
 	{
+		public static string userDirName = "nackskott";
+
 		[Export]
 		PackedScene UIScene;
 		UIDad UIInstance;
@@ -23,7 +25,8 @@ namespace Game {
 		/// использовать осторожно.
 		/// желательно только в UI
 		/// </summary>
-		public HandDude CurrentPlayer;
+		/// TODO: сделать Интерфейс для объекта для отображения его данных/полей в ui
+		public IEntityWithInventory CurrentInventoryHolder;
 
 		[Export]
 		public LocationLoader LocationLoader;
@@ -91,13 +94,7 @@ namespace Game {
         {
 			SetupUI();
 			SetupAudioPlayer();
-
-			foreach(var node in PlayerSystem.GetChildren()){
-                if(node is HandDude player){
-                    CurrentPlayer = player;
-					break;
-                }
-            }
+			LocationLoader.GuessCurrentLocId(GameScene);
 
 			Settings.InvokeChange();
 		}

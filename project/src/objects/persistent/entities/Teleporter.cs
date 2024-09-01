@@ -7,11 +7,13 @@ namespace Game
     {
         [Export]
         public string ID;
+        [Export]
+        public TeleportableObjectType ObjectType = TeleportableObjectType.HAND_DUDE;
 
         [Signal]
 		public delegate void OnTeleportStartEventHandler();
         [Signal]
-		public delegate void OnTeleportEndEventHandler(HandDude player);
+		public delegate void OnTeleportEndEventHandler(Node player);
 
         public override void _Ready()
         {
@@ -23,12 +25,31 @@ namespace Game
         }
 
         public void DeferredReady()
-        {
+        {   
+            IViewFollower<Node3D> viewFollower = null;
             foreach(var node in Global.Instance.PlayerSystem.GetChildren()){
-                if(node is HandDude player){
-                    if(player.TeleportToID == ID){
-                        player.PlaceAt(GlobalPosition);
-                        EmitSignal(SignalName.OnTeleportEnd, player);
+                if(node is IViewFollower<Node3D> follower){
+                    viewFollower = follower;
+                }
+            }
+            foreach(var node in Global.Instance.PlayerSystem.GetChildren()){
+                if(node is ITeleportable teleportable){
+                    if(teleportable.TeleportToID == ID){
+                        if(ObjectType == teleportable.GetObjectType()){
+                                if(node is IEntityWithInventory withInventory){
+                                    Global.Instance.CurrentInventoryHolder = withInventory;
+                                }
+                            if(viewFollower != null){
+                                if(node is Node3D viewable){
+                                    viewFollower.SetViewTarget(viewable);
+                                }
+                            }
+                            teleportable.Activate();
+                        }else{
+                            teleportable.Deactivate();
+                        }
+                        teleportable.PlaceAt(GlobalPosition);
+                        EmitSignal(SignalName.OnTeleportEnd, node);
                     }
                 }
             }
@@ -36,12 +57,15 @@ namespace Game
 
         public void Teleport(string location){
             foreach(var node in Global.Instance.PlayerSystem.GetChildren()){
-                if(node is HandDude player){
-                    player.TeleportToID = ID;
+                if(node is ITeleportable teleportable){
+                    teleportable.TeleportToID = ID;
                     EmitSignal(SignalName.OnTeleportStart);
                     Global.Instance.LocationLoader.LoadLocation(location);
                 }
             }
+        }
+        public void PrepareTeleportation(string location){
+            Global.Instance.LocationLoader.StartPackingScene();
         }
     }
 }

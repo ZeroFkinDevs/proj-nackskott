@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dwlbhjych1751"]
 
-[ext_resource type="PackedScene" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_p02gb"]
+[ext_resource type="PackedScene" uid="uid://br7g8oj031trm" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_p02gb"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/limbs/LimbEntity.cs" id="1_t4v8l"]
 [ext_resource type="PackedScene" uid="uid://bsrine03cou6i" path="res://scenes/persistent/limbs/knife_attack_action.tscn" id="2_wa5f4"]
 [ext_resource type="Script" path="res://src/utils/HookesConnector.cs" id="3_g2a1e"]

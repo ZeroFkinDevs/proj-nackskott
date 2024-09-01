@@ -13,6 +13,15 @@ namespace Game
 	/// </summary>
 	public partial class Pointer : Node3D
 	{
+		[Export]
+		public Area3D ControlArea = null;
+
+		public IPointerControlling AvailableControlling;
+		public IPointerControlling CurrentControlling;
+
+		public Vector2 RelativeMotion;
+		Vector2 prevPos = Vector2.Zero;
+
 		// у Pointer есть рабочая плоскость, по которой он передвигается,
 		// но можно будет сделать чтобы он передвигался по миру как character, если что.
 		// в этом и прикол иметь отдельный нод для указателя.
@@ -23,12 +32,12 @@ namespace Game
 		/// </summary>
 		public Plane workingPlane = new Plane(Vector3.Up, Vector3.Zero);
 
-		/// <summary>
-		/// Проецирует точку на экране под курсором на workingPlane в мировом пространстве игры <br/>
-		/// Перемещает Pointer
-		/// </summary>
-		/// <param name="delta">на всяки случай может понадобиться плавное перемещение</param>
-		public void MoveToMouseCursor(double delta)
+        /// <summary>
+        /// Проецирует точку на экране под курсором на workingPlane в мировом пространстве игры <br/>
+        /// Перемещает Pointer
+        /// </summary>
+        /// <param name="delta">на всяки случай может понадобиться плавное перемещение</param>
+        public void MoveToMouseCursor(double delta)
         {
 			// подготавливаем переменные
 			Camera3D camera = Global.Instance.CurrentMainCamera.Camera;
@@ -36,7 +45,7 @@ namespace Game
 			float rayCastDistance = camera.Far;
 
 			// получаем начальную и конечную точки луча отбрасываемого из камеры в направлении курсора мыши в пространстве экрана
-			Vector2 mousePos = GetViewport().GetMousePosition();
+			Vector2 mousePos = GetViewport().GetMousePosition(); 
 			Vector3 rayFrom = camera.ProjectRayOrigin(mousePos);
 			Vector3 rayTo = camera.ProjectRayNormal(mousePos) * camera.Far;
 
@@ -52,10 +61,56 @@ namespace Game
 				GlobalPosition = new Vector3(pos.X, workingPlane.Y, pos.Z);
 			}
 		}
-
+        public override void _PhysicsProcess(double delta)
+        {
+			Vector2 newPos = new Vector2(GlobalTransform.Origin.X, GlobalTransform.Origin.Z);
+			RelativeMotion = newPos - prevPos;
+            prevPos = new Vector2(GlobalTransform.Origin.X, GlobalTransform.Origin.Z);
+        }
         public override void _Process(double delta)
         {
 			MoveToMouseCursor(delta);
+			if(CurrentControlling!=null){
+				CurrentControlling.RecieveControl(RelativeMotion);
+			}
+		}
+		
+		public override void _Ready()
+        { 
+			if(ControlArea!=null){
+				ControlArea.BodyEntered += ProcessEnteredObj;
+				ControlArea.AreaEntered += ProcessEnteredObj;
+				ControlArea.BodyExited += ProcessExitedObj;
+				ControlArea.AreaExited += ProcessExitedObj;
+			}
+        }
+        public override void _ExitTree()
+        {
+            
+        }
+
+
+		public void TryToStartControlling(Node3D entity){
+			if(AvailableControlling==null) return;
+			if(CurrentControlling!=null) return;
+			CurrentControlling = AvailableControlling;
+		}
+		public void TryToStopControlling(Node3D entity){
+			CurrentControlling = null;
+		}
+
+		public void ProcessEnteredObj(Node3D body){
+			if(body is IPointerControlling usable){
+				GD.Print(body);	
+				AvailableControlling = usable;
+			}
+		}
+		public void ProcessExitedObj(Node3D body){
+			if(body is IPointerControlling usable){
+				if(usable == AvailableControlling){
+					AvailableControlling = null;
+				}
+			}
 		}
     }
 }

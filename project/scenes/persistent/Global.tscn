@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dny2dbrgu4thj"]
+[gd_scene load_steps=18 format=3 uid="uid://dny2dbrgu4thj"]
 
 [ext_resource type="Script" path="res://src/objects/persistent/global/Global.cs" id="1_7eyvp"]
 [ext_resource type="PackedScene" uid="uid://d05dd8hbrvdkk" path="res://scenes/persistent/ui/ui.tscn" id="2_mf6vp"]
@@ -6,6 +6,33 @@
 [ext_resource type="Script" path="res://src/objects/persistent/global/audio/AudioPlayer.cs" id="3_br2pl"]
 [ext_resource type="PackedScene" uid="uid://bsc886tdnlh4s" path="res://scenes/persistent/main_camera.tscn" id="4_8iff1"]
 [ext_resource type="PackedScene" uid="uid://dgw8w2rjvc285" path="res://scenes/persistent/hand_dude/hand_dude_system.tscn" id="5_b7dlw"]
+[ext_resource type="Script" path="res://src/objects/persistent/dude/Dude.cs" id="7_uvr75"]
+[ext_resource type="Script" path="res://src/objects/persistent/dude/DudeCharacter.cs" id="8_p0wrk"]
+[ext_resource type="PackedScene" uid="uid://bcaj8r51hvj23" path="res://scenes/persistent/dude/DudeAnimationController.tscn" id="9_v6xig"]
+[ext_resource type="Script" path="res://src/objects/persistent/hand_dude/UseRegion.cs" id="10_qcbs2"]
+[ext_resource type="Script" path="res://src/objects/persistent/Pointer.cs" id="11_umw8p"]
+[ext_resource type="Texture2D" uid="uid://ckpyr35bxtnpl" path="res://resources/objects/persistent/pointer/pointer_default.png" id="12_dimdi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tudb5"]
+radius = 0.359
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_245ph"]
+radius = 0.549085
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4xaf"]
+no_depth_test = true
+albedo_color = Color(0.435294, 0.584314, 1, 1)
+emission_enabled = true
+emission = Color(0.435294, 0.584314, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_vcuyp"]
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wn3ql"]
+radius = 0.668127
 
 [node name="Global" type="Node3D" node_paths=PackedStringArray("audioPlayer", "PlayerSystem")]
 script = ExtResource("1_7eyvp")
@@ -35,3 +62,52 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.90735e-06, 2.04584)
 
 [node name="HandDudeSystem" parent="PlayerSystem" instance=ExtResource("5_b7dlw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0566927, 0.836378, -0.267758)
+
+[node name="DudeSystem" type="Node3D" parent="PlayerSystem" node_paths=PackedStringArray("pointer", "Character", "useRegion")]
+script = ExtResource("7_uvr75")
+pointer = NodePath("DudeCharacter/Pointer")
+Character = NodePath("DudeCharacter")
+useRegion = NodePath("DudeCharacter/UseRegion")
+
+[node name="DudeCharacter" type="CharacterBody3D" parent="PlayerSystem/DudeSystem" node_paths=PackedStringArray("AnimController")]
+script = ExtResource("8_p0wrk")
+Speed = 0.2
+AnimController = NodePath("DudeAnimationController")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSystem/DudeSystem/DudeCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_tudb5")
+
+[node name="DudeAnimationController" parent="PlayerSystem/DudeSystem/DudeCharacter" instance=ExtResource("9_v6xig")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="UseRegion" type="Area3D" parent="PlayerSystem/DudeSystem/DudeCharacter" node_paths=PackedStringArray("Player", "Indicator")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544121, 0)
+script = ExtResource("10_qcbs2")
+Player = NodePath("../..")
+Indicator = NodePath("MeshInstance3D2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSystem/DudeSystem/DudeCharacter/UseRegion"]
+shape = SubResource("SphereShape3D_245ph")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlayerSystem/DudeSystem/DudeCharacter/UseRegion"]
+transform = Transform3D(1.121, -3.61209e-13, 8.57478e-14, 3.61209e-13, 1.121, 7.7173e-13, -8.57478e-14, -7.7173e-13, 1.121, 3.38502e-08, -0.0499957, -0.0996837)
+material_override = SubResource("StandardMaterial3D_i4xaf")
+mesh = SubResource("SphereMesh_vcuyp")
+skeleton = NodePath("../../LimbController/LimbContainer")
+
+[node name="Pointer" type="Node3D" parent="PlayerSystem/DudeSystem/DudeCharacter" node_paths=PackedStringArray("ControlArea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19434, -0.0294624, -0.0177753)
+script = ExtResource("11_umw8p")
+ControlArea = NodePath("Area3D")
+
+[node name="Sprite3D2" type="Sprite3D" parent="PlayerSystem/DudeSystem/DudeCharacter/Pointer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.11835, 0)
+no_depth_test = true
+texture_filter = 0
+texture = ExtResource("12_dimdi")
+
+[node name="Area3D" type="Area3D" parent="PlayerSystem/DudeSystem/DudeCharacter/Pointer"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSystem/DudeSystem/DudeCharacter/Pointer/Area3D"]
+shape = SubResource("SphereShape3D_wn3ql")

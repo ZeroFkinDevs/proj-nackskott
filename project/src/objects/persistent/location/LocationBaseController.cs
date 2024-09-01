@@ -15,7 +15,7 @@ namespace Game
         }
         void StartAnimation(){
             if(AnimationToPlayOnStart=="") return;
-            AnimPlayer.Play(AnimationToPlayOnStart);
+            // AnimPlayer.Play(AnimationToPlayOnStart);
         }
     }
 }

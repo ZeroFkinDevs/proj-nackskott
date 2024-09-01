@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://426biebiuswv"]
+
+[ext_resource type="PackedScene" path="res://resources/objects/prison/prison_loc_static_body.tscn" id="1_8101b"]
+[ext_resource type="AudioStream" uid="uid://dlnsggmymobee" path="res://resources/objects/leash/audio/ambience/ambience.mp3" id="2_p17w4"]
+[ext_resource type="Script" path="res://src/objects/persistent/entities/Teleporter.cs" id="4_15eyg"]
+[ext_resource type="Script" path="res://src/objects/persistent/inventory/PickableItem.cs" id="4_byeif"]
+[ext_resource type="Resource" uid="uid://pfqyif8s2rlr" path="res://scenes/persistent/items/pillsItem.tres" id="5_uv5l5"]
+[ext_resource type="PackedScene" path="res://resources/objects/prison/cell_door/cell_door_rigid_body.tscn" id="6_onfns"]
+[ext_resource type="Script" path="res://src/objects/persistent/entities/DoorControllable.cs" id="7_ttjiw"]
+
+[sub_resource type="Environment" id="Environment_p2mu3"]
+background_mode = 1
+ambient_light_energy = 0.0
+tonemap_mode = 2
+ssao_radius = 3.04
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_mci23"]
+vertices = PackedVector3Array(-4.0463, 0.100628, -3.82682, -4.0463, 0.100628, 3.87318, 3.7537, 0.100628, 3.87318, 3.7537, 0.100628, -3.82682)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 1
+cell_size = 0.1
+cell_height = 0.1
+agent_radius = 0.25
+agent_max_climb = 0.1
+vertices_per_polygon = 10.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h6taa"]
+size = Vector3(0.719299, 1, 0.787598)
+
+[node name="test_level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p2mu3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.272716, 2.66727, -0.306537)
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="Location" type="Node3D" parent="."]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Location"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.006405, 0)
+navigation_mesh = SubResource("NavigationMesh_mci23")
+
+[node name="prison_loc_static_body" parent="Location/NavigationRegion3D" instance=ExtResource("1_8101b")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_p17w4")
+autoplay = true
+
+[node name="PlayerSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.184932, 0.859647, 1.46777)
+script = ExtResource("4_15eyg")
+ID = "default"
+ObjectType = 0
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.446344, 0.383079, -0.731129)
+script = ExtResource("4_byeif")
+Item = ExtResource("5_uv5l5")
+Amount = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0134582, 0, -0.106201)
+shape = SubResource("BoxShape3D_h6taa")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.28143, 0.898406, 6.11779)
+node_a = NodePath("../cell_door_rigid_body")
+node_b = NodePath("../Location/NavigationRegion3D/prison_loc_static_body")
+exclude_nodes_from_collision = false
+
+[node name="cell_door_rigid_body" parent="." instance=ExtResource("6_onfns")]
+transform = Transform3D(0.90495, 0, -0.00952435, 0, 0.905, 0, 0.00952435, 0, 0.90495, -0.292815, 0.115974, 6.21293)
+script = ExtResource("7_ttjiw")

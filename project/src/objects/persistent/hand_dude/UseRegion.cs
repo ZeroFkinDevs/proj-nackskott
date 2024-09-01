@@ -6,7 +6,7 @@ namespace Game
 	public partial class UseRegion : Area3D
 	{
 		[Export]
-		public HandDude Player;
+		public Node3D Player;
 
 		[Export]
 		public Node3D Indicator;
@@ -41,8 +41,6 @@ namespace Game
         void ProcessEnteredObj(Node3D body){
 			if(body is IUsable usable){
 				CurrentUsable = usable;
-				// TODO:
-				usable.Use(Player);
 			}
 		}
 
@@ -57,18 +55,20 @@ namespace Game
 		public void TryGrip(){
 			foreach(Area3D obj in GetOverlappingAreas()){
 				if(obj is IGripable gripable){
-					var p1 = Player.rigidBody.GlobalPosition;
-                    var p2 = obj.GlobalPosition;
-                    var space = GetWorld3D().DirectSpaceState;
-                    var prms = PhysicsRayQueryParameters3D.Create(p1, p2, 2);
-                    var result = space.IntersectRay(prms);
-                    // проверить есть ли препятствия
-                    if(result.Count != 0)
-                        return;
+					if(Player is HandDude hand){
+						var p1 = hand.rigidBody.GlobalPosition;
+						var p2 = obj.GlobalPosition;
+						var space = GetWorld3D().DirectSpaceState;
+						var prms = PhysicsRayQueryParameters3D.Create(p1, p2, 2);
+						var result = space.IntersectRay(prms);
+						// проверить есть ли препятствия
+						if(result.Count != 0)
+							return;
 
-					if (gripable.IsEnabled()){
-						gripable.Grip(Player);
-						return;
+						if (gripable.IsEnabled()){
+							gripable.Grip(Player);
+							return;
+						}
 					}
 				}
 			}

@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://lff820h02vdw"]
 
-[ext_resource type="PackedScene" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_pksuu"]
+[ext_resource type="PackedScene" uid="uid://br7g8oj031trm" path="res://resources/objects/persistent/hand_dude/hand_dude.tscn" id="1_pksuu"]
 [ext_resource type="Script" path="res://src/objects/persistent/hand_dude/HandAnimationController.cs" id="2_kc0f8"]
 
 [sub_resource type="Animation" id="Animation_2gfa8"]

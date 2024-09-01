@@ -44,16 +44,9 @@ namespace Game
 
             Vector3 positionDifference = targetTransform.Origin - currentTransform.Origin;
 
-            if (positionDifference.LengthSquared() > 5.0f && false)
-            {
-                // Body.GlobalTransform = targetTransform;
-            }
-            else
-            {
-                Vector3 force = HookesLaw(positionDifference, Body.LinearVelocity, linearSpringStiffness, linearSpringDamping);
-                force = force.LimitLength(maxLinearForce);
-                Body.LinearVelocity += force * (float)delta;
-            }
+            Vector3 force = HookesLaw(positionDifference, Body.LinearVelocity, linearSpringStiffness, linearSpringDamping);
+            force = force.LimitLength(maxLinearForce);
+            Body.LinearVelocity += force * (float)delta;
 
             Vector3 torque = HookesLaw(rotationDifference.GetEuler(), Body.AngularVelocity, angularSpringStiffness, angularSpringDamping);
             torque = torque.LimitLength(maxAngularForce);
