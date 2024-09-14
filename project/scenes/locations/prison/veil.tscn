@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://txj7adrlh12c"]
+
+[ext_resource type="Script" path="res://src/objects/persistent/entities/decorative/Veil.cs" id="1_rv6kj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4x2j7"]
+size = Vector3(0.233887, 1.08093, 0.0810547)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bbj2y"]
+size = Vector3(0.234, 1.14, 0.081)
+
+[node name="veil" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("Model")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00622532, -0.0270862)
+script = ExtResource("1_rv6kj")
+Model = NodePath("Node3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00387274, -0.52702, 0.031928)
+shape = SubResource("BoxShape3D_4x2j7")
+
+[node name="Node3D" type="Node3D" parent="Area3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00174767, -0.552903, 0.0321041)
+mesh = SubResource("BoxMesh_bbj2y")
+skeleton = NodePath("")
