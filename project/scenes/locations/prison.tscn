@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://426biebiuswv"]
+[gd_scene load_steps=13 format=3 uid="uid://426biebiuswv"]
 
 [ext_resource type="PackedScene" path="res://resources/objects/prison/prison_loc_static_body.tscn" id="1_8101b"]
 [ext_resource type="AudioStream" uid="uid://dlnsggmymobee" path="res://resources/objects/leash/audio/ambience/ambience.mp3" id="2_p17w4"]
 [ext_resource type="Script" path="res://src/objects/persistent/entities/Teleporter.cs" id="4_15eyg"]
 [ext_resource type="Script" path="res://src/objects/persistent/inventory/PickableItem.cs" id="4_byeif"]
+[ext_resource type="Resource" uid="uid://pfqyif8s2rlr" path="res://scenes/persistent/items/pillsItem.tres" id="5_xy5xe"]
+[ext_resource type="Script" path="res://src/objects/persistent/usable/Bed.cs" id="6_ol8kr"]
 [ext_resource type="PackedScene" path="res://resources/objects/prison/cell_door/cell_door_rigid_body.tscn" id="6_onfns"]
 [ext_resource type="PackedScene" uid="uid://txj7adrlh12c" path="res://scenes/locations/prison/veil.tscn" id="7_rr0t5"]
 [ext_resource type="Script" path="res://src/objects/persistent/entities/DoorControllable.cs" id="7_ttjiw"]
@@ -26,7 +28,7 @@ agent_max_climb = 0.1
 vertices_per_polygon = 10.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h6taa"]
-size = Vector3(0.719299, 1, 0.787598)
+size = Vector3(1.0491, 1, 0.86277)
 
 [node name="test_level" type="Node3D"]
 
@@ -34,7 +36,7 @@ size = Vector3(0.719299, 1, 0.787598)
 environment = SubResource("Environment_p2mu3")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.272716, 2.66727, -0.306537)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.272716, 2.66727, 3.38943)
 shadow_enabled = true
 omni_range = 7.0
 
@@ -56,13 +58,37 @@ script = ExtResource("4_15eyg")
 ID = "default"
 ObjectType = 0
 
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.446344, 0.383079, -0.731129)
+[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("Container")]
+transform = Transform3D(0.0030543, 0, 0.999995, 0, 1, 0, -0.999995, 0, 0.0030543, -7.20924, 0.383079, 2.77632)
 script = ExtResource("4_byeif")
+Item = ExtResource("5_xy5xe")
+Amount = 1
+Container = NodePath(".")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0134582, 0, -0.106201)
 shape = SubResource("BoxShape3D_h6taa")
+
+[node name="bed" type="Area3D" parent="." node_paths=PackedStringArray("HaloSleepTeleporter", "CharacterPositionPoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93092, 0.383079, 3.37273)
+script = ExtResource("6_ol8kr")
+HaloSleepItem = ExtResource("5_xy5xe")
+HaloSleepTeleporter = NodePath("Teleporter")
+HaloSleepLocationId = "leash"
+CharacterPositionPoint = NodePath("charPos")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17836, 0, 0.168301)
+shape = SubResource("BoxShape3D_h6taa")
+
+[node name="charPos" type="Node3D" parent="bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.927514, 0, 0.189301)
+
+[node name="Teleporter" type="Node3D" parent="bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.884978, 0.662492, 0.112924)
+script = ExtResource("4_15eyg")
+ID = "prison_leash"
+ObjectType = 0
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.28143, 0.898406, 6.11779)

@@ -33,5 +33,10 @@ script = ExtResource( 8 )
 AnimationEvents = {
 "idle": [  ],
 "pick_up_forward": [  ],
+"use_lie_down": [ {
+"event": "global",
+"args": [ "use" ],
+"time": 2.2916666666666665
+} ],
 "walk": [  ]
 }

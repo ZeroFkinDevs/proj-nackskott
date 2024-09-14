@@ -47,7 +47,6 @@ namespace Game {
                     string globalDirPath = ProjectSettings.GlobalizePath(dir);
                     Directory.CreateDirectory(globalDirPath);
                     var path = dir+"/"+CurrentLocationId+".tscn";
-                    
 
                     Error error = ResourceSaver.Save(scenePack, path, ResourceSaver.SaverFlags.ReplaceSubresourcePaths);
                     if (error != Error.Ok)
@@ -61,7 +60,6 @@ namespace Game {
                 return scenePack;
             }
             return scenePack;
-            return null;
         }
 
         public string GuessCurrentLocId(Node3D scene){

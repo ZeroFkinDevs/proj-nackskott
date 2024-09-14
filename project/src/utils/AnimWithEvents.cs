@@ -17,12 +17,14 @@ namespace Game
         private delegate void AnimEventHandler(ArrayOfStrings args);
         private System.Collections.Generic.Dictionary<string, AnimEventHandler> EventsHandlersMap;
         private static System.Collections.Generic.HashSet<string> _registeredEvents;
+        public static event Action<string> OnGlobalEventInvoked;
         public AnimWithEvents()
         {
             _registeredEvents = new System.Collections.Generic.HashSet<string>();
             EventsHandlersMap = new System.Collections.Generic.Dictionary<string, AnimEventHandler> {
                 { "attach_camera",  AttachCamera},
-                { "deattach_camera",  DeAttachCamera}
+                { "deattach_camera",  DeAttachCamera},
+                { "global",  CharacterMethod}
             };
         }
 
@@ -33,6 +35,11 @@ namespace Game
         }
         public void DeAttachCamera(ArrayOfStrings args){
             Global.Instance.CurrentMainCamera.DeAttach();
+        }
+        public void CharacterMethod(ArrayOfStrings args){
+            if(args.Count>0){
+                OnGlobalEventInvoked?.Invoke(args[0]);
+            }
         }
 
 

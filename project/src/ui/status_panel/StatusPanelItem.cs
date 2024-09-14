@@ -22,7 +22,7 @@ namespace Game
 		public void Update(){
 			NameLabel.Text = "";
 			if(ItemCell==null) return;
-			NameLabel.Text = ItemCell.ItemRes.Name;
+			NameLabel.Text = ItemCell.ItemRes.Name + " " + ItemCell.Amount.ToString();
 		}
 
 		// Called when the node enters the scene tree for the first time.

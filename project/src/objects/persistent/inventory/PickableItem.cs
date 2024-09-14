@@ -3,7 +3,7 @@ using System;
 
 namespace Game
 {
-	public partial class PickableItem : Area3D, IUsable
+	public partial class PickableItem : Area3D, IUsable, ILookTarget
 	{
 		[Export]
 		public InventoryItem Item;
@@ -33,5 +33,10 @@ namespace Game
 		public bool IsEnabled(){
 			return true;
 		}
-	}
+
+        public Vector3 GetTargetPoint(Node3D user)
+        {
+            return GlobalPosition;
+        }
+    }
 }

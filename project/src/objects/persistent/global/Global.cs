@@ -26,7 +26,12 @@ namespace Game {
 		/// желательно только в UI
 		/// </summary>
 		/// TODO: сделать Интерфейс для объекта для отображения его данных/полей в ui
-		public IEntityWithInventory CurrentInventoryHolder;
+		public IEntityWithInventory CurrentInventoryHolder {get{return _currentInventoryHolder;} set{
+			_currentInventoryHolder = value;
+			OnCurrentInventoryHolderChanged?.Invoke();
+		}}
+		public IEntityWithInventory _currentInventoryHolder;
+		public Action OnCurrentInventoryHolderChanged;
 
 		[Export]
 		public LocationLoader LocationLoader;

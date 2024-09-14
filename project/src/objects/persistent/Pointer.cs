@@ -57,6 +57,9 @@ namespace Game
 				// если есть получаем НЕнулевое значение
 				// P.S. Value это относиться к Nullable<T>, а не к вектору
 				Vector3 pos = worldPos.Value;
+				// pos = (pos / Global.Instance.PixPerMeter).Round() * Global.Instance.PixPerMeter;
+				var snapping = GetViewport().GetVisibleRect().Size.Y / camera.Size;	
+				pos = (pos * snapping).Floor() / snapping;
 				// перемещаем Pointer
 				GlobalPosition = new Vector3(pos.X, workingPlane.Y, pos.Z);
 			}

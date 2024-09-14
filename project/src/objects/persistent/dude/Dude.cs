@@ -10,7 +10,7 @@ namespace Game
     public interface IDudeState
     {
         public void Init(Dude dude);
-        public void Process(Dude dude);
+        public void Process(Dude dude, double delta);
     }
 
     /// <summary>
@@ -21,11 +21,13 @@ namespace Game
         public void Init(Dude dude) {
 
         }
-        public void Process(Dude dude)
+        public void Process(Dude dude, double delta)
         {
             if (dude.useRegion.CurrentUsable != null){
-                if(Input.IsActionJustPressed("use")){
-                    dude.SetState(new UsingState());
+                if(dude.useRegion.CurrentUsable.IsEnabled()){
+                    if(Input.IsActionJustPressed("use")){
+                        dude.SetState(new UsingState());
+                    }
                 }
             }
             if(dude.pointer.GlobalPosition.DistanceTo(dude.Character.GlobalPosition) < 2.0f){
@@ -42,21 +44,55 @@ namespace Game
     public class UsingState: IState, IDudeState
     {
         public Dude _dude;
-        public void OnUsingFinished(){
-            if (_dude.useRegion.CurrentUsable != null){
+        public bool used = false;
+        public void Use(){
+            if (_dude.useRegion.CurrentUsable != null && !used){
                 _dude.useRegion.CurrentUsable.Use(_dude);
+                used = true;
             }
             _dude.Character.AnimController.FinishedUsing -= OnUsingFinished;
+            AnimWithEvents.OnGlobalEventInvoked -= ProcessGlobalAnimEvent;
             _dude.SetState(new NormalDudeState());
+        }
+        public void OnUsingFinished(){
+            Use();
         }
         public void Init(Dude dude) {
             _dude = dude;
-            _dude.Character.AnimController.FinishedUsing += OnUsingFinished;
-            _dude.Character.AnimController.Use();
-        }
-        public void Process(Dude dude)
-        {
             
+            _dude.Character.AnimController.FinishedUsing += OnUsingFinished;
+            AnimWithEvents.OnGlobalEventInvoked += ProcessGlobalAnimEvent;
+
+            string animationCode = "pick_up_forward";
+            if (_dude.useRegion.CurrentUsable != null){
+                if(_dude.useRegion.CurrentUsable is IUseAnimation useAnimation){
+                    animationCode = useAnimation.GetAnimationCode(_dude);
+                }
+            }
+            _dude.Character.AnimController.Use(animationCode);
+        }
+        public void ProcessGlobalAnimEvent(string code){
+            if(code=="use"){
+                Use();
+            }
+        }
+        public void Process(Dude dude, double delta)
+        {
+            dude.Character.Movement = Vector2.Zero;
+            if (_dude.useRegion.CurrentUsable != null){
+                if(_dude.useRegion.CurrentUsable is IPositionTarget positionTarget){
+                    var targetPos = positionTarget.GetPositionTarget(dude);
+                    var pos = _dude.Character.GlobalPosition;
+                    _dude.Character.GlobalPosition = pos.Slerp(new Vector3(targetPos.X, pos.Y, targetPos.Z), (float)delta * 4.0f);
+                }
+                if(_dude.useRegion.CurrentUsable is ILookTarget lookTarget){
+                    var trans = _dude.Character.GlobalTransform;
+                    var pos = _dude.Character.GlobalTransform.Origin;
+                    var targetPos = lookTarget.GetTargetPoint(dude);
+                    trans.Basis = trans.Basis.Slerp(trans.LookingAt(new Vector3(targetPos.X, pos.Y, targetPos.Z)).Basis, (float)delta * 10.0f);
+                    _dude.Character.GlobalTransform = trans;
+                }
+            }
         }
     }
 
@@ -92,7 +128,7 @@ namespace Game
         }
         public override void _Process(double delta)
         {
-            currentState?.Process(this);
+            currentState?.Process(this, delta);
         }
 
         public Vector3 GetViewTargetPoint()

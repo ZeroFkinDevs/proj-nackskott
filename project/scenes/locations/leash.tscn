@@ -235,4 +235,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4612, -3.66477, -26.9174)
 script = ExtResource("15_sgfer")
 ID = "default"
 
+[node name="prison_leash" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.762116, 1.39935, -4.82579)
+script = ExtResource("15_sgfer")
+ID = "prison_leash"
+
 [editable path="Rat Dude NPC"]

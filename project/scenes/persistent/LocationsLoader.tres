@@ -1,12 +1,14 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d4idxueigg3cg"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://d4idxueigg3cg"]
 
 [ext_resource type="PackedScene" uid="uid://coqe36w5mva0g" path="res://scenes/locations/leash.tscn" id="1_ou82j"]
 [ext_resource type="PackedScene" uid="uid://tj8u4nn4r4va" path="res://scenes/locations/hub.tscn" id="2_lyy7t"]
 [ext_resource type="Script" path="res://src/objects/persistent/global/LocationLoader.cs" id="3_dm2jr"]
+[ext_resource type="PackedScene" uid="uid://426biebiuswv" path="res://scenes/locations/prison.tscn" id="3_ybi4v"]
 
 [resource]
 script = ExtResource("3_dm2jr")
 locations = {
 "hub": ExtResource("2_lyy7t"),
-"leash": ExtResource("1_ou82j")
+"leash": ExtResource("1_ou82j"),
+"prison_start": ExtResource("3_ybi4v")
 }

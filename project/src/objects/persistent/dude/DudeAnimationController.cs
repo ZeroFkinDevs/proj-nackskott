@@ -5,6 +5,7 @@ namespace Game
 {
 	public partial class DudeAnimationController : AnimationController
 	{
+		private string usingTypeName = "usingType";
 		private string usingStateName = "usingState";
 		private string movementBlendName = "walkBlend";
 		private float MovementSpeed = 0.0f;
@@ -17,11 +18,12 @@ namespace Game
 			MovementSpeed = Mathf.Lerp(MovementSpeed, _movementSpeed, (float)delta * 8.0f);
 			AnimTree.Set("parameters/"+movementBlendName+"/blend_amount", MovementSpeed / 2.0f);
 		}
-		public void Use(){
+		public void Use(string animation_code){
 			SetState(usingStateName, "using");
+			SetState(usingTypeName, animation_code);
 		}
 		public override void OnAnimationFinished(StringName animationName){
-		    if(animationName == "pick_up_forward"){
+		    if(animationName.ToString().StartsWith("use_")){
 				FinishedUsing?.Invoke();
 			}
 		}

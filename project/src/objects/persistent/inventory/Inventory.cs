@@ -19,6 +19,15 @@ namespace Game
 				EmitSignal(SignalName.OnUpdate);
 				return true;
 			}
+			public bool ConsumeAmount(int amount){
+				if(Amount<amount) return false;
+				Amount -= amount;
+				if(Amount == 0){
+					ItemRes = null;
+				}
+				EmitSignal(SignalName.OnUpdate);
+				return true;
+			}
 		}
 
 		[Export]
@@ -64,9 +73,37 @@ namespace Game
 			}
 			return null;
 		}
+		public bool HasAmout(InventoryItem item, int amount){
+			var cell = GetCellWithItem(item);
+			if(cell==null) return false;
+			return cell.Amount >= amount;
+		}
+		public bool ConsumeAmount(InventoryItem item, int amount){
+			var cell = GetCellWithItem(item);
+			if(cell==null) return false;
+			if(cell.ConsumeAmount(amount)){
+				return true;
+			}
+			return false;
+		}
+		public Cell GetEmptyCell(){
+			for (int i = 0; i < cells.Count; i++)
+			{
+				Cell cell = cells[i];
+				if(cell.ItemRes == null){
+					return cell;
+				}
+			}
+			return null;
+		}
 		public Cell GetOrCreateCell(InventoryItem item){
 			Cell cell = GetCellWithItem(item);
 			if(cell != null) return cell;
+			cell = GetEmptyCell();
+			if(cell != null){
+				cell.ItemRes = item;
+				return cell;
+			}
 
 			cell = new Cell();
 			cell.ItemRes = item;
@@ -78,7 +115,7 @@ namespace Game
 		public Cell AddItem(InventoryItem item, int amount){
 			if(amount<=0) return null;
 			Cell cell = GetOrCreateCell(item);
-			cell.Amount += amount;
+			cell.AddAmout(amount);
 			return cell;
 		}
 	}
