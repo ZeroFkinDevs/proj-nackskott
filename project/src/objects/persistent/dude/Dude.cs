@@ -50,16 +50,16 @@ namespace Game
                 _dude.useRegion.CurrentUsable.Use(_dude);
                 used = true;
             }
+        }
+        public void OnUsingFinished(){
+            Use();
             _dude.Character.AnimController.FinishedUsing -= OnUsingFinished;
             AnimWithEvents.OnGlobalEventInvoked -= ProcessGlobalAnimEvent;
             _dude.SetState(new NormalDudeState());
         }
-        public void OnUsingFinished(){
-            Use();
-        }
         public void Init(Dude dude) {
             _dude = dude;
-            
+
             _dude.Character.AnimController.FinishedUsing += OnUsingFinished;
             AnimWithEvents.OnGlobalEventInvoked += ProcessGlobalAnimEvent;
 
