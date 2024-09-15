@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/objects/prison/med_personal/dude.glb" type="PackedScene" id=1]
+
+[ext_resource path="res://resources/objects/prison/med_personal/mat_pants_brown2_256.bmp.tres" type="Material" id=2]
+
+[ext_resource path="res://resources/objects/prison/med_personal/mat_hand_L_blood_256.bmp.tres" type="Material" id=3]
+
+[ext_resource path="res://resources/objects/prison/med_personal/mat_visor1.bmp.tres" type="Material" id=4]
+
+[ext_resource path="res://resources/objects/prison/med_personal/mat_coat_blood_256.bmp.tres" type="Material" id=5]
+
+[ext_resource path="res://resources/objects/prison/med_personal/mat_boots_cut_256_256.bmp.tres" type="Material" id=6]
+
+[ext_resource path="res://resources/objects/prison/med_personal/mat_head1_256.bmp.tres" type="Material" id=7]
+
+[ext_resource path="res://src/utils/AnimWithEvents.cs" type="Script" id=8]
+
+[node name="dude" instance=ExtResource( 1 )]
+
+[node name="doctor_bossqc_skeleton" parent="." index="0"]
+
+[node name="doctor2" parent="." index="1"]
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
+material/2 = ExtResource( 4 )
+material/3 = ExtResource( 5 )
+material/4 = ExtResource( 6 )
+material/5 = ExtResource( 7 )
+
+[node name="AnimationPlayer" parent="."]
+script = ExtResource( 8 )
+AnimationEvents = {
+"idle": [  ],
+"look": [  ],
+"look_n_go_away": [ {
+"event": "char",
+"args": [ "Remove" ],
+"time": 3.4166666666666665
+} ],
+"pick_up_forward": [  ],
+"Plane.001Action": [  ],
+"use_lie_down": [ {
+"event": "global",
+"args": [ "use" ],
+"time": 2.2916666666666665
+} ],
+"walk": [  ]
+}

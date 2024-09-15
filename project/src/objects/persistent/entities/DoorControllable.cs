@@ -6,7 +6,7 @@ namespace Game
     public partial class DoorControllable : RigidBody3D, IPointerControlling
     {
         [Export]
-        private bool _locked = false;
+        public bool _locked = false;
         public bool Locked{get{return _locked;} set{_locked = value; UpdateJoint(); }}
 
         [Export]
@@ -15,8 +15,8 @@ namespace Game
         public Joint3D OpenJoint;
 
         public void UpdateJoint(){
-            Joint3D jointdisable = null;
-            Joint3D jointenable = null;
+            Joint3D jointdisable;
+            Joint3D jointenable;
             if(_locked){
                 jointdisable = OpenJoint;
                 jointenable = LockedJoint;
@@ -25,7 +25,7 @@ namespace Game
                 jointenable = OpenJoint;
             }
             if(jointdisable!=null) jointdisable.NodeA = null;
-            if(jointenable!=null) jointenable.NodeA = GetPath();
+            if(jointenable!=null) jointenable.NodeA = jointenable.GetPathTo(this);
         }
 
         public override void _Ready()
